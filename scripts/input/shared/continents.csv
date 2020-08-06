@@ -1,0 +1,529 @@
+Country,Code,Year,Region
+Abkhazia,OWID_ABK,2015,Asia
+Afghanistan,AFG,2015,Asia
+Akrotiri and Dhekelia,OWID_AKD,2015,Asia
+Albania,ALB,2015,Europe
+Algeria,DZA,2015,Africa
+American Samoa,ASM,2015,Oceania
+Andorra,AND,2015,Europe
+Angola,AGO,2015,Africa
+Anguilla,AIA,2015,North America
+Antarctica,ATA,2015,Antarctica
+Antigua and Barbuda,ATG,2015,North America
+Argentina,ARG,2015,South America
+Armenia,ARM,2015,Asia
+Aruba,ABW,2015,North America
+Australia,AUS,2015,Oceania
+Austria,AUT,2015,Europe
+Austria-Hungary,OWID_AUH,2015,Europe
+Azerbaijan,AZE,2015,Asia
+Baden,OWID_BAD,2015,Europe
+Bahamas,BHS,2015,North America
+Bahrain,BHR,2015,Asia
+Bangladesh,BGD,2015,Asia
+Barbados,BRB,2015,North America
+Bavaria,OWID_BAV,2015,Europe
+Belarus,BLR,2015,Europe
+Belgium,BEL,2015,Europe
+Belize,BLZ,2015,North America
+Benin,BEN,2015,Africa
+Bermuda,BMU,2015,North America
+Bhutan,BTN,2015,Asia
+Bolivia,BOL,2015,South America
+Bonaire Sint Eustatius and Saba,BES,2015,North America
+Bosnia and Herzegovina,BIH,2015,Europe
+Botswana,BWA,2015,Africa
+Bouvet Island,BVT,2015,Antarctica
+Brazil,BRA,2015,South America
+British Indian Ocean Territory,IOT,2015,Asia
+British Virgin Islands,VGB,2015,North America
+Brunei,BRN,2015,Asia
+Bulgaria,BGR,2015,Europe
+Burkina Faso,BFA,2015,Africa
+Burundi,BDI,2015,Africa
+Cambodia,KHM,2015,Asia
+Cameroon,CMR,2015,Africa
+Canada,CAN,2015,North America
+Cape Verde,CPV,2015,Africa
+Cayman Islands,CYM,2015,North America
+Central African Republic,CAF,2015,Africa
+Chad,TCD,2015,Africa
+Channel Islands,OWID_CIS,2015,Europe
+Chile,CHL,2015,South America
+China,CHN,2015,Asia
+Christmas Island,CXR,2015,Asia
+Cocos Islands,CCK,2015,Asia
+Colombia,COL,2015,South America
+Comoros,COM,2015,Africa
+Congo,COG,2015,Africa
+Cook Islands,COK,2015,Oceania
+Costa Rica,CRI,2015,North America
+Cote d'Ivoire,CIV,2015,Africa
+Croatia,HRV,2015,Europe
+Cuba,CUB,2015,North America
+Curacao,CUW,2015,North America
+Cyprus,CYP,2015,Europe
+Czech Republic,CZE,2015,Europe
+Czechoslovakia,OWID_CZS,2015,Europe
+Democratic Republic of Congo,COD,2015,Africa
+Denmark,DNK,2015,Europe
+Djibouti,DJI,2015,Africa
+Dominica,DMA,2015,North America
+Dominican Republic,DOM,2015,North America
+East Germany,OWID_GDR,2015,Europe
+Ecuador,ECU,2015,South America
+Egypt,EGY,2015,Africa
+El Salvador,SLV,2015,North America
+Equatorial Guinea,GNQ,2015,Africa
+Eritrea,ERI,2015,Africa
+Eritrea and Ethiopia,OWID_ERE,2015,Africa
+Estonia,EST,2015,Europe
+Ethiopia,ETH,2015,Africa
+Faeroe Islands,FRO,2015,Europe
+Falkland Islands,FLK,2015,South America
+Fiji,FJI,2015,Oceania
+Finland,FIN,2015,Europe
+France,FRA,2015,Europe
+French Guiana,GUF,2015,South America
+French Polynesia,PYF,2015,Oceania
+French Southern Territories,ATF,2015,Antarctica
+Gabon,GAB,2015,Africa
+Gambia,GMB,2015,Africa
+Georgia,GEO,2015,Asia
+Germany,DEU,2015,Europe
+Ghana,GHA,2015,Africa
+Gibraltar,GIB,2015,Europe
+Greece,GRC,2015,Europe
+Greenland,GRL,2015,North America
+Grenada,GRD,2015,North America
+Guadeloupe,GLP,2015,North America
+Guam,GUM,2015,Oceania
+Guatemala,GTM,2015,North America
+Guernsey,GGY,2015,Europe
+Guinea,GIN,2015,Africa
+Guinea-Bissau,GNB,2015,Africa
+Guyana,GUY,2015,South America
+Haiti,HTI,2015,North America
+Hanover,OWID_HAN,2015,Europe
+Heard Island and McDonald Islands,HMD,2015,Antarctica
+Hesse Electoral,OWID_HSE,2015,Europe
+Hesse Grand Ducal,OWID_HSG,2015,Europe
+Honduras,HND,2015,North America
+Hong Kong,HKG,2015,Asia
+Hungary,HUN,2015,Europe
+Iceland,ISL,2015,Europe
+India,IND,2015,Asia
+Indonesia,IDN,2015,Asia
+Iran,IRN,2015,Asia
+Iraq,IRQ,2015,Asia
+Ireland,IRL,2015,Europe
+Isle of Man,IMN,2015,Europe
+Israel,ISR,2015,Asia
+Italy,ITA,2015,Europe
+Jamaica,JAM,2015,North America
+Japan,JPN,2015,Asia
+Jersey,JEY,2015,Europe
+Jordan,JOR,2015,Asia
+Kazakhstan,KAZ,2015,Asia
+Kenya,KEN,2015,Africa
+Kiribati,KIR,2015,Oceania
+Kosovo,OWID_KOS,2015,Europe
+Kuwait,KWT,2015,Asia
+Kyrgyzstan,KGZ,2015,Asia
+Laos,LAO,2015,Asia
+Latvia,LVA,2015,Europe
+Lebanon,LBN,2015,Asia
+Lesotho,LSO,2015,Africa
+Liberia,LBR,2015,Africa
+Libya,LBY,2015,Africa
+Liechtenstein,LIE,2015,Europe
+Lithuania,LTU,2015,Europe
+Luxembourg,LUX,2015,Europe
+Macao,MAC,2015,Asia
+Macedonia,MKD,2015,Europe
+Madagascar,MDG,2015,Africa
+Malawi,MWI,2015,Africa
+Malaysia,MYS,2015,Asia
+Maldives,MDV,2015,Asia
+Mali,MLI,2015,Africa
+Malta,MLT,2015,Europe
+Marshall Islands,MHL,2015,Oceania
+Martinique,MTQ,2015,North America
+Mauritania,MRT,2015,Africa
+Mauritius,MUS,2015,Africa
+Mayotte,MYT,2015,Africa
+Mecklenburg Schwerin,OWID_MEC,2015,Europe
+Mexico,MEX,2015,North America
+Micronesia (country),FSM,2015,Oceania
+Modena,OWID_MOD,2015,Europe
+Moldova,MDA,2015,Europe
+Monaco,MCO,2015,Europe
+Mongolia,MNG,2015,Asia
+Montenegro,MNE,2015,Europe
+Montserrat,MSR,2015,North America
+Morocco,MAR,2015,Africa
+Mozambique,MOZ,2015,Africa
+Myanmar,MMR,2015,Asia
+Nagorno-Karabakh,OWID_NAG,2015,Asia
+Namibia,NAM,2015,Africa
+Nauru,NRU,2015,Oceania
+Nepal,NPL,2015,Asia
+Netherlands,NLD,2015,Europe
+Netherlands Antilles,ANT,2015,North America
+New Caledonia,NCL,2015,Oceania
+New Zealand,NZL,2015,Oceania
+Nicaragua,NIC,2015,North America
+Niger,NER,2015,Africa
+Nigeria,NGA,2015,Africa
+Niue,NIU,2015,Oceania
+Norfolk Island,NFK,2015,Oceania
+North Korea,PRK,2015,Asia
+Northern Cyprus,OWID_CYN,2015,Asia
+Northern Mariana Islands,MNP,2015,Oceania
+Norway,NOR,2015,Europe
+Oman,OMN,2015,Asia
+Pakistan,PAK,2015,Asia
+Palau,PLW,2015,Oceania
+Palestine,PSE,2015,Asia
+Panama,PAN,2015,North America
+Papua New Guinea,PNG,2015,Oceania
+Paraguay,PRY,2015,South America
+Parma,OWID_PMA,2015,Europe
+Peru,PER,2015,South America
+Philippines,PHL,2015,Asia
+Pitcairn,PCN,2015,Oceania
+Poland,POL,2015,Europe
+Portugal,PRT,2015,Europe
+Puerto Rico,PRI,2015,North America
+Qatar,QAT,2015,Asia
+Republic of Vietnam,OWID_RVN,2015,Asia
+Reunion,REU,2015,Africa
+Romania,ROU,2015,Europe
+Russia,RUS,2015,Europe
+Rwanda,RWA,2015,Africa
+Saint Barthélemy,BLM,2015,North America
+Saint Helena,SHN,2015,Africa
+Saint Kitts and Nevis,KNA,2015,North America
+Saint Lucia,LCA,2015,North America
+Saint Martin (French part),MAF,2015,North America
+Saint Pierre and Miquelon,SPM,2015,North America
+Saint Vincent and the Grenadines,VCT,2015,North America
+Samoa,WSM,2015,Oceania
+San Marino,SMR,2015,Europe
+Sao Tome and Principe,STP,2015,Africa
+Saudi Arabia,SAU,2015,Asia
+Saxony,OWID_SAX,2015,Europe
+Senegal,SEN,2015,Africa
+Serbia,SRB,2015,Europe
+Serbia and Montenegro,OWID_SRM,2015,Europe
+Serbia excluding Kosovo,OWID_SEK,2015,Europe
+Seychelles,SYC,2015,Africa
+Sierra Leone,SLE,2015,Africa
+Singapore,SGP,2015,Asia
+Sint Maarten (Dutch part),SXM,2015,North America
+Slovakia,SVK,2015,Europe
+Slovenia,SVN,2015,Europe
+Solomon Islands,SLB,2015,Oceania
+Somalia,SOM,2015,Africa
+Somaliland,OWID_SML,2015,Africa
+South Africa,ZAF,2015,Africa
+South Georgia and the South Sandwich Islands,SGS,2015,South America
+South Korea,KOR,2015,Asia
+South Ossetia,OWID_SOS,2015,Asia
+South Sudan,SSD,2015,Africa
+Spain,ESP,2015,Europe
+Sri Lanka,LKA,2015,Asia
+Sudan,SDN,2015,Africa
+Suriname,SUR,2015,South America
+Svalbard and Jan Mayen,SJM,2015,Europe
+Swaziland,SWZ,2015,Africa
+Sweden,SWE,2015,Europe
+Switzerland,CHE,2015,Europe
+Syria,SYR,2015,Asia
+Taiwan,TWN,2015,Asia
+Tajikistan,TJK,2015,Asia
+Tanzania,TZA,2015,Africa
+Thailand,THA,2015,Asia
+Timor,TLS,2015,Asia
+Togo,TGO,2015,Africa
+Tokelau,TKL,2015,Oceania
+Tonga,TON,2015,Oceania
+Transnistria,OWID_TRS,2015,Europe
+Trinidad and Tobago,TTO,2015,North America
+Tunisia,TUN,2015,Africa
+Turkey,TUR,2015,Asia
+Turkmenistan,TKM,2015,Asia
+Turks and Caicos Islands,TCA,2015,North America
+Tuscany,OWID_TUS,2015,Europe
+Tuvalu,TUV,2015,Oceania
+Two Sicilies,OWID_SIC,2015,Europe
+USSR,OWID_USS,2015,Europe
+Uganda,UGA,2015,Africa
+Ukraine,UKR,2015,Europe
+United Arab Emirates,ARE,2015,Asia
+United Kingdom,GBR,2015,Europe
+United Korea,OWID_KRU,2015,Asia
+United States,USA,2015,North America
+United States Minor Outlying Islands,UMI,2015,Oceania
+United States Virgin Islands,VIR,2015,North America
+Uruguay,URY,2015,South America
+Uzbekistan,UZB,2015,Asia
+Vanuatu,VUT,2015,Oceania
+Vatican,VAT,2015,Europe
+Venezuela,VEN,2015,South America
+Vietnam,VNM,2015,Asia
+Wallis and Futuna,WLF,2015,Oceania
+West Germany,OWID_GFR,2015,Europe
+Western Sahara,ESH,2015,Africa
+Wuerttemburg,OWID_WRT,2015,Europe
+Yemen,YEM,2015,Asia
+Yemen Arab Republic,OWID_YAR,2015,Asia
+Yemen People's Republic,OWID_YPR,2015,Asia
+Yugoslavia,OWID_YGS,2015,Europe
+Zambia,ZMB,2015,Africa
+Zanzibar,OWID_ZAN,2015,Africa
+Zimbabwe,ZWE,2015,Africa
+Åland Islands,ALA,2015,Europe
+Austria,,2015,EU-27
+Belgium,,2015,EU-27
+Bulgaria,,2015,EU-27
+Croatia,,2015,EU-27
+Cyprus,,2015,EU-27
+Czech Republic,,2015,EU-27
+Denmark,,2015,EU-27
+Estonia,,2015,EU-27
+Finland,,2015,EU-27
+France,,2015,EU-27
+Germany,,2015,EU-27
+Greece,,2015,EU-27
+Hungary,,2015,EU-27
+Ireland,,2015,EU-27
+Italy,,2015,EU-27
+Latvia,,2015,EU-27
+Lithuania,,2015,EU-27
+Luxembourg,,2015,EU-27
+Malta,,2015,EU-27
+Netherlands,,2015,EU-27
+Poland,,2015,EU-27
+Portugal,,2015,EU-27
+Romania,,2015,EU-27
+Slovakia,,2015,EU-27
+Slovenia,,2015,EU-27
+Spain,,2015,EU-27
+Sweden,,2015,EU-27
+Abkhazia,,2015,Asia (excl. China & India)
+Afghanistan,,2015,Asia (excl. China & India)
+Akrotiri and Dhekelia,,2015,Asia (excl. China & India)
+Armenia,,2015,Asia (excl. China & India)
+Azerbaijan,,2015,Asia (excl. China & India)
+Bahrain,,2015,Asia (excl. China & India)
+Bangladesh,,2015,Asia (excl. China & India)
+Bhutan,,2015,Asia (excl. China & India)
+British Indian Ocean Territory,,2015,Asia (excl. China & India)
+Brunei,,2015,Asia (excl. China & India)
+Cambodia,,2015,Asia (excl. China & India)
+Christmas Island,,2015,Asia (excl. China & India)
+Cocos Islands,,2015,Asia (excl. China & India)
+Georgia,,2015,Asia (excl. China & India)
+Hong Kong,,2015,Asia (excl. China & India)
+Indonesia,,2015,Asia (excl. China & India)
+Iran,,2015,Asia (excl. China & India)
+Iraq,,2015,Asia (excl. China & India)
+Israel,,2015,Asia (excl. China & India)
+Japan,,2015,Asia (excl. China & India)
+Jordan,,2015,Asia (excl. China & India)
+Kazakhstan,,2015,Asia (excl. China & India)
+Kuwait,,2015,Asia (excl. China & India)
+Kyrgyzstan,,2015,Asia (excl. China & India)
+Laos,,2015,Asia (excl. China & India)
+Lebanon,,2015,Asia (excl. China & India)
+Macao,,2015,Asia (excl. China & India)
+Malaysia,,2015,Asia (excl. China & India)
+Maldives,,2015,Asia (excl. China & India)
+Mongolia,,2015,Asia (excl. China & India)
+Myanmar,,2015,Asia (excl. China & India)
+Nagorno-Karabakh,,2015,Asia (excl. China & India)
+Nepal,,2015,Asia (excl. China & India)
+North Korea,,2015,Asia (excl. China & India)
+Northern Cyprus,,2015,Asia (excl. China & India)
+Oman,,2015,Asia (excl. China & India)
+Pakistan,,2015,Asia (excl. China & India)
+Palestine,,2015,Asia (excl. China & India)
+Philippines,,2015,Asia (excl. China & India)
+Qatar,,2015,Asia (excl. China & India)
+Republic of Vietnam,,2015,Asia (excl. China & India)
+Saudi Arabia,,2015,Asia (excl. China & India)
+Singapore,,2015,Asia (excl. China & India)
+South Korea,,2015,Asia (excl. China & India)
+South Ossetia,,2015,Asia (excl. China & India)
+Sri Lanka,,2015,Asia (excl. China & India)
+Syria,,2015,Asia (excl. China & India)
+Taiwan,,2015,Asia (excl. China & India)
+Tajikistan,,2015,Asia (excl. China & India)
+Thailand,,2015,Asia (excl. China & India)
+Timor,,2015,Asia (excl. China & India)
+Turkey,,2015,Asia (excl. China & India)
+Turkmenistan,,2015,Asia (excl. China & India)
+United Arab Emirates,,2015,Asia (excl. China & India)
+United Korea,,2015,Asia (excl. China & India)
+Uzbekistan,,2015,Asia (excl. China & India)
+Vietnam,,2015,Asia (excl. China & India)
+Yemen,,2015,Asia (excl. China & India)
+Yemen Arab Republic,,2015,Asia (excl. China & India)
+Yemen People's Republic,,2015,Asia (excl. China & India)
+Anguilla,,2015,North America (excl. USA)
+Antigua and Barbuda,,2015,North America (excl. USA)
+Aruba,,2015,North America (excl. USA)
+Bahamas,,2015,North America (excl. USA)
+Barbados,,2015,North America (excl. USA)
+Belize,,2015,North America (excl. USA)
+Bermuda,,2015,North America (excl. USA)
+Bonaire Sint Eustatius and Saba,,2015,North America (excl. USA)
+British Virgin Islands,,2015,North America (excl. USA)
+Canada,,2015,North America (excl. USA)
+Cayman Islands,,2015,North America (excl. USA)
+Costa Rica,,2015,North America (excl. USA)
+Cuba,,2015,North America (excl. USA)
+Curacao,,2015,North America (excl. USA)
+Dominica,,2015,North America (excl. USA)
+Dominican Republic,,2015,North America (excl. USA)
+El Salvador,,2015,North America (excl. USA)
+Greenland,,2015,North America (excl. USA)
+Grenada,,2015,North America (excl. USA)
+Guadeloupe,,2015,North America (excl. USA)
+Guatemala,,2015,North America (excl. USA)
+Haiti,,2015,North America (excl. USA)
+Honduras,,2015,North America (excl. USA)
+Jamaica,,2015,North America (excl. USA)
+Martinique,,2015,North America (excl. USA)
+Mexico,,2015,North America (excl. USA)
+Montserrat,,2015,North America (excl. USA)
+Netherlands Antilles,,2015,North America (excl. USA)
+Nicaragua,,2015,North America (excl. USA)
+Panama,,2015,North America (excl. USA)
+Puerto Rico,,2015,North America (excl. USA)
+Saint Barthélemy,,2015,North America (excl. USA)
+Saint Kitts and Nevis,,2015,North America (excl. USA)
+Saint Lucia,,2015,North America (excl. USA)
+Saint Martin (French part),,2015,North America (excl. USA)
+Saint Pierre and Miquelon,,2015,North America (excl. USA)
+Saint Vincent and the Grenadines,,2015,North America (excl. USA)
+Sint Maarten (Dutch part),,2015,North America (excl. USA)
+Trinidad and Tobago,,2015,North America (excl. USA)
+Turks and Caicos Islands,,2015,North America (excl. USA)
+United States Virgin Islands,,2015,North America (excl. USA)
+Albania,,2015,Europe (excl. EU-27)
+Andorra,,2015,Europe (excl. EU-27)
+Austria-Hungary,,2015,Europe (excl. EU-27)
+Baden,,2015,Europe (excl. EU-27)
+Bavaria,,2015,Europe (excl. EU-27)
+Belarus,,2015,Europe (excl. EU-27)
+Bosnia and Herzegovina,,2015,Europe (excl. EU-27)
+Channel Islands,,2015,Europe (excl. EU-27)
+Faeroe Islands,,2015,Europe (excl. EU-27)
+Gibraltar,,2015,Europe (excl. EU-27)
+Guernsey,,2015,Europe (excl. EU-27)
+Hanover,,2015,Europe (excl. EU-27)
+Hesse Electoral,,2015,Europe (excl. EU-27)
+Hesse Grand Ducal,,2015,Europe (excl. EU-27)
+Iceland,,2015,Europe (excl. EU-27)
+Isle of Man,,2015,Europe (excl. EU-27)
+Jersey,,2015,Europe (excl. EU-27)
+Kosovo,,2015,Europe (excl. EU-27)
+Latvia,,2015,Europe (excl. EU-27)
+Liechtenstein,,2015,Europe (excl. EU-27)
+Macedonia,,2015,Europe (excl. EU-27)
+Mecklenburg Schwerin,,2015,Europe (excl. EU-27)
+Modena,,2015,Europe (excl. EU-27)
+Moldova,,2015,Europe (excl. EU-27)
+Monaco,,2015,Europe (excl. EU-27)
+Montenegro,,2015,Europe (excl. EU-27)
+Norway,,2015,Europe (excl. EU-27)
+Parma,,2015,Europe (excl. EU-27)
+Russia,,2015,Europe (excl. EU-27)
+San Marino,,2015,Europe (excl. EU-27)
+Saxony,,2015,Europe (excl. EU-27)
+Serbia,,2015,Europe (excl. EU-27)
+Serbia and Montenegro,,2015,Europe (excl. EU-27)
+Serbia excluding Kosovo,,2015,Europe (excl. EU-27)
+Svalbard and Jan Mayen,,2015,Europe (excl. EU-27)
+Switzerland,,2015,Europe (excl. EU-27)
+Transnistria,,2015,Europe (excl. EU-27)
+Ukraine,,2015,Europe (excl. EU-27)
+United Kingdom,,2015,Europe (excl. EU-27)
+Vatican,,2015,Europe (excl. EU-27)
+Wuerttemburg,,2015,Europe (excl. EU-27)
+Yugoslavia,,2015,Europe (excl. EU-27)
+Åland Islands,,2015,Europe (excl. EU-27)
+Albania,,2015,Europe (excl. EU-28)
+Andorra,,2015,Europe (excl. EU-28)
+Austria-Hungary,,2015,Europe (excl. EU-28)
+Baden,,2015,Europe (excl. EU-28)
+Bavaria,,2015,Europe (excl. EU-28)
+Belarus,,2015,Europe (excl. EU-28)
+Bosnia and Herzegovina,,2015,Europe (excl. EU-28)
+Channel Islands,,2015,Europe (excl. EU-28)
+Faeroe Islands,,2015,Europe (excl. EU-28)
+Gibraltar,,2015,Europe (excl. EU-28)
+Guernsey,,2015,Europe (excl. EU-28)
+Hanover,,2015,Europe (excl. EU-28)
+Hesse Electoral,,2015,Europe (excl. EU-28)
+Hesse Grand Ducal,,2015,Europe (excl. EU-28)
+Iceland,,2015,Europe (excl. EU-28)
+Isle of Man,,2015,Europe (excl. EU-28)
+Jersey,,2015,Europe (excl. EU-28)
+Kosovo,,2015,Europe (excl. EU-28)
+Latvia,,2015,Europe (excl. EU-28)
+Liechtenstein,,2015,Europe (excl. EU-28)
+Macedonia,,2015,Europe (excl. EU-28)
+Mecklenburg Schwerin,,2015,Europe (excl. EU-28)
+Modena,,2015,Europe (excl. EU-28)
+Moldova,,2015,Europe (excl. EU-28)
+Monaco,,2015,Europe (excl. EU-28)
+Montenegro,,2015,Europe (excl. EU-28)
+Norway,,2015,Europe (excl. EU-28)
+Parma,,2015,Europe (excl. EU-28)
+Russia,,2015,Europe (excl. EU-28)
+San Marino,,2015,Europe (excl. EU-28)
+Saxony,,2015,Europe (excl. EU-28)
+Serbia,,2015,Europe (excl. EU-28)
+Serbia and Montenegro,,2015,Europe (excl. EU-28)
+Serbia excluding Kosovo,,2015,Europe (excl. EU-28)
+Svalbard and Jan Mayen,,2015,Europe (excl. EU-28)
+Switzerland,,2015,Europe (excl. EU-28)
+Transnistria,,2015,Europe (excl. EU-28)
+Ukraine,,2015,Europe (excl. EU-28)
+Vatican,,2015,Europe (excl. EU-28)
+Wuerttemburg,,2015,Europe (excl. EU-28)
+Yugoslavia,,2015,Europe (excl. EU-28)
+Åland Islands,,2015,Europe (excl. EU-28)
+Austria,,2015,EU-28
+Belgium,,2015,EU-28
+Bulgaria,,2015,EU-28
+Croatia,,2015,EU-28
+Cyprus,,2015,EU-28
+Czech Republic,,2015,EU-28
+Denmark,,2015,EU-28
+Estonia,,2015,EU-28
+Finland,,2015,EU-28
+France,,2015,EU-28
+Germany,,2015,EU-28
+Greece,,2015,EU-28
+Hungary,,2015,EU-28
+Ireland,,2015,EU-28
+Italy,,2015,EU-28
+Latvia,,2015,EU-28
+Lithuania,,2015,EU-28
+Luxembourg,,2015,EU-28
+Malta,,2015,EU-28
+Netherlands,,2015,EU-28
+Poland,,2015,EU-28
+Portugal,,2015,EU-28
+Romania,,2015,EU-28
+Slovakia,,2015,EU-28
+Slovenia,,2015,EU-28
+Spain,,2015,EU-28
+Sweden,,2015,EU-28
+United Kingdom,,2015,EU-28
+USSR,,2015,Europe (excl. EU-28)
+USSR,,2015,Europe (excl. EU-28)
