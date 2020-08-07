@@ -104,6 +104,9 @@ def main():
 
     combined = add_iso_codes(combined)
 
+    # Round to 3 decimals
+    combined = combined.round(3)
+
     combined.to_csv(
         os.path.join(OUTPUT_DIR, "owid-co2-data.csv"), index=False
     )
