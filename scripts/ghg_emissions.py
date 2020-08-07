@@ -4,7 +4,7 @@ import pandas as pd
 
 CURRENT_DIR = os.path.dirname(__file__)
 INPUT_DIR = os.path.join(CURRENT_DIR, "input")
-TMP_DIR = os.path.join(CURRENT_DIR, "tmp")
+GRAPHER_DIR = os.path.join(CURRENT_DIR, "grapher")
 
 
 def main():
@@ -93,7 +93,7 @@ def main():
             filename = "all_ghg_emissions.csv"
         else:
             filename = f"{gas}_by_sector.csv"
-        gas_df.to_csv(os.path.join(TMP_DIR, filename), index=False)
+        gas_df.to_csv(os.path.join(GRAPHER_DIR, filename), index=False)
 
 
 if __name__ == '__main__':
