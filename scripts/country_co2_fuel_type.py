@@ -91,8 +91,8 @@ def main():
     )
 
     #Convert from thousand tonnes of carbon to million tonnes of CO2
-    emissions_cdiac[["Coal", "Oil", "Gas", "Cement", "Flaring"]] = (
-        emissions_cdiac[["Coal", "Oil", "Gas", "Cement", "Flaring"]]
+    emissions_cdiac[["Cement", "Coal", "Flaring", "Gas", "Oil"]] = (
+        emissions_cdiac[["Cement", "Coal", "Flaring", "Gas", "Oil"]]
         .astype(float)
         .mul(3.664 / 1000)
     )
@@ -126,7 +126,7 @@ def main():
     combined = combined.merge(population, on=["Country", "Year"])
 
     # Calculate per capita figures
-    per_capita_cols = ["Coal", "Oil", "Gas", "Cement", "Flaring"]
+    per_capita_cols = ["Cement", "Coal", "Flaring", "Gas", "Oil"]
     for col in per_capita_cols:
         combined[f"{col} (per capita)"] = combined[col] / combined["Population"] * 1000000
 

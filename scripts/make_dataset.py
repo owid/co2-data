@@ -102,24 +102,45 @@ def main():
         .merge(gdp, on=["Year", "Country"], how="left")
     )
 
-    combined = combined.rename(columns={
+    combined = combined.rename(errors="raise", columns={
         "Country": "country",
         "Year": "year",
-        "Annual CO2 emissions": "Annual CO2 emissions (Mt)",
-        "Annual consumption-based CO2 emissions": "Annual consumption-based CO2 emissions (Mt)",
-        "Annual CO2 growth (abs)": "Annual CO2 emisions growth (Mt)",
-        "Annual CO2 growth (%)": "Annual growth in CO2 emissions (%)",
-        "CO2 emissions embedded in trade": "CO2 emissions embedded in trade (Mt)",
-        "Per capita CO2 emissions": "Per capita CO2 emissions (tonnes)",
+        "Annual CO2 emissions": "co2",
+        "Annual consumption-based CO2 emissions": "consumption_co2",
+        "Annual CO2 growth (abs)": "co2_growth_abs",
+        "Annual CO2 growth (%)": "co2_growth_prct",
+        "CO2 emissions embedded in trade": "trade_co2",
+        "Share of CO2 emissions embedded in trade": "trade_co2_share",
+        "Per capita CO2 emissions": "co2_per_capita",
         "Primary energy consumption (TWh) (BP & WB)": "Primary energy consumption (TWh)",
-        "Per capita consumption-based CO2 emissions": \
-            "Per capita consumption-based CO2 emissions (tonnes)",
-        "Cumulative CO2 emissions": "Cumulative CO2 emissions (Mt)",
-        "Cement": "CO2 emissions from cement (Mt)",
-        "Coal": "CO2 emissions from coal (Mt)",
-        "Oil": "CO2 emissions from oil (Mt)",
-        "Gas": "CO2 emissions from gas (Mt)",
-        "Flaring": "CO2 emissions from flaring (Mt)"
+        "Per capita consumption-based CO2 emissions": "consumption_co2_per_capita",
+        "Share of global CO2 emissions": "share_global_co2",
+        "Cumulative CO2 emissions": "cumulative_co2",
+        "Share of global cumulative CO2 emissions": "share_global_cumulative_co2",
+        "CO2 per GDP (kg per $PPP)": "co2_per_gdp",
+        "Consumption-based CO2 per GDP (kg per $PPP)": "consumption_co2_per_gdp",
+        "CO2 per unit energy (kgCO2 per kilowatt-hour)": "co2_per_unit_energy",
+        "Cement": "cement_co2",
+        "Coal": "coal_co2",
+        "Oil": "oil_co2",
+        "Gas": "gas_co2",
+        "Flaring": "flaring_co2",
+        "Cement (per capita)": "cement_co2_per_capita",
+        "Coal (per capita)": "coal_co2_per_capita",
+        "Oil (per capita)": "oil_co2_per_capita",
+        "Gas (per capita)": "gas_co2_per_capita",
+        "Flaring (per capita)": "flaring_co2_per_capita",
+        "Total GHG emissions (MtCO2e)": "total_ghg",
+        "GHG emissions per capita (tCO2e)": "ghg_per_capita",
+        "CH4 emissions (MtCO2e)": "methane",
+        "CH4 emissions per capita (tCO2e)": "methane_per_capita",
+        "N2O emissions (MtCO2e)": "nitrous_oxide",
+        "N2O emissions per capita (tCO2e)": "nitrous_oxide_per_capita",
+        "Primary energy consumption (TWh) (BP & WB)": "primary_energy_consumption",
+        "Energy per capita (kWh)": "energy_per_capita",
+        "Energy per GDP (kWh per $)": "energy_per_gdp",
+        "Population": "population",
+        "Total real GDP": "gdp"
     })
 
     combined = add_iso_codes(combined)
