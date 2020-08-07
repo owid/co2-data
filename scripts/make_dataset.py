@@ -1,4 +1,5 @@
 import os
+import json
 import pandas as pd
 
 
@@ -12,6 +13,25 @@ def add_iso_codes(dataframe):
     iso_codes = pd.read_csv(os.path.join(INPUT_DIR, "shared/iso3166_1_alpha_3_codes.csv"))
     dataframe = iso_codes.merge(dataframe, on="country", how="right")
     return dataframe
+
+
+def df_to_json(complete_dataset, output_path, static_columns):
+    megajson = {}
+
+    for _, row in complete_dataset.iterrows():
+
+        row_country = row["country"]
+        row_dict_static = row.drop("country")[static_columns].dropna().to_dict()
+        row_dict_dynamic = row.drop("country").drop(static_columns).dropna().to_dict()
+
+        if row_country not in megajson:
+            megajson[row_country] = row_dict_static
+            megajson[row_country]["data"] = [row_dict_dynamic]
+        else:
+            megajson[row_country]["data"].append(row_dict_dynamic)
+
+    with open(output_path, "w") as file:
+        file.write(json.dumps(megajson, indent=4))
 
 
 def main():
@@ -103,9 +123,8 @@ def main():
     })
 
     combined = add_iso_codes(combined)
-
-    # Round to 3 decimals
     combined = combined.round(3)
+    combined = combined.sort_values(["country", "year"])
 
     combined.to_csv(
         os.path.join(OUTPUT_DIR, "owid-co2-data.csv"), index=False
@@ -113,7 +132,7 @@ def main():
     combined.to_excel(
         os.path.join(OUTPUT_DIR, "owid-co2-data.xlsx"), index=False
     )
-    combined.to_json(os.path.join(OUTPUT_DIR, "owid-co2-data.json"))
+    df_to_json(combined, os.path.join(OUTPUT_DIR, "owid-co2-data.json"), ["iso_code"])
 
 
 if __name__ == "__main__":

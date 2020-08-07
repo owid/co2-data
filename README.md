@@ -17,7 +17,7 @@ We will continue to publish updated data on CO2 and Greenhouse Gas Emissions as 
 
 **Our complete CO2 and Greenhouse Gas Emissions dataset is available in [CSV](#), [XLSX](#), and [JSON](#) formats.**
 
-The CSV and XLSX files follow a format of 1 row per location and year. The JSON version is split by country ISO code, with static variables and an array of yearly records.
+The CSV and XLSX files follow a format of 1 row per location and year. The JSON version is split by country, with an array of yearly records.
 
 The variables represent all of our main data related to CO2 emissions, other greenhouse gas emissions, energy mix, as well as other variables of potential interest.
 
