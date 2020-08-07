@@ -25,6 +25,8 @@ A [full codebook](#) is made available, with a description and source for each v
 
 ## Changelog
 
+- On August 7, 2020, the first version of this dataset was made available.
+
 ## Data alterations
 
 - **We standardize names of countries and regions.** Since the names of countries and regions are different in different data sources, we standardize all names to the [*Our World in Data* standard entity names](#).
