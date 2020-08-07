@@ -1,0 +1,39 @@
+column,description,source
+iso_code,ISO 3166-1 alpha-3 – three-letter country codes,International Organization for Standardization
+country,Geographic location,Our World in Data
+year,Year of observation,Our World in Data
+co2,"Annual production-based emissions of carbon dioxide (CO2), measured in million tonnes per year.",Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+co2_growth_prct,Percentage change in CO2 emissions from one year relative to the previous year.,Calculated by Our World in Data based on Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+co2_growth_abs,"Annual change in CO2 emissions from one year relative to the previous year, measured in million tonnes.",Calculated by Our World in Data based on Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+consumption_co2,"Annual consumption-based CO2 emissions, measured in million tonnes per year.",Global Carbon Project
+trade_co2,"Net CO2 emissions embedded in trade; this is the net difference between CO2 embedded in exported and imported goods, measured in million tonnes.",Calculated by Our World in Data based on Global Carbon Project
+trade_co2_share,"CO2 emissions embedded in trade, given as a percentage of national production-based emissions.",Calculated by Our World in Data based on Global Carbon Project
+co2_per_capita,"Average per capita CO2 emissions, measured in tonnes per year.",Calculated by Our World in Data based on CDIAC and Global Carbon Project; and Gapminder and UN population estimates
+consumption_co2_per_capita,"Per capita consumption-based CO2 emissions, measured in tonnes per year.",Calculated by Our World in Data based on Global Carbon Project and UN Population estimates
+share_global_co2,"National or regional annual CO2 emissions, measured as a percentage of the global total",Calculated by Our World in Data based on Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+cumulative_co2,"Cumulative emissions of CO2 from 1751 through to the given year, measured in million tonnes.",Calculated by Our World in Data based on Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+share_global_cumulative_co2,"National or regional annual cumulative CO2 emissions, measured as a share of the global total",Calculated by Our World in Data based on Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+co2_per_gdp,CO2 emissions measured per unit of gross domestic product. GDP is adjusted for inflation and cross-country price differences (PPP-adjusted).,Calculated by Our World in Data based on Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project; and Maddison Project Database
+consumption_co2_per_gdp,Consumption-based CO2 emissions measured per unit of gross domestic product. GDP is adjusted for inflation and cross-country price differences (PPP-adjusted).,Calculated by Our World in Data based on the Global Carbon Project and Maddison Project Database
+co2_per_unit_energy,CO2 emissions measured per unit of energy consumed.,Calculated by Our World in Data based on Global Carbon Project and BP Statistical Review of World Energy
+cement_co2,"CO2 emissions from cement production, measured in million tonnes.",Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+coal_co2,"CO2 emissions from coal production, measured in million tonnes.",Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+flaring_co2,"CO2 emissions from gas flaring, measured in million tonnes.",Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+gas_co2,"CO2 emissions from gas production, measured in million tonnes.",Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+oil_co2,"CO2 emissions from oil production, measured in million tonnes.",Carbon Dioxide Information Analysis Center (CDIAC) and Global Carbon Project
+cement_co2_per_capita,"Per capita CO2 emissions from cement production, measured in tonnes.","Calculated by Our World in Data based on CDIAC, Global Carbon Project and UN Population estimates"
+coal_co2_per_capita,"Per capita CO2 emissions from coal production, measured in tonnes.","Calculated by Our World in Data based on CDIAC, Global Carbon Project and UN Population estimates"
+flaring_co2_per_capita,"Per capita CO2 emissions from flaring, measured in tonnes.","Calculated by Our World in Data based on CDIAC, Global Carbon Project and UN Population estimates"
+gas_co2_per_capita,"Per capita CO2 emissions from gas production, measured in tonnes.","Calculated by Our World in Data based on CDIAC, Global Carbon Project and UN Population estimates"
+oil_co2_per_capita,"Per capita CO2 emissions from oil production, measured in tonnes.","Calculated by Our World in Data based on CDIAC, Global Carbon Project and UN Population estimates"
+total_ghg,"Annual greenhouse gas emissions, measured in million tonnes of carbon dioxide equivalents.",CAIT Climate Data Explorer
+ghg_per_capita,"Greenhouse gas emissions per capita, measured in tonnes of carbon dioxide equivalents.",Calculated by Our World in Data based on CAIT Climate Data Explorer and UN Population estimates
+methane,"Annual methane emissions, measured in million tonnes of carbon dioxide equivalents.",CAIT Climate Data Explorer
+methane_per_capita,"Methane emissions per capita, measured in tonnes of carbon dioxide equivalents.",Calculated by Our World in Data based on CAIT Climate Data Explorer and UN Population estimates
+nitrous_oxide,"Annual nitrous oxide emissions, measured in million tonnes of carbon dioxide equivalents.",CAIT Climate Data Explorer
+nitrous_oxide_per_capita,"Nitrous oxide emissions per capita, measured in tonnes of carbon dioxide equivalents.",Calculated by Our World in Data based on CAIT Climate Data Explorer and UN Population estimates
+primary_energy_consumption,"Primary energy consumption, measured in terawatt-hours per year.",BP Statistical Review of World Energy
+energy_per_capita,"Primary energy consumption per capita, measured in kilowatt-hours per year.",Calculated by Our World in Data based on BP Statistical Review of World Energy and UN Population estimates
+energy_per_gdp,"Primary energy consumption per unit of gross domestic product, measured in kilowatt-hours per international-$.",Calculated by Our World in Data based on BP Statistical Review of World Energy and Maddison Project Database
+population,Total population,Gapminder and UN Population estimates
+gdp,"Total real gross domestic product, inflation-adjusted",Maddison Project Database
