@@ -4,9 +4,14 @@ import pandas as pd
 
 CURRENT_DIR = os.path.dirname(__file__)
 INPUT_DIR = os.path.join(CURRENT_DIR, "input")
-TMP_DIR = os.path.join(CURRENT_DIR, "tmp")
 GRAPHER_DIR = os.path.join(CURRENT_DIR, "grapher")
 OUTPUT_DIR = os.path.join(CURRENT_DIR, "..")
+
+
+def add_iso_codes(dataframe):
+    iso_codes = pd.read_csv(os.path.join(INPUT_DIR, "shared/iso3166_1_alpha_3_codes.csv"))
+    dataframe = iso_codes.merge(dataframe, on="country", how="right")
+    return dataframe
 
 
 def main():
@@ -18,7 +23,7 @@ def main():
 
     # Add GHG emissions data
     ghg_emissions = pd.read_csv(
-        os.path.join(TMP_DIR, "all_ghg_emissions.csv"),
+        os.path.join(GRAPHER_DIR, "all_ghg_emissions.csv"),
         usecols=["Country", "Year", "Total including LUCF", "Total including LUCF (per capita)"]
     )
     ghg_emissions = ghg_emissions.rename(columns={
@@ -27,7 +32,7 @@ def main():
     })
 
     ch4 = pd.read_csv(
-        os.path.join(TMP_DIR, "CH4_by_sector.csv"),
+        os.path.join(GRAPHER_DIR, "CH4_by_sector.csv"),
         usecols=["Country", "Year", "Total including LUCF", "Total including LUCF (per capita)"]
     )
     ch4 = ch4.rename(columns={
@@ -36,7 +41,7 @@ def main():
     })
 
     n2o = pd.read_csv(
-        os.path.join(TMP_DIR, "N2O_by_sector.csv"),
+        os.path.join(GRAPHER_DIR, "N2O_by_sector.csv"),
         usecols=[
             "Country",
             "Year",
@@ -78,6 +83,8 @@ def main():
     )
 
     combined = combined.rename(columns={
+        "Country": "country",
+        "Year": "year",
         "Annual CO2 emissions": "Annual CO2 emissions (Mt)",
         "Annual consumption-based CO2 emissions": "Annual consumption-based CO2 emissions (Mt)",
         "Annual CO2 growth (abs)": "Annual CO2 emisions growth (Mt)",
@@ -94,6 +101,8 @@ def main():
         "Gas": "CO2 emissions from gas (Mt)",
         "Flaring": "CO2 emissions from flaring (Mt)"
     })
+
+    combined = add_iso_codes(combined)
 
     combined.to_csv(
         os.path.join(OUTPUT_DIR, "owid-co2-data.csv"), index=False
