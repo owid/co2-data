@@ -47,7 +47,7 @@ def get_continents(dataframe):
         .rename(columns={"Region": "Country"})
         .replace(0, pd.NA)
     )
-    return dataframe
+    return continents
 
 
 def process_cdiac():
@@ -162,8 +162,7 @@ def main():
     combined = combined.drop(columns=["Priority", "Source"])
 
     # Reorder columns
-    column_order = ["Country", "Year", "CO2 emissions"]
-    combined = combined[column_order]
+    combined = combined[["Country", "Year", "CO2 emissions"]]
 
     combined = combined[-((combined["Country"] == "USSR") & (combined["Year"] > 1958))]
 
