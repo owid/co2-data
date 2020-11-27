@@ -223,17 +223,17 @@ def main():
     combined = combined.merge(consumption, on=["Country", "Year"], how="left")
     combined["Traded emissions"] = combined["Consumption emissions"] - combined["CO2 emissions"]
     combined["Share emissions traded"] = (
-        combined["Traded emissions"] / combined["CO2 emissions"]
+        (combined["Traded emissions"] / combined["CO2 emissions"])
         .mul(100)
     )
 
     # Calculating per capita emissions
     combined["Per capita emissions"] = (
-        combined["CO2 emissions"] / combined["Population"]
+        (combined["CO2 emissions"] / combined["Population"])
         .mul(1000000)
     )
     combined["Per capita consumption emissions"] = (
-        combined["Consumption emissions"] / combined["Population"]
+        (combined["Consumption emissions"] / combined["Population"])
         .mul(1000000)
     )
 
@@ -251,7 +251,8 @@ def main():
     combined = combined.merge(global_co2, on="Year", how="left")
 
     combined["Share of global emissions"] = (
-        combined["CO2 emissions"] / combined["Global emissions"] * 100
+        (combined["CO2 emissions"] / combined["Global emissions"])
+        .mul(100)
     )
 
     # Calculating peak emissions
@@ -265,17 +266,17 @@ def main():
 
     # Calculating share of global cumulative emissions
     combined["Share of global cumulative emissions"] = (
-        combined["Cumulative"] / combined["Global cumulative"]
+        (combined["Cumulative"] / combined["Global cumulative"])
         .mul(100)
     )
 
     # Calculating carbon intensity (per unit GDP)
     combined["CO2 per GDP (kg per $PPP)"] = (
-        combined["CO2 emissions"] / combined["Total real GDP"]
+        (combined["CO2 emissions"] / combined["Total real GDP"])
         .mul(1000000000)
     )
     combined["Consumption-based CO2 per GDP (kg per $PPP)"] = (
-        combined["Consumption emissions"] / combined["Total real GDP"]
+        (combined["Consumption emissions"] / combined["Total real GDP"])
         .mul(1000000000)
     )
     combined = combined.drop(columns=["Total real GDP"])
