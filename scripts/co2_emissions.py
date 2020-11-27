@@ -229,7 +229,8 @@ def main():
 
     # Calculating per capita emissions
     combined["Per capita emissions"] = (
-        combined["CO2 emissions"] / combined["Population"] * 1000000
+        (combined["CO2 emissions"] / combined["Population"])
+        .mul(1000000)
     )
     combined["Per capita consumption emissions"] = (
         (combined["Consumption emissions"] / combined["Population"])
@@ -250,7 +251,8 @@ def main():
     combined = combined.merge(global_co2, on="Year", how="left")
 
     combined["Share of global emissions"] = (
-        combined["CO2 emissions"] / combined["Global emissions"] * 100
+        (combined["CO2 emissions"] / combined["Global emissions"])
+        .mul(100)
     )
 
     # Calculating peak emissions
