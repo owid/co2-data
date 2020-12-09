@@ -63,7 +63,7 @@ Croatia,HRV,2015,Europe
 Cuba,CUB,2015,North America
 Curacao,CUW,2015,North America
 Cyprus,CYP,2015,Europe
-Czech Republic,CZE,2015,Europe
+Czechia,CZE,2015,Europe
 Czechoslovakia,OWID_CZS,2015,Europe
 Democratic Republic of Congo,COD,2015,Africa
 Denmark,DNK,2015,Europe
@@ -140,7 +140,7 @@ Liechtenstein,LIE,2015,Europe
 Lithuania,LTU,2015,Europe
 Luxembourg,LUX,2015,Europe
 Macao,MAC,2015,Asia
-Macedonia,MKD,2015,Europe
+North Macedonia,MKD,2015,Europe
 Madagascar,MDG,2015,Africa
 Malawi,MWI,2015,Africa
 Malaysia,MYS,2015,Asia
@@ -236,7 +236,7 @@ Sri Lanka,LKA,2015,Asia
 Sudan,SDN,2015,Africa
 Suriname,SUR,2015,South America
 Svalbard and Jan Mayen,SJM,2015,Europe
-Swaziland,SWZ,2015,Africa
+Eswatini,SWZ,2015,Africa
 Sweden,SWE,2015,Europe
 Switzerland,CHE,2015,Europe
 Syria,SYR,2015,Asia
@@ -289,7 +289,7 @@ Belgium,,2015,EU-27
 Bulgaria,,2015,EU-27
 Croatia,,2015,EU-27
 Cyprus,,2015,EU-27
-Czech Republic,,2015,EU-27
+Czechia,,2015,EU-27
 Denmark,,2015,EU-27
 Estonia,,2015,EU-27
 Finland,,2015,EU-27
@@ -432,7 +432,7 @@ Jersey,,2015,Europe (excl. EU-27)
 Kosovo,,2015,Europe (excl. EU-27)
 Latvia,,2015,Europe (excl. EU-27)
 Liechtenstein,,2015,Europe (excl. EU-27)
-Macedonia,,2015,Europe (excl. EU-27)
+North Macedonia,,2015,Europe (excl. EU-27)
 Mecklenburg Schwerin,,2015,Europe (excl. EU-27)
 Modena,,2015,Europe (excl. EU-27)
 Moldova,,2015,Europe (excl. EU-27)
@@ -475,7 +475,7 @@ Jersey,,2015,Europe (excl. EU-28)
 Kosovo,,2015,Europe (excl. EU-28)
 Latvia,,2015,Europe (excl. EU-28)
 Liechtenstein,,2015,Europe (excl. EU-28)
-Macedonia,,2015,Europe (excl. EU-28)
+North Macedonia,,2015,Europe (excl. EU-28)
 Mecklenburg Schwerin,,2015,Europe (excl. EU-28)
 Modena,,2015,Europe (excl. EU-28)
 Moldova,,2015,Europe (excl. EU-28)
@@ -502,7 +502,7 @@ Belgium,,2015,EU-28
 Bulgaria,,2015,EU-28
 Croatia,,2015,EU-28
 Cyprus,,2015,EU-28
-Czech Republic,,2015,EU-28
+Czechia,,2015,EU-28
 Denmark,,2015,EU-28
 Estonia,,2015,EU-28
 Finland,,2015,EU-28
