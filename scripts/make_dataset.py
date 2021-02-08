@@ -1,6 +1,7 @@
 import os
 import json
 import pandas as pd
+import numpy as np
 
 
 CURRENT_DIR = os.path.dirname(__file__)
@@ -37,9 +38,6 @@ def df_to_json(complete_dataset, output_path, static_columns):
 def main():
     # Add CO2 emissions
     co2 = pd.read_csv(os.path.join(GRAPHER_DIR, "co2_emissions.csv"))
-
-    # Add CO2 by fuel type
-    co2_by_fuel = pd.read_csv(os.path.join(GRAPHER_DIR, "co2_fuel.csv"))
 
     # Add GHG emissions data
     ghg_emissions = pd.read_csv(
@@ -90,16 +88,35 @@ def main():
         usecols=["Entity", "Year", "Total real GDP"]
     ).rename(columns={"Entity": "Country"})
 
-    # Combine datasets
+    # kludge: renames countries in the primary_energy dataset prior to merge.
+    primary_energy['Country'].replace({
+        'Burma': 'Myanmar',
+        'Ivory Coast': 'Côte d\'Ivoire',
+        'Macedonia': 'North Macedonia'
+    }, inplace=True)
+
+    # replaces values of 0 with NaN in the co2 dataset, b/c most (all?) of 
+    # these 0 values reflect missing data rather than an actual 0 value.
+    co2 = co2.replace(0, np.nan)
+    
+    # merges together the emissions datasets
     combined = (
         co2
-        .merge(co2_by_fuel, on=["Year", "Country"], how="left")
-        .merge(ghg_emissions, on=["Year", "Country"], how="left")
-        .merge(ch4, on=["Year", "Country"], how="left")
-        .merge(n2o, on=["Year", "Country"], how="left")
-        .merge(primary_energy, on=["Year", "Country"], how="left")
-        .merge(population, on=["Year", "Country"], how="left")
-        .merge(gdp, on=["Year", "Country"], how="left")
+        .merge(ghg_emissions, on=["Year", "Country"], how="outer", validate="1:1")
+        .merge(ch4, on=["Year", "Country"], how="outer", validate="1:1")
+        .merge(n2o, on=["Year", "Country"], how="outer", validate="1:1")
+    )
+    
+    # drops any country-year rows that contain only NaN values.
+    row_has_data = combined.drop(columns=['Country', 'Year']).notnull().any(axis=1)
+    combined = combined[row_has_data]
+
+    # merges non-emissions datasets onto emissions dataset
+    combined = (
+        combined
+        .merge(primary_energy, on=["Year", "Country"], how="left", validate="1:1")
+        .merge(population, on=["Year", "Country"], how="left", validate="1:1")
+        .merge(gdp, on=["Year", "Country"], how="left", validate="1:1")
     )
 
     combined = combined.rename(errors="raise", columns={
@@ -112,7 +129,6 @@ def main():
         "CO2 emissions embedded in trade": "trade_co2",
         "Share of CO2 emissions embedded in trade": "trade_co2_share",
         "Per capita CO2 emissions": "co2_per_capita",
-        "Primary energy consumption (TWh) (BP & WB)": "Primary energy consumption (TWh)",
         "Per capita consumption-based CO2 emissions": "consumption_co2_per_capita",
         "Share of global CO2 emissions": "share_global_co2",
         "Cumulative CO2 emissions": "cumulative_co2",
@@ -120,16 +136,34 @@ def main():
         "CO2 per GDP (kg per $PPP)": "co2_per_gdp",
         "Consumption-based CO2 per GDP (kg per $PPP)": "consumption_co2_per_gdp",
         "CO2 per unit energy (kgCO2 per kilowatt-hour)": "co2_per_unit_energy",
-        "Cement": "cement_co2",
-        "Coal": "coal_co2",
-        "Oil": "oil_co2",
-        "Gas": "gas_co2",
-        "Flaring": "flaring_co2",
-        "Cement (per capita)": "cement_co2_per_capita",
-        "Coal (per capita)": "coal_co2_per_capita",
-        "Oil (per capita)": "oil_co2_per_capita",
-        "Gas (per capita)": "gas_co2_per_capita",
-        "Flaring (per capita)": "flaring_co2_per_capita",
+        "CO2 emissions from cement": "cement_co2",
+        "CO2 emissions from coal": "coal_co2",
+        "CO2 emissions from oil": "oil_co2",
+        "CO2 emissions from gas": "gas_co2",
+        "CO2 emissions from flaring": "flaring_co2",
+        "CO2 emissions from other industry": "other_industry_co2",
+        "Cement emissions (per capita)": "cement_co2_per_capita",
+        "Coal emissions (per capita)": "coal_co2_per_capita",
+        "Oil emissions (per capita)": "oil_co2_per_capita",
+        "Gas emissions (per capita)": "gas_co2_per_capita",
+        "Flaring emissions (per capita)": "flaring_co2_per_capita",
+        "Other emissions (per capita)": "other_co2_per_capita",
+        "Share of global coal emissions": "share_global_coal_co2",
+        "Share of global oil emissions": "share_global_oil_co2",
+        "Share of global gas emissions": "share_global_gas_co2",
+        "Share of global flaring emissions": "share_global_flaring_co2",
+        "Share of global cement emissions": "share_global_cement_co2",
+        "Cumulative coal emissions": "cumulative_coal_co2",
+        "Cumulative oil emissions": "cumulative_oil_co2",
+        "Cumulative gas emissions": "cumulative_gas_co2",
+        "Cumulative flaring emissions": "cumulative_flaring_co2",
+        "Cumulative cement emissions": "cumulative_cement_co2",
+        "Cumulative other industry emissions": "cumulative_other_co2",
+        "Share of global cumulative coal emissions": "share_global_cumulative_coal_co2",
+        "Share of global cumulative oil emissions": "share_global_cumulative_oil_co2",
+        "Share of global cumulative gas emissions": "share_global_cumulative_gas_co2",
+        "Share of global cumulative flaring emissions": "share_global_cumulative_flaring_co2",
+        "Share of global cumulative cement emissions": "share_global_cumulative_cement_co2",
         "Total GHG emissions (MtCO2e)": "total_ghg",
         "GHG emissions per capita (tCO2e)": "ghg_per_capita",
         "CH4 emissions (MtCO2e)": "methane",
@@ -146,6 +180,13 @@ def main():
     combined = add_iso_codes(combined)
     combined = combined.round(3)
     combined = combined.sort_values(["country", "year"])
+    
+    # drops all columns that are not in the codebook
+    codebook = pd.read_csv(os.path.join(OUTPUT_DIR, "owid-co2-codebook.csv"))
+    combined = combined[codebook['column'].tolist()]
+    
+    # reorders columns so that index columns are first.
+    combined = combined.set_index(['iso_code', 'country', 'year']).reset_index()
 
     combined.to_csv(
         os.path.join(OUTPUT_DIR, "owid-co2-data.csv"), index=False
