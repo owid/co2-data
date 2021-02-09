@@ -8,7 +8,7 @@ We will continue to publish updated data on CO2 and Greenhouse Gas Emissions as 
 
 ## Our data sources
 
-- **CO2 emissions**: we have combined data from two sources: the [Global Carbon Project](http://www.globalcarbonproject.org/carbonbudget) and the [Carbon Dioxide Information Analysis Center](https://cdiac.ess-dive.lbl.gov/trends/emis/meth_reg.html) (CDIAC). Data until the year 1959 is taken from CDIAC; data from 1959 onwards is sourced from the Global Carbon Project. The Global Carbon Project typically releases a new update of CO2 emissions annually.
+- **CO2 emissions**: this data is sourced from the [Global Carbon Project](http://www.globalcarbonproject.org/carbonbudget). The Global Carbon Project typically releases a new update of CO2 emissions annually.
 - **Greenhouse gas emissions (including methane, and nitrous oxide):** this data is sourced from the CAIT Climate Data Explorer, and downloaded from the [Climate Watch Portal](https://www.climatewatchdata.org/data-explorer/historical-emissionshttps://www.climatewatchdata.org/data-explorer/historical-emissions).
 - **Energy (primary energy, energy mix and energy intensity):** this data is sourced from a combination of two sources. The [BP Statistical Review of World Energy](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html) is published annually, but it does not provide data on primary energy consumption for all countries. For countries absent from this dataset, we calculate primary energy by multiplying the [World Bank, World Development Indicators](https://databank.worldbank.org/source/world-development-indicators) metric `Energy use per capita` by total population figures. The World Bank sources this metric from the IEA.
 - **Other variables:** this data is collected from a variety of sources (United Nations, World Bank, Gapminder, Maddison Project Database, etc.). More information is available in [our codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv).
@@ -26,6 +26,7 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 ## Changelog
 
 - On August 7, 2020, the first version of this dataset was made available.
+– On February 8, 2020 we updated this dataset with the latest annual release from the Global Carbon Project.
 
 ## Data alterations
 
