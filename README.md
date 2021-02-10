@@ -26,7 +26,7 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 ## Changelog
 
 - On August 7, 2020, the first version of this dataset was made available.
-- On February 8, 2020 we updated this dataset with the latest annual release from the Global Carbon Project.
+- On February 8, 2021 we updated this dataset with the latest annual release from the Global Carbon Project.
 
 ## Data alterations
 
