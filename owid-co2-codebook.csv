@@ -53,4 +53,4 @@ primary_energy_consumption,"Primary energy consumption, measured in terawatt-hou
 energy_per_capita,"Primary energy consumption per capita, measured in kilowatt-hours per year.",Calculated by Our World in Data based on BP Statistical Review of World Energy and UN Population estimates
 energy_per_gdp,"Primary energy consumption per unit of gross domestic product, measured in kilowatt-hours per international-$.",Calculated by Our World in Data based on BP Statistical Review of World Energy and Maddison Project Database
 population,Total population,Gapminder and UN Population estimates
-gdp,"Total real gross domestic product, inflation-adjusted",Maddison Project Database
+gdp,"GDP adjusted for price changes over time (inflation) and price differences between countries – it is measured in international-$ in 2011 prices.",Maddison Project Database
