@@ -1,4 +1,5 @@
 iso_code,country
+,International
 ABW,Aruba
 AFG,Afghanistan
 AGO,Angola
@@ -34,8 +35,8 @@ BMU,Bermuda
 BOL,Bolivia
 BRA,Brazil
 BRB,Barbados
-BRN,Brunei Darussalam
 BRN,Brunei
+BRN,Brunei Darussalam
 BTN,Bhutan
 BVT,Bouvet Island
 BWA,Botswana
@@ -75,11 +76,11 @@ EST,Estonia
 ETH,Ethiopia
 FIN,Finland
 FJI,Fiji
-FLK,Falkland Islands (Malvinas)
 FLK,Falkland Islands
+FLK,Falkland Islands (Malvinas)
 FRA,France
-FRO,Faroe Islands
 FRO,Faeroe Islands
+FRO,Faroe Islands
 FSM,Federated States of Micronesia
 GAB,Gabon
 GBR,United Kingdom
@@ -132,8 +133,8 @@ LAO,Lao People's Democratic Republic
 LAO,Laos
 LBN,Lebanon
 LBR,Liberia
-LBY,Libyan Arab Jamahiriya
 LBY,Libya
+LBY,Libyan Arab Jamahiriya
 LCA,Saint Lucia
 LIE,Liechtenstein
 LKA,Sri Lanka
@@ -178,6 +179,9 @@ NPL,Nepal
 NRU,Nauru
 NZL,New Zealand
 OMN,Oman
+OWID_CZS,Czechoslovakia
+OWID_KOS,Kosovo
+OWID_WRL,World
 PAK,Pakistan
 PAN,Panama
 PCN,Pitcairn
@@ -191,14 +195,14 @@ PRK,Democratic People's Republic of Korea
 PRK,North Korea
 PRT,Portugal
 PRY,Paraguay
-PSE,Palestinian Territory
 PSE,Palestine
+PSE,Palestinian Territory
 PYF,French Polynesia
 QAT,Qatar
 REU,Réunion
 ROU,Romania
-RUS,Russian Federation
 RUS,Russia
+RUS,Russian Federation
 RWA,Rwanda
 SAU,Saudi Arabia
 SDN,Sudan
@@ -223,8 +227,8 @@ SWE,Sweden
 SWZ,Eswatini
 SXM,Sint Maarten (Dutch part)
 SYC,Seychelles
-SYR,Syrian Arab Republic
 SYR,Syria
+SYR,Syrian Arab Republic
 TCA,Turks and Caicos Islands
 TCD,Chad
 TGO,Togo
@@ -232,8 +236,8 @@ THA,Thailand
 TJK,Tajikistan
 TKL,Tokelau
 TKM,Turkmenistan
-TLS,Timor-Leste
 TLS,Timor
+TLS,Timor-Leste
 TON,Tonga
 TTO,Trinidad and Tobago
 TUN,Tunisia
@@ -257,10 +261,7 @@ VNM,Vietnam
 VUT,Vanuatu
 WLF,Wallis and Futuna Islands
 WSM,Samoa
-OWID_KOS,Kosovo
 YEM,Yemen
 ZAF,South Africa
 ZMB,Zambia
 ZWE,Zimbabwe
-OWID_WRL,World
-,International
