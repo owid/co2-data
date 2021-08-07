@@ -16,14 +16,14 @@ def main():
 
     # Convert years into rows
     raw_data = raw_data.melt(
-        id_vars=["Country", "Sector", "Gas"],
-        var_name="Date",
-        value_name="Value"
+        id_vars=["Country", "Sector", "Gas"], var_name="Date", value_name="Value"
     )
     raw_data["Date"] = raw_data["Date"].astype(int)
 
     # Country mapping of OWID country names
-    country_mapping = pd.read_csv(os.path.join(INPUT_DIR, "ghg/cait_country_standardized.csv"))
+    country_mapping = pd.read_csv(
+        os.path.join(INPUT_DIR, "ghg/cait_country_standardized.csv")
+    )
 
     # Import population dataset
     population = pd.read_csv(os.path.join(INPUT_DIR, "shared/population.csv"))
@@ -35,9 +35,7 @@ def main():
         # Convert 'Sector' rows into separate columns
         # then put year on every row
         gas_df = gas_df.pivot_table(
-            index=["Country", "Date"],
-            columns="Sector",
-            values="Value"
+            index=["Country", "Date"], columns="Sector", values="Value"
         ).reset_index()
 
         # Add country mapping of OWID country names
@@ -46,16 +44,18 @@ def main():
         gas_df = gas_df.drop(columns=["Country"])
 
         # Rename columns
-        gas_df = gas_df.rename(columns={
-            "OWIDCountry": "Country",
-            "Date": "Year",
-            "Industrial Processes": "Industry",
-            "Electricity/Heat": "Electricity & Heat",
-            "Bunker Fuels": "International aviation & shipping",
-            "Transportation": "Transport",
-            "Manufacturing/Construction": "Manufacturing & Construction",
-            "Building": "Buildings"
-        })
+        gas_df = gas_df.rename(
+            columns={
+                "OWIDCountry": "Country",
+                "Date": "Year",
+                "Industrial Processes": "Industry",
+                "Electricity/Heat": "Electricity & Heat",
+                "Bunker Fuels": "International aviation & shipping",
+                "Transportation": "Transport",
+                "Manufacturing/Construction": "Manufacturing & Construction",
+                "Building": "Buildings",
+            }
+        )
 
         # Add population
         gas_df = gas_df.merge(population, how="left", on=["Country", "Year"])
@@ -73,18 +73,22 @@ def main():
             "Total excluding LUCF",
             "Total including LUCF",
             "Transport",
-            "Waste"
+            "Waste",
         ]
         for col in columns_per_capita:
             if col in gas_df.columns:
-                gas_df[f"{col} (per capita)"] = gas_df[col] / gas_df["Population"] * 1000000
+                gas_df[f"{col} (per capita)"] = (
+                    gas_df[col] / gas_df["Population"] * 1000000
+                )
 
         # Drop 'Population' column
         gas_df = gas_df.drop(columns=["Population"])
 
         # Reorder columns
         left_columns = ["Country", "Year"]
-        other_columns = sorted([col for col in gas_df.columns if col not in left_columns])
+        other_columns = sorted(
+            [col for col in gas_df.columns if col not in left_columns]
+        )
         column_order = left_columns + other_columns
         gas_df = gas_df[column_order]
 
@@ -96,5 +100,5 @@ def main():
         gas_df.to_csv(os.path.join(GRAPHER_DIR, filename), index=False)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -10,29 +10,35 @@ TMP_DIR = os.path.join(CURRENT_DIR, "tmp")
 def main():
 
     # CDIAC
-    df_cdiac = pd.read_csv(os.path.join(INPUT_DIR, "global_fuel/global_fuel_type.csv"), skiprows=4)
+    df_cdiac = pd.read_csv(
+        os.path.join(INPUT_DIR, "global_fuel/global_fuel_type.csv"), skiprows=4
+    )
     df_cdiac = df_cdiac.drop(
         columns=["Per capita carbon emissions (metric tons of carbon; after 1949 only)"]
     )
-    df_cdiac = df_cdiac.rename(columns={
-        "Total carbon emissions from fossil fuel consumption and cement production (million metric tons of C)": "Total emissions",
-        "Carbon emissions from solid fuel consumption": "Coal",
-        "Carbon emissions from liquid fuel consumption": "Oil",
-        "Carbon emissions from gas fuel consumption": "Gas",
-        "Carbon emissions from cement production": "Cement",
-        "Carbon emissions from gas flaring": "Flaring"
-    })
+    df_cdiac = df_cdiac.rename(
+        columns={
+            "Total carbon emissions from fossil fuel consumption and cement production (million metric tons of C)": "Total emissions",
+            "Carbon emissions from solid fuel consumption": "Coal",
+            "Carbon emissions from liquid fuel consumption": "Oil",
+            "Carbon emissions from gas fuel consumption": "Gas",
+            "Carbon emissions from cement production": "Cement",
+            "Carbon emissions from gas flaring": "Flaring",
+        }
+    )
 
     co2_conversion = 3.664
 
     converted_cols = ["Total emissions", "Coal", "Oil", "Gas", "Cement", "Flaring"]
-    df_cdiac[converted_cols] = df_cdiac[converted_cols].astype(float).mul(co2_conversion)
+    df_cdiac[converted_cols] = (
+        df_cdiac[converted_cols].astype(float).mul(co2_conversion)
+    )
 
     # Global Carbon Project
     df_gcp = pd.read_excel(
         os.path.join(INPUT_DIR, "global_fuel/global_fuel_type_gcp.xlsx"),
         sheet_name="Fossil Emissions by Fuel Type",
-        skiprows=12
+        skiprows=12,
     )
     df_gcp = df_gcp.drop(columns=["Per Capita"])
     df_gcp = df_gcp.rename(columns={"Total": "Total emissions"})
