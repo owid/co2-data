@@ -36,7 +36,7 @@ def main():
         skiprows=1,
     )
     country_gcp = pd.read_csv(
-        os.path.join(INPUT_DIR, "shared/gcp_country_standardized.csv")
+        os.path.join(INPUT_DIR, "country_fuel/gcp_country_standardized.csv")
     )
 
     gas_gcp = pd.melt(gas_gcp, id_vars=["Year"], var_name=["Country"], value_name="Gas")
