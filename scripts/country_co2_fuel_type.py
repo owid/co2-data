@@ -94,7 +94,7 @@ def main():
 
     # Merge with country standardised names
     country_cdiac = pd.read_csv(
-        os.path.join(INPUT_DIR, "shared/cdiac_country_standardized.csv")
+        os.path.join(INPUT_DIR, "country_fuel/cdiac_country_standardized.csv")
     )
     emissions_cdiac = (
         emissions_cdiac.merge(country_cdiac, on="Country")
