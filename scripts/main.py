@@ -113,6 +113,26 @@ def get_co2_emissions() -> pd.DataFrame:
         assert re.search(
             r"co2", meta["name"], re.I
         ), "'co2' does not appear in co2 emissions variable"
+        # converts tonnes to million tonnes for CO2 emissions variables with
+        # unit=="tonnes".
+        assert meta["unit"] in [
+            "tonnes",
+            "tonnes per capita",
+            "%",
+            "kilograms per $PPP",
+            "kilograms per kilowatt-hour",
+        ], (
+            f"Encountered an unexpected unit value for variable {var_id}: "
+            f'"{meta["unit"]}". get_co2_emissions() may not work as '
+            "expected."
+        )
+        if meta["unit"] == "tonnes":
+            assert "conversionFactor" not in meta["display"], (
+                f"variable {var_id} has a non-null conversion factor "
+                f"({meta['display']['conversionFactor']}). Variable may not "
+                "actually be stored in tonnes."
+            )
+            df["value"] /= 1e6  # convert tonnes to million tonnes
         df = df.rename(
             columns={
                 "entity": "Country",
