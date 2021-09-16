@@ -25,8 +25,11 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 ## Changelog
 
-- On August 7, 2020, the first version of this dataset was made available.
-- On February 8, 2021 we updated this dataset with the latest annual release from the Global Carbon Project.
+- September 16, 2021:
+  - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
+  - Replaced all input CSVs with data retrieved directly from ourworldindata.org.
+- February 8, 2021: we updated this dataset with the latest annual release from the Global Carbon Project.
+- August 7, 2020: the first version of this dataset was made available.
 
 ## Data alterations
 
