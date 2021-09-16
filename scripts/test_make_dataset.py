@@ -1,5 +1,8 @@
 import unittest
-from scripts.make_dataset import *
+import os
+import pandas as pd
+from scripts.main import main
+from scripts import OUTPUT_DIR
 
 
 class TestMakeDataset(unittest.TestCase):
