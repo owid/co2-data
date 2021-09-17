@@ -25,8 +25,11 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 ## Changelog
 
-- On August 7, 2020, the first version of this dataset was made available.
-- On February 8, 2021 we updated this dataset with the latest annual release from the Global Carbon Project.
+- September 16, 2021:
+  - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
+  - Replaced all input CSVs with data retrieved directly from ourworldindata.org.
+- February 8, 2021: we updated this dataset with the latest annual release from the Global Carbon Project.
+- August 7, 2020: the first version of this dataset was made available.
 
 ## Data alterations
 
@@ -42,6 +45,6 @@ The data produced by third parties and made available by _Our World in Data_ is 
 
 ## Authors
 
-This data has been collected, aggregated, and documented by Hannah Ritchie, Max Roser and Edouard Mathieu.
+This data has been collected, aggregated, and documented by Hannah Ritchie, Max Roser, Edouard Mathieu and Bobbie Macdonald.
 
 The mission of *Our World in Data* is to make data and research on the world’s largest problems understandable and accessible. [Read more about our mission](https://ourworldindata.org/about).
