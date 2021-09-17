@@ -230,6 +230,10 @@ def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
         ),
         dataframes,
     )
+
+    # fix: replaces "European Union (27)" with "EU-27" for consistency with CO2
+    # emissions dataset
+    df["Country"].replace("European Union (27)", "EU-27", inplace=True)
     return df, codebook
 
 
@@ -280,6 +284,10 @@ def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
         ),
         dataframes,
     )
+
+    # fix: replaces "European Union (27)" with "EU-27" for consistency with CO2
+    # emissions dataset
+    df["Country"].replace("European Union (27)", "EU-27", inplace=True)
     return df, codebook
 
 
@@ -335,6 +343,10 @@ def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
         ),
         dataframes,
     )
+
+    # fix: replaces "European Union (27)" with "EU-27" for consistency with CO2
+    # emissions dataset
+    df["Country"].replace("European Union (27)", "EU-27", inplace=True)
     return df, codebook
 
 
