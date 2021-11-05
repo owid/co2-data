@@ -33,7 +33,7 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 ## Data alterations
 
-- **We standardize names of countries and regions.** Since the names of countries and regions are different in different data sources, we standardize all names to the [*Our World in Data* standard entity names](https://github.com/owid/co2-data/blob/master/scripts/input/shared/continents.csv).
+- **We standardize names of countries and regions.** Since the names of countries and regions are different in different data sources, we standardize all names in order to minimize data loss during data merges.
 - **We recalculate carbon emissions to CO2.** The primary data sources on CO2 emissions—the Global Carbon Project, for example—typically report emissions in tonnes of carbon. We have recalculated these figures as tonnes of CO2 using a conversion factor of 3.664.
 - **We calculate per capita figures.** All of our per capita figures are calculated from our metric `Population`, which is included in the complete dataset. These population figures are sourced from [Gapminder](http://gapminder.org) and the [UN World Population Prospects (UNWPP)](https://population.un.org/wpp/).
 
