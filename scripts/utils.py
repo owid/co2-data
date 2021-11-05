@@ -6,15 +6,14 @@ from dateutil.parser import parse
 import pandas as pd
 
 EPOCH_DATE = "2020-01-21"
+HOST = "https://ourworldindata.org"
 
 
 def get_owid_variable(
     variable_id: Union[int, str], to_frame: bool = False
 ) -> Tuple[Union[pd.DataFrame, dict], dict]:
     data_keys = ["years", "entities", "values"]
-    res = requests.get(
-        f"https://ourworldindata.org/grapher/data/variables/{variable_id}.json"
-    )
+    res = requests.get(f"{HOST}/grapher/data/variables/{variable_id}.json")
     assert res.ok
     result = json.loads(res.content)
     meta = {
