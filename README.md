@@ -25,6 +25,7 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 ## Changelog
 
+- November 5, 2021: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
 - September 16, 2021:
   - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
   - Replaced all input CSVs with data retrieved directly from ourworldindata.org.
