@@ -14,8 +14,8 @@ from typing import List, Tuple, Dict, Optional
 from functools import reduce
 from tqdm import tqdm
 
-from scripts import INPUT_DIR, OUTPUT_DIR
-from scripts.utils import get_owid_variable
+from __init__ import INPUT_DIR, OUTPUT_DIR
+from utils import get_owid_variable
 
 
 def main():
