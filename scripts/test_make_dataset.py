@@ -1,7 +1,6 @@
 import unittest
 import os
 import pandas as pd
-from scripts.main import main
 from scripts import OUTPUT_DIR
 
 
@@ -10,7 +9,6 @@ class TestMakeDataset(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        main()
         cls.data = pd.read_csv(os.path.join(OUTPUT_DIR, "owid-co2-data.csv"))
         cls.codebook = pd.read_csv(os.path.join(OUTPUT_DIR, "owid-co2-codebook.csv"))
         cls.index_cols = ["country", "year", "iso_code"]
