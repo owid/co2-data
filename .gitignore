@@ -3,5 +3,8 @@ __pycache__/
 venv
 .vscode
 
+# Jupyter notebook checkpoints
+.ipynb_checkpoints
+
 # Config files and folders
 .idea
