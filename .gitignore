@@ -2,3 +2,6 @@
 __pycache__/
 venv
 .vscode
+
+# Config files and folders
+.idea
