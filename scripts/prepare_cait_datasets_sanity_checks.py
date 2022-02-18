@@ -207,7 +207,8 @@ NAME_ALL_NEW = {
     'waste_per_capita': 'Waste (per capita)',
 }
 
-NAME_CO2_NEW = {col for col in NAME_ALL_NEW if col not in [
+# Define entity names in the new dataset of CO2 emissions.
+NAME_CO2_NEW = {col: NAME_ALL_NEW[col] for col in NAME_ALL_NEW if col not in [
     'Agriculture', 'Agriculture (per capita)', 'Waste', 'Waste (per capita)']}
 
 # Define entity names in the new dataset of CH4 emissions.
