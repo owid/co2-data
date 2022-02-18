@@ -39,7 +39,7 @@ EXPORT_INTERACTIVE_PLOTS = False
 # Maximum number of plots (of potentially problematic cases) to show in output file.
 MAX_NUM_PLOTS = 150
 
-
+# Define paths for each of the output csv files.
 DATASET_NEW_FILES = {
     'emissions_all_ghg': os.path.join(DATASET_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
     'emissions_co2': os.path.join(DATASET_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
@@ -61,6 +61,7 @@ DATASET_OLD_FILES = {
                                          "%20emissions%20by%20sector%20(CAIT%2C%202020).csv",
 }
 
+# Define entity names in the old dataset of all GHG emissions.
 NAME_ALL_OLD = {
     'country': 'Entity',
     'year': 'Year',
@@ -98,6 +99,7 @@ NAME_ALL_OLD = {
     'waste_per_capita': 'Waste (per capita) (GHG Emissions, CAIT)',
 }
 
+# Define entity names in the old dataset of CO2 emissions.
 NAME_CO2_OLD = {
     'country': 'Entity',
     'year': 'Year',
@@ -125,6 +127,7 @@ NAME_CO2_OLD = {
     'transport_per_capita': 'Transport (per capita) (CAIT)',
 }
 
+# Define entity names in the old dataset of CH4 emissions.
 NAME_CH4_OLD = {
     'country': 'Entity',
     'year': 'Year',
@@ -146,6 +149,7 @@ NAME_CH4_OLD = {
     'waste_per_capita': 'Waste (per capita) (CH4 emissions, CAIT)',
 }
 
+# Define entity names in the old dataset of N2O emissions.
 NAME_N2O_OLD = {
     'country': 'Entity',
     'year': 'Year',
@@ -167,6 +171,7 @@ NAME_N2O_OLD = {
     'waste_per_capita': 'Waste (per capita) (CAIT)',
 }
 
+# Define entity names in the new dataset of all GHG emissions.
 NAME_ALL_NEW = {
     'country': 'Country',
     'year': 'Year',
@@ -204,12 +209,16 @@ NAME_ALL_NEW = {
 
 NAME_CO2_NEW = {col for col in NAME_ALL_NEW if col not in [
     'Agriculture', 'Agriculture (per capita)', 'Waste', 'Waste (per capita)']}
-NAME_CH4_NEW = {col for col in NAME_ALL_NEW if col not in [
+
+# Define entity names in the new dataset of CH4 emissions.
+NAME_CH4_NEW = {col: NAME_ALL_NEW[col] for col in NAME_ALL_NEW if col not in [
     'Buildings', 'Buildings (per capita)', 'Electricity and heat', 'Electricity and heat (per capita)',
     'International aviation and shipping', 'International aviation and shipping (per capita)',
     'Manufacturing and construction', 'Manufacturing and construction (per capita)', 'Transport',
     'Transport (per capita)']}
-NAME_N2O_NEW = {col for col in NAME_ALL_NEW if col not in [
+
+# Define entity names in the new dataset of N2O emissions.
+NAME_N2O_NEW = {col: NAME_ALL_NEW[col] for col in NAME_ALL_NEW if col not in [
     'Buildings', 'Buildings (per capita)', 'Electricity and heat', 'Electricity and heat (per capita)',
     'International aviation and shipping', 'International aviation and shipping (per capita)',
     'Manufacturing and construction', 'Manufacturing and construction (per capita)', 'Transport',
@@ -218,7 +227,7 @@ NAME_N2O_NEW = {col for col in NAME_ALL_NEW if col not in [
 # Define default entity names.
 NAME = NAME_ALL_NEW.copy()
 
-# For convenience, put all dictionaries together keyed by dataset name.
+# For convenience, put all dictionaries of entity names together keyed by dataset name.
 NAME_OLD = {
     'emissions_all_ghg': NAME_ALL_OLD,
     'emissions_co2': NAME_CO2_OLD,
@@ -244,17 +253,40 @@ NAME_POPULATION = {
     "year": "Year",
 }
 
-# Latest possible value for the minimum year.
+# Define error metric. This dictionary should contain:
+# * 'name': Name of the error metric.
+# * 'function': Function that ingests and old array and a new array, and returns an array of errors.
+# * 'min_relevant': Minimum error to consider for warnings. Any error below this value will be ignored.
+ERROR_METRIC = {
+    'name': 'mape',
+    'function': sanity_checks.mean_absolute_percentage_error,
+    'min_relevant': 20,
+}
+
+# Latest acceptable value for the minimum year.
 MIN_YEAR_LATEST_POSSIBLE = 2000
 # Maximum delay (from current year) that maximum year can have.
 MAX_YEAR_MAXIMUM_DELAY = 4
-
+# Minimum acceptable value for emissions.
 MIN_EMISSIONS = 0
+# Maximum acceptable value for emissions; if equal to 'World', the world's maximum will be used.
 MAX_EMISSIONS = 'World'
+# Minimum acceptable value for emissions per capita.
 MIN_EMISSIONS_PER_CAPITA = 0
+# Maximum acceptable value for emissions.
 MAX_EMISSIONS_PER_CAPITA = 100
+# Minimum amount of emissions to consider relevant when calculating deviations.
+# This should be a value such that, if neither old nor new datasets surpass it (in absolute value), no deviation will be
+# calculated. We do so to avoid having large errors on small values.
 MIN_RELEVANT_EMISSIONS = 10
-
+# Ranges of values of all variables. Each key in this dictionary corresponds to a variable (defined using
+# default entity names), and the value is another dictionary, containing at least the following keys:
+# * 'min': Minimum value allowed for variable.
+# * 'max': Maximum value allowed for variable. As a special case, the value for 'max' can be 'World', in which
+#   case we assume that the maximum value allowed for variable is the maximum value for the world.
+# * 'min_relevant': Minimum relevant value to consider when looking for abrupt deviations. If a variable has
+#   an *absolute value* smaller than min_relevant, both in old and new datasets, the deviation will not be
+#   calculated for that point. This is so to avoid inspecting large errors on small, irrelevant values.
 # TODO: Choose meaningful ranges.
 RANGES = {
     # Total values.
@@ -401,12 +433,6 @@ RANGES = {
     },
 }
 
-ERROR_METRIC = {
-    'name': 'mape',
-    'function': sanity_checks.mean_absolute_percentage_error,
-    'min_relevant': 20,
-}
-
 
 def load_population(name_population=NAME_POPULATION, name=NAME):
     """Load population dataset and return it with the default entity naming.
@@ -443,69 +469,92 @@ def load_population(name_population=NAME_POPULATION, name=NAME):
     return population_renamed
 
 
-def execute_all_checks(old, new, population):
-    checks_on_single_dataset = sanity_checks.SanityChecksOnSingleDataset(
-        data=new,
-        name=NAME,
-        variable_ranges=RANGES,
-        population=population,
-        min_year_latest_possible=MIN_YEAR_LATEST_POSSIBLE,
-        max_year_maximum_delay=MAX_YEAR_MAXIMUM_DELAY)
-
-    checks_comparing_datasets = sanity_checks.SanityChecksComparingTwoDatasets(
-        data_old=old,
-        data_new=new,
-        name=NAME,
-        variable_ranges=RANGES,
-        data_label_old=DATA_LABEL_OLD,
-        data_label_new=DATA_LABEL_NEW,
-        error_metric=ERROR_METRIC
-    )
-
-    print("Execute sanity checks on single dataset.")
-    warnings_single_dataset = checks_on_single_dataset.apply_all_checks()
-    summary = checks_on_single_dataset.summarize_warnings_in_html(all_warnings=warnings_single_dataset)
-
-    print("Execute sanity checks comparing old and new datasets.")
-    warnings_comparing_datasets = checks_comparing_datasets.apply_all_checks()
-    summary += checks_comparing_datasets.summarize_warnings_in_html(all_warnings=warnings_comparing_datasets)
-    # Add graphs to be visually inspected.
-    summary += checks_comparing_datasets.summarize_figures_to_inspect_in_html(warnings=warnings_comparing_datasets)
-    
-    # Combine all warnings (for debugging purposes).
-    all_warnings = pd.concat([warnings_single_dataset, warnings_comparing_datasets], ignore_index=True)
-    
-    return summary, all_warnings
-
-
-def main(dataset_name, output_file):
+def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset_new_files=DATASET_NEW_FILES, name=NAME,
+         name_old=NAME_OLD, name_new=NAME_NEW, ranges=RANGES, min_year_latest_possible=MIN_YEAR_LATEST_POSSIBLE,
+         max_year_maximum_delay=MAX_YEAR_MAXIMUM_DELAY, data_label_old=DATA_LABEL_OLD, data_label_new=DATA_LABEL_NEW,
+         error_metric=ERROR_METRIC):
     """Apply all sanity checks and store the result as an HTML file to be visually inspected.
 
     Parameters
     ----------
-    data_file_old : str
-        Path to old dataset file.
-    data_file_new : str
-        Path to new dataset file.
+    dataset_name : str
+        Name of dataset to consider.
     output_file : str
         Path to output HTML file to be visually inspected.
+    dataset_old_files : dict
+        Paths (or URL) to each of the old dataset csv files.
+    dataset_new_files : dict
+        Paths for each of the output csv files.
+    name : dict
+        Dictionary of default entity names.
+    name_old : dict
+        Dictionary containing, for each one of the old datasets, its corresponding dictionary of entity names.
+    name_new : dict
+        Dictionary containing, for each one of the new datasets, its corresponding dictionary of entity names.
+    ranges : dict
+        Ranges of values of all variables. Each key in this dictionary corresponds to a variable (defined using
+        default entity names), and the value is another dictionary, containing at least the following keys:
+        * 'min': Minimum value allowed for variable.
+        * 'max': Maximum value allowed for variable. As a special case, the value for 'max' can be 'World', in which
+          case we assume that the maximum value allowed for variable is the maximum value for the world.
+        * 'min_relevant': Minimum relevant value to consider when looking for abrupt deviations. If a variable has
+          an *absolute value* smaller than min_relevant, both in old and new datasets, the deviation will not be
+          calculated for that point. This is so to avoid inspecting large errors on small, irrelevant values.
+    min_year_latest_possible : int
+        Latest acceptable value for the minimum year.
+    max_year_maximum_delay : int
+        Maximum delay (from current year) that maximum year can have
+    data_label_old : str
+        Label to use to identify old dataset (in plots).
+    data_label_new : str
+        Label to use to identify new dataset (in plots).
+    error_metric : dict
+        Error metric. This dictionary should contain:
+        * 'name': Name of the error metric.
+        * 'function': Function that ingests and old array and a new array, and returns an array of errors.
+        * 'min_relevant': Minimum error to consider for warnings. Any error below this value will be ignored.
 
     """
     print("Loading data.")
-    old_raw = pd.read_csv(DATASET_OLD_FILES[dataset_name])
-    new_raw = pd.read_csv(DATASET_NEW_FILES[dataset_name])
+    old_raw = pd.read_csv(dataset_old_files[dataset_name])
+    new_raw = pd.read_csv(dataset_new_files[dataset_name])
 
     # Prepare old and new datasets.
-    old = sanity_checks.rename_columns(data=old_raw, entities_to_rename_in_columns=list(NAME_OLD[dataset_name]),
-                                       name_dataset=NAME_OLD[dataset_name], name_default=NAME)
-    new = sanity_checks.rename_columns(data=new_raw, entities_to_rename_in_columns=list(NAME_NEW[dataset_name]),
-                                       name_dataset=NAME_NEW[dataset_name], name_default=NAME)
+    old = sanity_checks.rename_columns(data=old_raw, entities_to_rename_in_columns=list(name_old[dataset_name]),
+                                       name_dataset=name_old[dataset_name], name_default=name)
+    new = sanity_checks.rename_columns(data=new_raw, entities_to_rename_in_columns=list(name_new[dataset_name]),
+                                       name_dataset=name_new[dataset_name], name_default=name)
 
     print("Load population dataset.")
     population = load_population()
 
     # Execute all sanity checks.
-    summary, all_warnings = execute_all_checks(old=old, new=new, population=population)
+    print("Execute sanity checks on the new dataset.")
+    checks_on_single_dataset = sanity_checks.SanityChecksOnSingleDataset(
+        data=new,
+        name=name,
+        variable_ranges=ranges,
+        population=population,
+        min_year_latest_possible=min_year_latest_possible,
+        max_year_maximum_delay=max_year_maximum_delay,
+    )
+    warnings_single_dataset = checks_on_single_dataset.apply_all_checks()
+    summary = checks_on_single_dataset.summarize_warnings_in_html(all_warnings=warnings_single_dataset)
+
+    print("Execute sanity checks comparing old and new datasets.")
+    checks_comparing_datasets = sanity_checks.SanityChecksComparingTwoDatasets(
+        data_old=old,
+        data_new=new,
+        name=name,
+        variable_ranges=ranges,
+        data_label_old=data_label_old,
+        data_label_new=data_label_new,
+        error_metric=error_metric,
+    )
+    warnings_comparing_datasets = checks_comparing_datasets.apply_all_checks()
+    summary += checks_comparing_datasets.summarize_warnings_in_html(all_warnings=warnings_comparing_datasets)
+    # Add graphs to be visually inspected.
+    summary += checks_comparing_datasets.summarize_figures_to_inspect_in_html(warnings=warnings_comparing_datasets)
 
     print(f"Saving summary to file {output_file}.")
     with open(output_file, "w") as output_file_:
