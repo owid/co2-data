@@ -109,8 +109,8 @@ class Check(abc.ABC):
 
         Returns
         -------
-        summary : str
-            HTML with a summary of the results of this check.
+        all_warnings : pd.DataFrame
+            All potentially problematic data points found during checks.
 
         """
         all_check_names = self._gather_all_check_names()
@@ -128,6 +128,20 @@ class Check(abc.ABC):
         return all_warnings
     
     def summarize_warnings_in_html(self, all_warnings):
+        """Generate a HTML summary of all warnings generated during sanity checks, that should be visually inspected.
+
+        Parameters
+        ----------
+        all_warnings : pd.DataFrame
+            All potentially problematic data points found during checks.
+
+
+        Returns
+        -------
+        summary : str
+            HTML with a summary of the results of this check.
+
+        """
         all_check_names = self._gather_all_check_names()
         summary = ""
         for i, check_name in enumerate(all_check_names):
@@ -159,6 +173,18 @@ class SanityChecksOnSingleDataset(Check):
             Dataset.
         name : dict
             Default entity names.
+        variable_ranges : dict
+            Ranges of values of all variables. Each key in this dictionary corresponds to a variable (defined using
+            default entity names), and the value is another dictionary, containing at least the following keys:
+            * 'min': Minimum value allowed for variable.
+            * 'max': Maximum value allowed for variable. As a special case, the value for 'max' can be 'World', in which
+              case we assume that the maximum value allowed for variable is the maximum value for the world.
+        min_year_latest_possible : int
+            Latest acceptable value for the minimum year.
+        max_year_maximum_delay : int
+            Maximum delay (from current year) that maximum year can have
+        population : pd.DataFrame
+            Population dataset.
 
         """
         super().__init__()
@@ -259,11 +285,29 @@ class SanityChecksComparingTwoDatasets(Check):
             Old dataset.
         data_new : pd.DataFrame
             New dataset.
+        error_metric : dict
+            Error metric. This dictionary should contain:
+            * 'name': Name of the error metric.
+            * 'function': Function that ingests and old array and a new array, and returns an array of errors.
+            * 'min_relevant': Minimum error to consider for warnings. Any error below this value will be ignored.
         name : dict
             Default entity names.
+        variable_ranges : dict
+            Ranges of values of all variables. Each key in this dictionary corresponds to a variable (defined using
+            default entity names), and the value is another dictionary, containing at least the following keys:
+            * 'min_relevant': Minimum relevant value to consider when looking for abrupt deviations. If a variable has
+              an *absolute value* smaller than min_relevant, both in old and new datasets, the deviation will not be
+              calculated for that point. This is so to avoid inspecting large errors on small, irrelevant values.
+        data_label_old : str
+            Label to use to identify old dataset (in plots).
+        data_label_new : str
+            Label to use to identify new dataset (in plots).
         export_interactive_plots : bool
             True to export figures as interactive plotly figures (which, if there are many, can slow down the inspection
             of figures). False to export figures encoded in base64 format.
+        max_num_plots : int
+            Maximum number of plots to include in final summary of warnings. If there are more warnings than this
+            number, an additional warning line is added before the figures.
 
         """
         super().__init__()
@@ -396,7 +440,7 @@ class SanityChecksComparingTwoDatasets(Check):
         error_name : str
             Name for the error metric.
         error_function : function
-            Error metric. This function must ingest an 'old' and 'new' arguments.
+            Error function, that must ingest an 'old' and 'new' arguments.
 
         Returns
         -------
@@ -529,12 +573,6 @@ class SanityChecksComparingTwoDatasets(Check):
                 f.write(fig_html)
 
     def check_that_values_did_not_change_abruptly_from_old_to_new_dataset(self):
-        """Detect abrupt changes in variables when going from the old to the new dataset.
-
-        Return a dataframe with all country-variables that are potentially problematic, since they changed too much in
-        the new dataset with respect to the previous.
-
-        """
         # Calculate errors between old and new time series.
         error_name = self.error_metric['name']
         error_function = self.error_metric['function']
