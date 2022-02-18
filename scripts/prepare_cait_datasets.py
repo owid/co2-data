@@ -17,7 +17,7 @@ from tqdm.auto import tqdm
 # Define paths.
 CURRENT_DIR = os.path.dirname(__file__)
 INPUT_DIR = os.path.join(CURRENT_DIR, "input")
-OUTPUT_DIR = os.path.join(CURRENT_DIR, "output")
+OUTPUT_DIR = os.path.join(CURRENT_DIR, "grapher")
 # CAIT API URL.
 CAIT_API_URL = "https://www.climatewatchdata.org/api/v1/data/historical_emissions/"
 # Number of records to fetch per api request.
@@ -25,28 +25,28 @@ API_RECORDS_PER_REQUEST = 500
 # Time to wait between consecutive api requests.
 TIME_BETWEEN_REQUESTS = 0.1
 # Temporary file for API data.
-TEMP_API_DATA_FILE = os.path.join(CURRENT_DIR, "output", "temp.json")
+TEMP_API_DATA_FILE = os.path.join(OUTPUT_DIR, "temp.json")
 
 # Define default naming conventions (some of which will be in the outputs).
 NAME = {
-    'country': 'Entity',
-    'data_source': 'data_source',
-    'gas': 'gas',
-    'iso_3': 'iso_alpha3',
+    'country': 'Country',
+    'data_source': 'Data source',
+    'gas': 'Gas',
+    'iso_3': 'ISO alpha 3',
     'population': 'Population',
-    'sector': 'sector',
-    'value': 'value',
+    'sector': 'Sector',
+    'value': 'Value',
     'year': 'Year',
     'sector_agriculture': 'Agriculture',
-    'sector_aviation_and_shipping': 'International aviation & shipping',
+    'sector_aviation_and_shipping': 'Aviation and shipping',
     'sector_buildings': 'Buildings',
-    'sector_electricity_and_heat': 'Electricity & Heat',
+    'sector_electricity_and_heat': 'Electricity and heat',
     'sector_energy': 'Energy',
-    'sector_fugitive_emissions': 'Fugitive Emissions',
+    'sector_fugitive_emissions': 'Fugitive emissions',
     'sector_industry': 'Industry',
-    'sector_lucf': 'Land-Use Change and Forestry',
-    'sector_manufacturing_and_construction': 'Manufacturing & Construction',
-    'sector_other_fuel_combustion': 'Other Fuel Combustion',
+    'sector_lucf': 'Land-use change and forestry',
+    'sector_manufacturing_and_construction': 'Manufacturing and construction',
+    'sector_other_fuel_combustion': 'Other fuel combustion',
     'sector_total_excluding_lucf': 'Total excluding LUCF',
     'sector_total_including_lucf': 'Total including LUCF',
     'sector_transport': 'Transport',
@@ -55,7 +55,7 @@ NAME = {
     'iso_3_european_union': 'OWID_EUN',
     'iso_3_world': 'OWID_WRL',
     'country_european_union': 'European Union (27)',
-    'emissions_all_ghg': 'All Greenhouse Gases',
+    'emissions_all_ghg': 'All greenhouse gases',
     'emissions_co2': 'CO2',
     'emissions_ch4': 'CH4',
     'emissions_n20': 'N2O',
@@ -114,27 +114,14 @@ NAME_POP = {
 SUFFIX_FOR_PER_CAPITA_VARIABLES = " (per capita)"
 
 # Define output columns that will be added as per capita variables.
-COLUMNS_PER_CAPITA = [
-    'sector_agriculture',
-    'sector_buildings',
-    'sector_electricity_and_heat',
-    'sector_fugitive_emissions',
-    'sector_industry',
-    'sector_aviation_and_shipping',
-    'sector_lucf',
-    'sector_manufacturing_and_construction',
-    'sector_total_excluding_lucf',
-    'sector_total_including_lucf',
-    'sector_transport',
-    'sector_waste',
-]
+COLUMNS_PER_CAPITA = [column for column in list(NAME) if column.startswith('sector_')]
 
 # Define output files for each gas.
-GASES_AND_FILENAMES = {
-    'emissions_all_ghg': os.path.join(OUTPUT_DIR, "all_ghg_emissions.csv"),
-    'emissions_co2': os.path.join(OUTPUT_DIR, "CO2_by_sector.csv"),
-    'emissions_ch4': os.path.join(OUTPUT_DIR, "CH4_by_sector.csv"),
-    'emissions_n20': os.path.join(OUTPUT_DIR, "N2O_by_sector.csv"),
+GASES_AND_FILES = {
+    'emissions_all_ghg': os.path.join(OUTPUT_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
+    'emissions_co2': os.path.join(OUTPUT_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
+    'emissions_ch4': os.path.join(OUTPUT_DIR, "Methane emissions by sector (CAIT, 2021).csv"),
+    'emissions_n20': os.path.join(OUTPUT_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
 }
 
 # According to the documentation of the API, it is possible to select data by data_sources, gases or sectors.
@@ -287,12 +274,12 @@ def combine_ghg_and_population(ghg_data, population, name=NAME):
     return ghg_data
 
 
-def collect_data_for_each_gas(ghg_data, name=NAME, gases_and_filenames=GASES_AND_FILENAMES,
+def collect_data_for_each_gas(ghg_data, name=NAME, gases_and_files=GASES_AND_FILES,
                               columns_per_capita=COLUMNS_PER_CAPITA,
                               suffix_for_per_capita_variables=SUFFIX_FOR_PER_CAPITA_VARIABLES):
     data_for_gases = {}
     # Export a dataset for all ghg and for each individual gas.
-    for gas in gases_and_filenames:
+    for gas in gases_and_files:
         # Select data for this gas, and create a column for each sector.
         gas_data = ghg_data.loc[ghg_data[name['gas']] == name[gas]].\
                     pivot_table(index=[name['country'], name['year'], name['population']], columns=name['sector'],
@@ -318,10 +305,10 @@ def collect_data_for_each_gas(ghg_data, name=NAME, gases_and_filenames=GASES_AND
     return data_for_gases
 
 
-def save_data_for_each_gas(data_for_gases, gases_and_filename=GASES_AND_FILENAMES):
-    for gas in gases_and_filename:
+def save_data_for_each_gas(data_for_gases, gases_and_files=GASES_AND_FILES):
+    for gas in gases_and_files:
         # Save gas data to output file.
-        output_file = gases_and_filename[gas]
+        output_file = gases_and_files[gas]
         print(f"Saving data to file: {output_file}")
         data_for_gases[gas].to_csv(output_file, index=False)
 
@@ -347,7 +334,7 @@ def add_eu_27_to_population_dataset(population, name=NAME):
 
 
 ########################################################################################################################
-# TODO: Remove this temporary solution once Cook Islands and Naui are added to population dataset.
+# TODO: Remove this temporary solution once Cook Islands and Niue are added to population dataset.
 def add_population_for_missing_countries(population, countries_regions, name=NAME):
     missing_countries = ['Cook Islands', 'Niue']
     # Download complete population dataset.
@@ -399,11 +386,11 @@ def main(name=NAME, temp_api_data_file=TEMP_API_DATA_FILE):
     ####################################################################################################################
 
     ####################################################################################################################
-    # TODO: Remove this temporary solution once Cook Islands and Naui are added to population dataset.
+    # TODO: Remove this temporary solution once Cook Islands and Niue are added to population dataset.
     population = add_population_for_missing_countries(population=population, countries_regions=countries_regions)
     ####################################################################################################################
 
-    print("Prepare data on green house gases.")
+    print("Prepare data on greenhouse gases.")
     ghg_data = prepare_ghg_data(api_data)
 
     # Combine GHG and population data.
