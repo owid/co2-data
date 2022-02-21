@@ -18,8 +18,9 @@ CURRENT_DIR = os.path.dirname(__file__)
 DATASET_DIR = os.path.join(CURRENT_DIR, "grapher")
 
 # Date tag and output file for visual inspection of potential issues with the dataset.
+# In the output file, <DATASET_NAME> will be replaced by the name of the dataset, e.g. 'emissions_co2'.
 DATE_TAG = datetime.now().strftime("%Y-%m-%d")
-OUTPUT_FILE = os.path.join(CURRENT_DIR, f"cait_datasets_sanity_checks_{DATE_TAG}.html")
+OUTPUT_FILE = os.path.join(CURRENT_DIR, "sanity_checks", f"cait_datasets_sanity_checks_<DATASET_NAME>_{DATE_TAG}.html")
 
 # Define parameters for output figures.
 
@@ -38,7 +39,7 @@ DATASET_NEW_FILES = {
     'emissions_all_ghg': os.path.join(DATASET_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
     'emissions_co2': os.path.join(DATASET_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
     'emissions_ch4': os.path.join(DATASET_DIR, "Methane emissions by sector (CAIT, 2021).csv"),
-    'emissions_n20': os.path.join(DATASET_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
+    'emissions_n2o': os.path.join(DATASET_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
 }
 
 # Define URL of previous datasets for each gas (for checking purposes).
@@ -51,7 +52,7 @@ DATASET_OLD_FILES = {
                                          "sector%20(CAIT%2C%202020).csv",
     'emissions_ch4': OWID_DATASETS_URL + "Methane%20emissions%20by%20sector%20(CAIT%2C%202020)/Methane%20emissions%20"
                                          "by%20sector%20(CAIT%2C%202020).csv",
-    'emissions_n20': OWID_DATASETS_URL + "Nitrous%20oxide%20emissions%20by%20sector%20(CAIT%2C%202020)/Nitrous%20oxide"
+    'emissions_n2o': OWID_DATASETS_URL + "Nitrous%20oxide%20emissions%20by%20sector%20(CAIT%2C%202020)/Nitrous%20oxide"
                                          "%20emissions%20by%20sector%20(CAIT%2C%202020).csv",
 }
 
@@ -493,9 +494,9 @@ def check_that_energy_is_well_calculated(data, min_relevant_value=1, min_relevan
         All potentially problematic data points found during check.
 
     """
-    energy_estimated = data[[name['buildings'], name['electricity_and_heat'], name['fugitive_emissions'],
-                             name['manufacturing_and_construction'], name['other_fuel_combustion'],
-                             name['transport']]].sum(axis=1)
+    relevant_columns = [name['buildings'], name['electricity_and_heat'], name['fugitive_emissions'],
+                        name['manufacturing_and_construction'], name['other_fuel_combustion'], name['transport']]
+    energy_estimated = data[[col for col in relevant_columns if col in data.columns]].sum(axis=1)
     comparison = pd.DataFrame({'estimated': energy_estimated, 'reported': data[name['energy']]})
     select_relevant = (comparison['estimated'] > min_relevant_value) | (comparison['reported'] > min_relevant_value)
     comparison[error_name] = error_function(
@@ -504,6 +505,17 @@ def check_that_energy_is_well_calculated(data, min_relevant_value=1, min_relevan
     warnings['check_name'] = 'check_that_energy_is_well_calculated'
 
     return warnings
+
+
+def _save_output_file(summary, output_file, dataset_name):
+    output_file_parsed = output_file.replace('<DATASET_NAME>', dataset_name)
+    # Ensure output folder exists.
+    output_dir = os.path.abspath(os.path.dirname(output_file_parsed))
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
+    print(f"Saving summary to file {output_file_parsed}.")
+    with open(output_file_parsed, "w") as output_file_:
+        output_file_.write(summary)
 
 
 def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset_new_files=DATASET_NEW_FILES, name=NAME,
@@ -550,6 +562,9 @@ def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset
         * 'name': Name of the error metric.
         * 'function': Function that ingests and old array and a new array, and returns an array of errors.
         * 'min_relevant': Minimum error to consider for warnings. Any error below this value will be ignored.
+    ignore_lucf : bool
+        True to ignore variables related to LUCF when comparing old and new datasets. We do this because this variable
+        is particularly inconsistent among datasets (and unstable within a dataset).
 
     """
     print("Loading data.")
@@ -606,9 +621,7 @@ def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset
     # Add graphs to be visually inspected.
     summary += checks_comparing_datasets.summarize_figures_to_inspect_in_html(warnings=warnings_comparing_datasets)
 
-    print(f"Saving summary to file {output_file}.")
-    with open(output_file, "w") as output_file_:
-        output_file_.write(summary)
+    _save_output_file(summary, output_file, dataset_name)
 
 
 if __name__ == "__main__":
@@ -625,8 +638,8 @@ if __name__ == "__main__":
         "-f",
         "--output_file",
         default=OUTPUT_FILE,
-        help=f"Path to output HTML file to be visually inspected. Default: "
-        f"{OUTPUT_FILE}",
+        help=f"Path to output HTML file to be visually inspected. Default: {OUTPUT_FILE} (where <DATASET_NAME> will be "
+             f"replaced by the chosen dataset name)",
     )
     parser.add_argument(
         "-s",
