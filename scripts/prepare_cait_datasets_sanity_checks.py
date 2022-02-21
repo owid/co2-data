@@ -663,6 +663,11 @@ if __name__ == "__main__":
 
 # Conclusions:
 # * All variables related to LUCF are significantly inconsistent between old and new datasets (for many countries).
-# * There are several countries whose data has changed abruptly. We disregard those cases where (after visual
-#   inspection) the new data is more stable than the old one.
-# * Industry in France and Italy went up abruptly and systematically for all years.
+#   Some particularly unusual examples:
+#   * Romania's Total emissions including LUCF is the lowest in the world, in particular between 2011 and 2015.
+# * There are several countries whose data has changed abruptly from old to new dataset, most significantly:
+#   * Argentina - Manufacturing and construction.
+#   * European Union (27) - Industry (possibly as a consequence of changes in France and Italy).
+#   * France - Industry.
+#   * Italy - Industry.
+#   * Oman - Buildings, Manufacturing and construction.
