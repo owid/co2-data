@@ -13,12 +13,6 @@ import pandas as pd
 
 import sanity_checks
 
-# TODO: Checks to do:
-#  * Check that
-#    data[['Buildings', 'Electricity and heat', 'Fugitive emissions', 'Manufacturing and construction',
-#         'Other fuel combustion', 'Transport']].sum(axis=1)
-#    and check['Energy'] are almost identical.
-
 # Define paths.
 CURRENT_DIR = os.path.dirname(__file__)
 DATASET_DIR = os.path.join(CURRENT_DIR, "grapher")
@@ -265,21 +259,24 @@ ERROR_METRIC = {
 }
 
 # Latest acceptable value for the minimum year.
-MIN_YEAR_LATEST_POSSIBLE = 2000
+MIN_YEAR_LATEST_POSSIBLE = 1990
 # Maximum delay (from current year) that maximum year can have.
 MAX_YEAR_MAXIMUM_DELAY = 4
-# Minimum acceptable value for emissions.
+# Minimum acceptable value for emissions (in megatons of CO2-equivalents per year).
 MIN_EMISSIONS = 0
-# Maximum acceptable value for emissions; if equal to 'World', the world's maximum will be used.
+# Maximum acceptable value for emissions (in megatons of CO2-equivalents per year).
+# If equal to 'World', the world's maximum will be used.
 MAX_EMISSIONS = 'World'
-# Minimum acceptable value for emissions per capita.
+# Minimum acceptable value for emissions per capita (in tons of CO2-equivalents per year).
 MIN_EMISSIONS_PER_CAPITA = 0
-# Maximum acceptable value for emissions.
+# Maximum acceptable value for emissions (in tons of CO2-equivalents per year).
 MAX_EMISSIONS_PER_CAPITA = 100
-# Minimum amount of emissions to consider relevant when calculating deviations.
+# Minimum emissions to consider relevant when calculating deviations (in megatons of CO2-equivalents per year).
 # This should be a value such that, if neither old nor new datasets surpass it (in absolute value), no deviation will be
 # calculated. We do so to avoid having large errors on small values.
 MIN_RELEVANT_EMISSIONS = 10
+# Idem for per-capita emissions (in tons of CO2-equivalents per year).
+MIN_RELEVANT_EMISSIONS_PER_CAPITA = 1
 # Ranges of values of all variables. Each key in this dictionary corresponds to a variable (defined using
 # default entity names), and the value is another dictionary, containing at least the following keys:
 # * 'min': Minimum value allowed for variable.
@@ -288,7 +285,6 @@ MIN_RELEVANT_EMISSIONS = 10
 # * 'min_relevant': Minimum relevant value to consider when looking for abrupt deviations. If a variable has
 #   an *absolute value* smaller than min_relevant, both in old and new datasets, the deviation will not be
 #   calculated for that point. This is so to avoid inspecting large errors on small, irrelevant values.
-# TODO: Choose meaningful ranges.
 RANGES = {
     # Total values.
     'agriculture': {
@@ -327,9 +323,9 @@ RANGES = {
         'min_relevant': MIN_RELEVANT_EMISSIONS,
     },
     'lucf': {
-        'min': -100,
+        'min': -800,
         'max': MAX_EMISSIONS,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': 30,
     },
     'manufacturing_and_construction': {
         'min': MIN_EMISSIONS,
@@ -344,12 +340,12 @@ RANGES = {
     'total_excluding_lucf': {
         'min': MIN_EMISSIONS,
         'max': MAX_EMISSIONS,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': 30,
     },
     'total_including_lucf': {
-        'min': -5,
+        'min': -10,
         'max': MAX_EMISSIONS,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': 30,
     },
     'transport': {
         'min': MIN_EMISSIONS,
@@ -365,72 +361,72 @@ RANGES = {
     'agriculture_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'aviation_and_shipping_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'buildings_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'electricity_and_heat_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'energy_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'fugitive_emissions_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'industry_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'lucf_per_capita': {
-        'min': -5,
+        'min': -15,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': 10,
     },
     'manufacturing_and_construction_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'other_fuel_combustion_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'total_excluding_lucf_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': 10,
     },
     'total_including_lucf_per_capita': {
-        'min': -5,
+        'min': -15,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': 10,
     },
     'transport_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
     'waste_per_capita': {
         'min': MIN_EMISSIONS_PER_CAPITA,
         'max': MAX_EMISSIONS_PER_CAPITA,
-        'min_relevant': MIN_RELEVANT_EMISSIONS,
+        'min_relevant': MIN_RELEVANT_EMISSIONS_PER_CAPITA,
     },
 }
 
@@ -470,10 +466,50 @@ def load_population(name_population=NAME_POPULATION, name=NAME):
     return population_renamed
 
 
+def check_that_energy_is_well_calculated(data, min_relevant_value=1, min_relevant_error=1, name=NAME,
+                                         error_name=ERROR_METRIC['name'],
+                                         error_function=ERROR_METRIC['function']):
+    """Check that the column representing combined emissions in energy is the sum of the emissions from the
+    corresponding columns.
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        Data.
+    min_relevant_value : float
+        Minimum relevant value to consider when looking for abrupt deviations.
+    min_relevant_error : float
+        Minimum error to consider for warnings. Any error below this value will be ignored.
+    name : dict
+        Default entity names.
+    error_name : str
+        Name for the error metric.
+    error_function : function
+        Error function, that must ingest an 'old' and 'new' arguments.
+
+    Returns
+    -------
+    warnings : pd.DataFrame
+        All potentially problematic data points found during check.
+
+    """
+    energy_estimated = data[[name['buildings'], name['electricity_and_heat'], name['fugitive_emissions'],
+                             name['manufacturing_and_construction'], name['other_fuel_combustion'],
+                             name['transport']]].sum(axis=1)
+    comparison = pd.DataFrame({'estimated': energy_estimated, 'reported': data[name['energy']]})
+    select_relevant = (comparison['estimated'] > min_relevant_value) | (comparison['reported'] > min_relevant_value)
+    comparison[error_name] = error_function(
+        old=comparison[select_relevant]['reported'], new=comparison[select_relevant]['estimated'])
+    warnings = comparison[comparison[error_name] > min_relevant_error].reset_index(drop=True)
+    warnings['check_name'] = 'check_that_energy_is_well_calculated'
+
+    return warnings
+
+
 def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset_new_files=DATASET_NEW_FILES, name=NAME,
          name_old=NAME_OLD, name_new=NAME_NEW, ranges=RANGES, min_year_latest_possible=MIN_YEAR_LATEST_POSSIBLE,
          max_year_maximum_delay=MAX_YEAR_MAXIMUM_DELAY, data_label_old=DATA_LABEL_OLD, data_label_new=DATA_LABEL_NEW,
-         error_metric=ERROR_METRIC):
+         error_metric=ERROR_METRIC, ignore_lucf=False):
     """Apply all sanity checks and store the result as an HTML file to be visually inspected.
 
     Parameters
@@ -539,6 +575,10 @@ def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset
         min_year_latest_possible=min_year_latest_possible,
         max_year_maximum_delay=max_year_maximum_delay,
     )
+    # Add custom checks on the new dataset.
+    checks_on_single_dataset.check_that_energy_is_well_calculated =\
+        lambda: check_that_energy_is_well_calculated(data=new)
+    # Gather all warnings from checks.
     warnings_single_dataset = checks_on_single_dataset.apply_all_checks()
     summary = checks_on_single_dataset.summarize_warnings_in_html(all_warnings=warnings_single_dataset)
 
@@ -553,6 +593,15 @@ def main(dataset_name, output_file, dataset_old_files=DATASET_OLD_FILES, dataset
         error_metric=error_metric,
     )
     warnings_comparing_datasets = checks_comparing_datasets.apply_all_checks()
+    # Since data related to LUCF is highly inconsistent (for many countries), optionally ignore these variables to avoid
+    # an overwhelming amount of warnings.
+    if ignore_lucf:
+        allowed_variables = [name[col] for col in name if 'lucf' not in col]
+        warnings_comparing_datasets = warnings_comparing_datasets[
+            (warnings_comparing_datasets[
+                 'check_name'] == 'check_that_values_did_not_change_abruptly_from_old_to_new_dataset') &
+            (warnings_comparing_datasets['Variable'].isin(allowed_variables))
+        ]
     summary += checks_comparing_datasets.summarize_warnings_in_html(all_warnings=warnings_comparing_datasets)
     # Add graphs to be visually inspected.
     summary += checks_comparing_datasets.summarize_figures_to_inspect_in_html(warnings=warnings_comparing_datasets)
@@ -586,8 +635,21 @@ if __name__ == "__main__":
         action="store_true",
         help="If given, display output file in browser.",
     )
+    parser.add_argument(
+        "-i",
+        "--ignore_lucf",
+        default=False,
+        action="store_true",
+        help="If given, ignore variables related to LUCF when checking for abrupt changes.",
+    )
     args = parser.parse_args()
 
-    main(dataset_name=args.dataset_name, output_file=args.output_file)
+    main(dataset_name=args.dataset_name, output_file=args.output_file, ignore_lucf=args.ignore_lucf)
     if args.show_in_browser:
-        webbrowser.open("file://" + args.output_file)
+        webbrowser.open("file://" + os.path.abspath(args.output_file))
+
+# Conclusions:
+# * All variables related to LUCF are significantly inconsistent between old and new datasets (for many countries).
+# * There are several countries whose data has changed abruptly. We disregard those cases where (after visual
+#   inspection) the new data is more stable than the old one.
+# * Industry in France and Italy went up abruptly and systematically for all years.
