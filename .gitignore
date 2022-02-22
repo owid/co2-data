@@ -11,3 +11,6 @@ venv
 
 # Data files that should not be included in git
 *.html
+
+# Temporary files.
+temp.json
