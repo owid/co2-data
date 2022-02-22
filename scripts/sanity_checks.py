@@ -24,8 +24,7 @@ EXPORT_INTERACTIVE_PLOTS = False
 MAX_NUM_PLOTS = 150
 
 
-def rename_columns(
-        data, entities_to_rename_in_columns, name_dataset, name_default):
+def rename_columns(data, entities_to_rename_in_columns, name_dataset, name_default):
     """Translate columns in a dataframe, from a naming convention to another.
 
     Parameters
@@ -93,16 +92,20 @@ class Check(abc.ABC):
 
     @staticmethod
     def _parse_check_name(check_name):
-        check_name_parsed = check_name.capitalize().replace('_', ' ')
+        check_name_parsed = check_name.capitalize().replace("_", " ")
 
         return check_name_parsed
 
     def _gather_all_check_names(self):
-        all_check_names = [check_name for check_name in dir(self) if callable(getattr(self, check_name))
-                           if check_name.startswith("check_")]
+        all_check_names = [
+            check_name
+            for check_name in dir(self)
+            if callable(getattr(self, check_name))
+            if check_name.startswith("check_")
+        ]
 
         return all_check_names
-    
+
     def apply_all_checks(self):
         """Apply all methods in the class that are called 'check_', assume they do not ingest any argument, and execute
         them one by one, gathering all their output summaries.
@@ -114,7 +117,7 @@ class Check(abc.ABC):
 
         """
         all_check_names = self._gather_all_check_names()
-        all_warnings = pd.DataFrame({'check_name': []})
+        all_warnings = pd.DataFrame({"check_name": []})
         for i, check_name in enumerate(tqdm(all_check_names)):
             check_name_parsed = self._parse_check_name(check_name)
             print(f"({i + 1}/{len(all_check_names)}) {check_name_parsed}.")
@@ -122,11 +125,11 @@ class Check(abc.ABC):
             warnings = getattr(self, check_name)()
             if len(warnings) > 0:
                 print(f"WARNING: Potential issues: {len(warnings)}")
-                warnings['check_name'] = check_name
+                warnings["check_name"] = check_name
                 all_warnings = pd.concat([all_warnings, warnings], ignore_index=True)
 
         return all_warnings
-    
+
     def summarize_warnings_in_html(self, all_warnings):
         """Generate a HTML summary of all warnings generated during sanity checks, that should be visually inspected.
 
@@ -147,7 +150,9 @@ class Check(abc.ABC):
         for i, check_name in enumerate(all_check_names):
             check_name_parsed = self._parse_check_name(check_name)
             summary += f"<br><br>({i + 1}/{len(all_check_names)}) {check_name_parsed}."
-            warnings = all_warnings[all_warnings['check_name'] == check_name].dropna(axis=1)
+            warnings = all_warnings[all_warnings["check_name"] == check_name].dropna(
+                axis=1
+            )
             if len(warnings) > 0:
                 summary += f"<br><font color='red'>WARNING: Potential issues: {len(warnings)}</font>"
                 summary += warnings.to_html()
@@ -196,11 +201,14 @@ class SanityChecksOnSingleDataset(Check):
         self.max_year_maximum_delay = max_year_maximum_delay
 
     def check_that_countries_are_in_population_dataset(self):
-        missing_countries = list(set(self.data[self.name["country"]]) - set(self.population[self.name["country"]]))
-        warnings = pd.DataFrame({'country': missing_countries})
+        missing_countries = list(
+            set(self.data[self.name["country"]])
+            - set(self.population[self.name["country"]])
+        )
+        warnings = pd.DataFrame({"country": missing_countries})
 
         return warnings
-    
+
     def _get_year_ranges(self):
         # Keep only rows for which we have at least one not null data point.
         data_clean = self.data.dropna(how="all")
@@ -211,54 +219,76 @@ class SanityChecksOnSingleDataset(Check):
         )
 
         return year_ranges
-    
+
     def check_that_first_year_is_not_too_recent(self):
         year_ranges = self._get_year_ranges()
-        warnings = year_ranges[year_ranges["min"] > self.min_year_latest_possible][[self.name['country'], 'min']].\
-            rename(columns={'min': 'Value'})
+        warnings = year_ranges[year_ranges["min"] > self.min_year_latest_possible][
+            [self.name["country"], "min"]
+        ].rename(columns={"min": "Value"})
 
         return warnings
 
     def check_that_latest_year_is_not_too_old(self):
         current_year = datetime.today().year
         year_ranges = self._get_year_ranges()
-        warnings = year_ranges[year_ranges["max"] > (current_year - self.max_year_maximum_delay)][[
-            self.name['country'], 'max']].rename(columns={'max': 'Value'})
+        warnings = year_ranges[
+            year_ranges["max"] > (current_year - self.max_year_maximum_delay)
+        ][[self.name["country"], "max"]].rename(columns={"max": "Value"})
 
         return warnings
 
     def check_that_variables_have_values_that_are_not_lower_than_expected(self):
         warnings = pd.DataFrame()
-        ranges = {variable: self.variable_ranges[variable] for variable in self.variable_ranges
-                  if self.name[variable] in self.data.columns}
+        ranges = {
+            variable: self.variable_ranges[variable]
+            for variable in self.variable_ranges
+            if self.name[variable] in self.data.columns
+        }
         for variable in ranges:
-            min_value = ranges[variable]['min']
-            if min_value == 'World':
-                min_value = self.data[(self.data[self.name['country']] == 'World')][self.name[variable]].min()
-            too_low_rows = self.data[(self.data[self.name[variable]] < min_value)][[
-                self.name['country'], self.name['year'], self.name[variable]]]
+            min_value = ranges[variable]["min"]
+            if min_value == "World":
+                min_value = self.data[(self.data[self.name["country"]] == "World")][
+                    self.name[variable]
+                ].min()
+            too_low_rows = self.data[(self.data[self.name[variable]] < min_value)][
+                [self.name["country"], self.name["year"], self.name[variable]]
+            ]
             if len(too_low_rows) > 0:
-                too_low = too_low_rows.groupby(self.name['country']).agg({self.name[variable]: min}).\
-                    reset_index().rename(columns={self.name[variable]: 'Value'})
-                too_low['Variable'] = variable
+                too_low = (
+                    too_low_rows.groupby(self.name["country"])
+                    .agg({self.name[variable]: min})
+                    .reset_index()
+                    .rename(columns={self.name[variable]: "Value"})
+                )
+                too_low["Variable"] = variable
                 warnings = pd.concat([warnings, too_low], ignore_index=True)
 
         return warnings
 
     def check_that_variables_have_values_that_are_not_higher_than_expected(self):
         warnings = pd.DataFrame()
-        ranges = {variable: self.variable_ranges[variable] for variable in self.variable_ranges
-                  if self.name[variable] in self.data.columns}
+        ranges = {
+            variable: self.variable_ranges[variable]
+            for variable in self.variable_ranges
+            if self.name[variable] in self.data.columns
+        }
         for variable in ranges:
-            max_value = ranges[variable]['max']
-            if max_value == 'World':
-                max_value = self.data[(self.data[self.name['country']] == 'World')][self.name[variable]].max()
-            too_high_rows = self.data[(self.data[self.name[variable]] > max_value)][[
-                self.name['country'], self.name['year'], self.name[variable]]]
+            max_value = ranges[variable]["max"]
+            if max_value == "World":
+                max_value = self.data[(self.data[self.name["country"]] == "World")][
+                    self.name[variable]
+                ].max()
+            too_high_rows = self.data[(self.data[self.name[variable]] > max_value)][
+                [self.name["country"], self.name["year"], self.name[variable]]
+            ]
             if len(too_high_rows) > 0:
-                too_high = too_high_rows.groupby(self.name['country']).agg({self.name[variable]: max}).\
-                    reset_index().rename(columns={self.name[variable]: 'Value'})
-                too_high['Variable'] = variable
+                too_high = (
+                    too_high_rows.groupby(self.name["country"])
+                    .agg({self.name[variable]: max})
+                    .reset_index()
+                    .rename(columns={self.name[variable]: "Value"})
+                )
+                too_high["Variable"] = variable
                 warnings = pd.concat([warnings, too_high], ignore_index=True)
 
         return warnings
@@ -335,29 +365,35 @@ class SanityChecksComparingTwoDatasets(Check):
         return comparison
 
     def check_that_all_countries_in_old_dataset_are_in_new_dataset(self):
-        warnings = self.data_old[~self.data_old[self.name['country']].isin(self.data_new[self.name['country']])][[
-            self.name['country']]].drop_duplicates()
+        warnings = self.data_old[
+            ~self.data_old[self.name["country"]].isin(
+                self.data_new[self.name["country"]]
+            )
+        ][[self.name["country"]]].drop_duplicates()
 
         return warnings
 
     def check_that_all_countries_in_new_dataset_are_in_old_dataset(self):
-        warnings = self.data_new[~self.data_new[self.name['country']].isin(self.data_old[self.name['country']])][[
-            self.name['country']]].drop_duplicates()
+        warnings = self.data_new[
+            ~self.data_new[self.name["country"]].isin(
+                self.data_old[self.name["country"]]
+            )
+        ][[self.name["country"]]].drop_duplicates()
 
         return warnings
 
     def check_that_all_columns_in_old_dataset_are_in_new_dataset(self):
         missing_columns = list(set(self.data_old.columns) - set(self.data_new.columns))
-        warnings = pd.DataFrame({'Variable': missing_columns})
+        warnings = pd.DataFrame({"Variable": missing_columns})
 
         return warnings
 
     def check_that_all_columns_in_new_dataset_are_in_old_dataset(self):
         missing_columns = list(set(self.data_new.columns) - set(self.data_old.columns))
-        warnings = pd.DataFrame({'Variable': missing_columns})
+        warnings = pd.DataFrame({"Variable": missing_columns})
 
         return warnings
-    
+
     def plot_time_series_for_country_and_variable(self, country, variable):
         """Plot a time series for a specific country and variable in the old dataset and an analogous time series for
         the new dataset.
@@ -384,7 +420,7 @@ class SanityChecksComparingTwoDatasets(Check):
         comparison.loc[comparison["source"] == self.data_label_new, "size"] = 0.001
         # hover_data = {'source': False, name['year']: False, variable: True, 'size': False}
         hover_data = {}
-        
+
         # Get range for vertical axis.
         absolute_min = comparison[variable].min()
         absolute_max = comparison[variable].max()
@@ -449,16 +485,23 @@ class SanityChecksComparingTwoDatasets(Check):
 
         """
         # Compare only columns that appear in both old and new dataset, and have int or float dtypes.
-        columns = [col for col in self.variable_ranges
-                   if self.name[col] in self.data_old.columns
-                   if self.name[col] in self.data_new.columns]
+        columns = [
+            col
+            for col in self.variable_ranges
+            if self.name[col] in self.data_old.columns
+            if self.name[col] in self.data_new.columns
+        ]
         errors = pd.DataFrame()
         for country in tqdm(self.comparison[self.name["country"]].unique().tolist()):
             for variable in columns:
-                min_relevant_value = self.variable_ranges[variable]['min_relevant']
+                min_relevant_value = self.variable_ranges[variable]["min_relevant"]
                 comparison_pivot = (
                     self.comparison[self.comparison[self.name["country"]] == country]
-                    .pivot(index=self.name["year"], columns="source", values=self.name[variable])
+                    .pivot(
+                        index=self.name["year"],
+                        columns="source",
+                        values=self.name[variable],
+                    )
                     .dropna(how="any")
                     .reset_index()
                 )
@@ -527,13 +570,17 @@ class SanityChecksComparingTwoDatasets(Check):
             fig.show()
 
     @staticmethod
-    def convert_plotly_figure_to_html(fig, export_interactive_plots=EXPORT_INTERACTIVE_PLOTS):
+    def convert_plotly_figure_to_html(
+        fig, export_interactive_plots=EXPORT_INTERACTIVE_PLOTS
+    ):
         if export_interactive_plots:
             fig_html = fig.to_html(full_html=False, include_plotlyjs="cdn")
         else:
             img = plotly.io.to_image(fig, scale=1.2)
             img_base64 = base64.b64encode(img).decode("utf8")
-            fig_html = f"<br><img class='icon' src='data:image/png;base64,{img_base64}'>"
+            fig_html = (
+                f"<br><img class='icon' src='data:image/png;base64,{img_base64}'>"
+            )
 
         return fig_html
 
@@ -569,18 +616,22 @@ class SanityChecksComparingTwoDatasets(Check):
                     country=country, variable=variable
                 )
                 fig_html = self.convert_plotly_figure_to_html(
-                    fig, export_interactive_plots=self.export_interactive_plots)
+                    fig, export_interactive_plots=self.export_interactive_plots
+                )
                 f.write(fig_html)
 
     def check_that_values_did_not_change_abruptly_from_old_to_new_dataset(self):
         # Calculate errors between old and new time series.
-        error_name = self.error_metric['name']
-        error_function = self.error_metric['function']
-        error_min_relevant = self.error_metric['min_relevant']
+        error_name = self.error_metric["name"]
+        error_function = self.error_metric["function"]
+        error_min_relevant = self.error_metric["min_relevant"]
         errors = self.get_value_deviations_from_old_to_new_datasets(
-            error_name=error_name, error_function=error_function)
+            error_name=error_name, error_function=error_function
+        )
         errors[error_name] = errors[error_name].round(1)
-        warnings = errors[(errors[error_name] > error_min_relevant)].sort_values(error_name, ascending=False)
+        warnings = errors[(errors[error_name] > error_min_relevant)].sort_values(
+            error_name, ascending=False
+        )
 
         return warnings
 
@@ -600,22 +651,28 @@ class SanityChecksComparingTwoDatasets(Check):
 
         """
         figures = ""
-        warnings_to_plot = warnings[warnings[self.error_metric['name']].notnull()].reset_index(drop=True)
+        warnings_to_plot = warnings[
+            warnings[self.error_metric["name"]].notnull()
+        ].reset_index(drop=True)
         if len(warnings_to_plot) > self.max_num_plots:
             figures += (
                 f"<br><font color='red'>WARNING: {len(warnings_to_plot)} figures to plot, only {self.max_num_plots} "
                 f"will be shown.</font><br>"
             )
-        for i, warning in tqdm(warnings_to_plot.iterrows(), total=len(warnings_to_plot)):
+        for i, warning in tqdm(
+            warnings_to_plot.iterrows(), total=len(warnings_to_plot)
+        ):
             fig = self.plot_time_series_for_country_and_variable(
                 country=warning[self.name["country"]], variable=warning["Variable"]
             )
-            if self.error_metric['name'] in warning:
+            if self.error_metric["name"] in warning:
                 fig.update_layout(
                     title=f"{fig.layout.title['text']} - Relevant {self.error_metric['name']}: "
-                          f"{warning[self.error_metric['name']]} % "
+                    f"{warning[self.error_metric['name']]} % "
                 )
-            fig_html = self.convert_plotly_figure_to_html(fig, export_interactive_plots=self.export_interactive_plots)
+            fig_html = self.convert_plotly_figure_to_html(
+                fig, export_interactive_plots=self.export_interactive_plots
+            )
             figures += fig_html
 
         return figures

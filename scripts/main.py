@@ -6,13 +6,14 @@ Usage:
 
 """
 
-import os
 import json
+import os
 import re
-import pandas as pd
-from typing import List, Tuple, Dict, Optional
 from functools import reduce
-from tqdm import tqdm
+from typing import List, Tuple, Dict, Optional
+
+import pandas as pd
+from tqdm.auto import tqdm
 
 from scripts import INPUT_DIR, OUTPUT_DIR
 from scripts.utils import get_owid_variable
