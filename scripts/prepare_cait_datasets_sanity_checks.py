@@ -765,7 +765,8 @@ if __name__ == "__main__":
 #   * Romania's Total emissions including LUCF is the lowest in the world, in particular between 2011 and 2015.
 # * There are several countries whose data has changed abruptly from old to new dataset, most significantly:
 #   * Argentina - Manufacturing and construction.
-#   * European Union (27) - Industry (possibly as a consequence of changes in France and Italy).
-#   * France - Industry.
-#   * Italy - Industry.
+#   * Italy, France and the European Union (27) - Industry. The reason for these changes is that, in the previous CAIT
+#     dataset, CO2 emissions from industry were missing for Italy and France. However, their total GHG data interpreted
+#     missing CO2 as zeros. Therefore, industry emissions for France, Italy (and hence also the EU) were underestimated.
+#     This has been solved now that Italy and France do include data for CO2 emissions from industry.
 #   * Oman - Buildings, Manufacturing and construction.
