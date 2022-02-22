@@ -232,7 +232,7 @@ class SanityChecksOnSingleDataset(Check):
         current_year = datetime.today().year
         year_ranges = self._get_year_ranges()
         warnings = year_ranges[
-            year_ranges["max"] > (current_year - self.max_year_maximum_delay)
+            year_ranges["max"] < (current_year - self.max_year_maximum_delay)
         ][[self.name["country"], "max"]].rename(columns={"max": "Value"})
 
         return warnings

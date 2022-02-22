@@ -757,7 +757,8 @@ if __name__ == "__main__":
         ignore_lucf=args.ignore_lucf,
     )
     if args.show_in_browser:
-        webbrowser.open("file://" + os.path.abspath(args.output_file))
+        output_file_parsed = args.output_file.replace("<DATASET_NAME>", args.dataset_name)
+        webbrowser.open("file://" + os.path.abspath(output_file_parsed))
 
 # Conclusions:
 # * All variables related to LUCF are significantly inconsistent between old and new datasets (for many countries).
