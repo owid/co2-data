@@ -12,10 +12,7 @@ from datetime import datetime
 import pandas as pd
 
 import sanity_checks
-
-# Define paths.
-CURRENT_DIR = os.path.dirname(__file__)
-DATASET_DIR = os.path.join(CURRENT_DIR, "grapher")
+from scripts import CURRENT_DIR, GRAPHER_DIR
 
 # Date tag and output file for visual inspection of potential issues with the dataset.
 # In the output file, <DATASET_NAME> will be replaced by the name of the dataset, e.g. 'emissions_co2'.
@@ -36,10 +33,10 @@ MAX_NUM_PLOTS = 150
 
 # Define paths for each of the output csv files.
 DATASET_NEW_FILES = {
-    'emissions_all_ghg': os.path.join(DATASET_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
-    'emissions_co2': os.path.join(DATASET_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
-    'emissions_ch4': os.path.join(DATASET_DIR, "Methane emissions by sector (CAIT, 2021).csv"),
-    'emissions_n2o': os.path.join(DATASET_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
+    'emissions_all_ghg': os.path.join(GRAPHER_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
+    'emissions_co2': os.path.join(GRAPHER_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
+    'emissions_ch4': os.path.join(GRAPHER_DIR, "Methane emissions by sector (CAIT, 2021).csv"),
+    'emissions_n2o': os.path.join(GRAPHER_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
 }
 
 # Define URL of previous datasets for each gas (for checking purposes).

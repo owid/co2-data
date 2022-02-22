@@ -14,10 +14,8 @@ import requests
 from owid import catalog
 from tqdm.auto import tqdm
 
-# Define paths.
-CURRENT_DIR = os.path.dirname(__file__)
-INPUT_DIR = os.path.join(CURRENT_DIR, "input")
-OUTPUT_DIR = os.path.join(CURRENT_DIR, "grapher")
+from scripts import GRAPHER_DIR
+
 # CAIT API URL.
 CAIT_API_URL = "https://www.climatewatchdata.org/api/v1/data/historical_emissions/"
 # Number of records to fetch per api request.
@@ -25,7 +23,7 @@ API_RECORDS_PER_REQUEST = 500
 # Time to wait between consecutive api requests.
 TIME_BETWEEN_REQUESTS = 0.1
 # Temporary file for API data.
-TEMP_API_DATA_FILE = os.path.join(OUTPUT_DIR, "temp.json")
+TEMP_API_DATA_FILE = os.path.join(GRAPHER_DIR, "temp.json")
 
 # Define default naming conventions (some of which will be in the outputs).
 NAME = {
@@ -118,10 +116,10 @@ COLUMNS_PER_CAPITA = [column for column in list(NAME) if column.startswith('sect
 
 # Define output files for each gas.
 GASES_AND_FILES = {
-    'emissions_all_ghg': os.path.join(OUTPUT_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
-    'emissions_co2': os.path.join(OUTPUT_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
-    'emissions_ch4': os.path.join(OUTPUT_DIR, "Methane emissions by sector (CAIT, 2021).csv"),
-    'emissions_n20': os.path.join(OUTPUT_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
+    'emissions_all_ghg': os.path.join(GRAPHER_DIR, "GHG Emissions by Country and Sector (CAIT, 2021).csv"),
+    'emissions_co2': os.path.join(GRAPHER_DIR, "CO2 emissions by sector (CAIT, 2021).csv"),
+    'emissions_ch4': os.path.join(GRAPHER_DIR, "Methane emissions by sector (CAIT, 2021).csv"),
+    'emissions_n20': os.path.join(GRAPHER_DIR, "Nitrous oxide emissions by sector (CAIT, 2021).csv"),
 }
 
 # According to the documentation of the API, it is possible to select data by data_sources, gases or sectors.
