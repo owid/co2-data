@@ -185,15 +185,14 @@ def get_co2_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving total GHG emissions data...")
-    variables = [142731, 142823]
+    variables = [
+        347573,
+        347574,
+    ]
     dataframes = []
     codebook = []
     for var_id in variables:
         df, meta = get_owid_variable(var_id, to_frame=True)
-        assert re.search(
-            r"ghg", meta["name"], re.I
-        ), "'ghg' does not appear in ghg emissions variable"
-
         # fix: if conversionFactor==1e6, then the variable is actually stored in
         # million tonnes. Updates the description accordingly.
         description = meta["description"]
@@ -239,15 +238,16 @@ def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving CH4 emissions data...")
-    variables = [142803, 142841]
+    variables = [
+        347635,
+        347636,
+    ]
     dataframes = []
     codebook = []
     for var_id in variables:
         df, meta = get_owid_variable(var_id, to_frame=True)
-        assert re.search(
-            r"ch4", meta["name"], re.I
-        ), "'ch4' does not appear in ch4 emissions variable"
-
+        if not re.search(r"ch4", meta["name"], re.I):
+            meta["name"] += " (CH4)"
         # fix: if conversionFactor==1e6, then the variable is actually stored in
         # million tonnes. Updates the description accordingly
         description = meta["description"]
@@ -293,7 +293,10 @@ def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving N2O emissions data...")
-    variables = [142812, 142848]
+    variables = [
+        347617,
+        347618,
+    ]
     dataframes = []
     codebook = []
     for var_id in variables:
