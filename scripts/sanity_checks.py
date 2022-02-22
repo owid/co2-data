@@ -491,7 +491,7 @@ class SanityChecksComparingTwoDatasets(Check):
             if self.name[col] in self.data_old.columns
             if self.name[col] in self.data_new.columns
         ]
-        errors = pd.DataFrame()
+        errors = pd.DataFrame({self.name["country"]: [], "Variable": [], error_name: []})
         for country in tqdm(self.comparison[self.name["country"]].unique().tolist()):
             for variable in columns:
                 min_relevant_value = self.variable_ranges[variable]["min_relevant"]
