@@ -14,3 +14,7 @@ venv
 
 # Temporary files.
 temp.json
+
+# Keep in git only the csv file of the dataset, and ignore the json and xlsx files (they will only be stored in S3).
+owid-co2-data.json
+owid-co2-data.xlsx
