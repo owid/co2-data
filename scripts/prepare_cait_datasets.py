@@ -1,4 +1,4 @@
-"""Download data from CAIT using Climate Watch Data API, process data, and export a csv file.
+"""Download greenhouse gas emissions data from CAIT using Climate Watch Data API, process data, and export csv files.
 
 See https://www.climatewatchdata.org/data-explorer/historical-emissions
 

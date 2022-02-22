@@ -1,6 +1,7 @@
-"""Download data from CAIT using Climate Watch Data API, process data, and export a csv file.
+"""Run sanity checks on the CAIT dataset files.
 
-See https://www.climatewatchdata.org/data-explorer/historical-emissions
+This script should be run for each dataset ('emissions_all_ghg', 'emissions_co2', 'emissions_ch4', 'emissions_n2o').
+All warnings that should be visually inspected are stored in an HTML file for each dataset.
 
 """
 
