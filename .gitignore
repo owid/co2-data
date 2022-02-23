@@ -9,12 +9,6 @@ venv
 # Config files and folders
 .idea
 
-# Data files that should not be included in git
-*.html
-
-# Temporary files.
-temp.json
-
 # Keep in git only the csv file of the dataset, and ignore the json and xlsx files (they will only be stored in S3).
 owid-co2-data.json
 owid-co2-data.xlsx
