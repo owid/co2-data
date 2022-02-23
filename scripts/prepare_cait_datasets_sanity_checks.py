@@ -12,8 +12,7 @@ from datetime import datetime
 
 import pandas as pd
 
-import sanity_checks
-from scripts import CURRENT_DIR, GRAPHER_DIR
+from scripts import CURRENT_DIR, GRAPHER_DIR, sanity_checks
 
 # Date tag and output file for visual inspection of potential issues with the dataset.
 # In the output file, <DATASET_NAME> will be replaced by the name of the dataset, e.g. 'emissions_co2'.
@@ -572,8 +571,8 @@ def check_that_energy_is_well_calculated(
     return warnings
 
 
-def _save_output_file(summary, output_file, dataset_name):
-    output_file_parsed = output_file.replace("<DATASET_NAME>", dataset_name)
+def _save_output_file(summary, output_file, dataset_name, ignore_lucf):
+    output_file_parsed = _parse_output_file_name(output_file, dataset_name, ignore_lucf=ignore_lucf)
     # Ensure output folder exists.
     output_dir = os.path.abspath(os.path.dirname(output_file_parsed))
     if not os.path.isdir(output_dir):
@@ -699,7 +698,8 @@ def main(
     # Since data related to LUCF is highly inconsistent (for many countries), optionally ignore these variables to avoid
     # an overwhelming amount of warnings.
     if ignore_lucf:
-        allowed_variables = [name[col] for col in name if "lucf" not in col]
+        allowed_variables = [name[col] for col in name if col not in ["lucf", "lucf_per_capita", "total_including_lucf",
+                                                                      "total_including_lucf_per_capita"]]
         warnings_comparing_datasets = warnings_comparing_datasets[
             (
                 warnings_comparing_datasets["check_name"]
@@ -715,7 +715,15 @@ def main(
         warnings=warnings_comparing_datasets
     )
 
-    _save_output_file(summary, output_file, dataset_name)
+    _save_output_file(summary=summary, output_file=output_file, dataset_name=dataset_name, ignore_lucf=ignore_lucf)
+
+
+def _parse_output_file_name(output_file, dataset_name, ignore_lucf=False):
+    if ignore_lucf:
+        output_file = output_file.replace('.html', '_ignore_lucf.html')
+    output_file_parsed = output_file.replace("<DATASET_NAME>", dataset_name)
+
+    return output_file_parsed
 
 
 if __name__ == "__main__":
@@ -747,7 +755,8 @@ if __name__ == "__main__":
         "--ignore_lucf",
         default=False,
         action="store_true",
-        help="If given, ignore variables related to LUCF when checking for abrupt changes.",
+        help="If given, ignore variables that include LUCF when checking for abrupt changes. The generated output file "
+             "will end in '_ignore_lucf'.",
     )
     args = parser.parse_args()
 
@@ -757,7 +766,7 @@ if __name__ == "__main__":
         ignore_lucf=args.ignore_lucf,
     )
     if args.show_in_browser:
-        output_file_parsed = args.output_file.replace("<DATASET_NAME>", args.dataset_name)
+        output_file_parsed = _parse_output_file_name(args.output_file, args.dataset_name, ignore_lucf=args.ignore_lucf)
         webbrowser.open("file://" + os.path.abspath(output_file_parsed))
 
 # Conclusions:
