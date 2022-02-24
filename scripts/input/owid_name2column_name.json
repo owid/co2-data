@@ -48,6 +48,8 @@
   "Share of global cumulative CO2 emissions from other industry": "share_global_cumulative_other_co2",
   "Total including LUCF": "total_ghg",
   "Total including LUCF (per capita)": "ghg_per_capita",
+  "Total excluding LUCF": "total_ghg_excluding_lucf",
+  "Total excluding LUCF (per capita)": "ghg_excluding_lucf_per_capita",
   "Total including LUCF (CH4)": "methane",
   "Total including LUCF (per capita) (CH4)": "methane_per_capita",
   "Total including LUCF (N2O)": "nitrous_oxide",

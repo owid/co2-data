@@ -189,6 +189,8 @@ def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     variables = [
         347573,
         347574,
+        347571,
+        347572,
     ]
     dataframes = []
     codebook = []
