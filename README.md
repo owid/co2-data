@@ -27,7 +27,7 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 - February 24, 2022:
   - Updated greenhouse gas emissions data from CAIT Climate Data Explorer.
-  - Include two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
+  - Included two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
 - November 5, 2021: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
 - September 16, 2021:
   - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
