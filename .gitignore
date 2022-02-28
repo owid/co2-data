@@ -2,3 +2,13 @@
 __pycache__/
 venv
 .vscode
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints
+
+# Config files and folders
+.idea
+
+# Keep in git only the csv file of the dataset, and ignore the json and xlsx files (they will only be stored in S3).
+owid-co2-data.json
+owid-co2-data.xlsx

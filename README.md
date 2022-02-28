@@ -2,7 +2,7 @@
 
 Our complete CO2 and Greenhouse Gas Emissions dataset is a collection of key metrics maintained by [*Our World in Data*](https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions). It is updated regularly and includes data on CO2 emissions (annual, per capita, cumulative and consumption-based), other greenhouse gases, energy mix, and other relevant metrics.
 
-### 🗂️ Download our complete CO2 and Greenhouse Gas Emissions dataset : [CSV](https://github.com/owid/co2-data/raw/master/owid-co2-data.csv) | [XLSX](https://github.com/owid/co2-data/raw/master/owid-co2-data.xlsx) | [JSON](https://github.com/owid/co2-data/raw/master/owid-co2-data.json)
+### 🗂️ Download our complete CO2 and Greenhouse Gas Emissions dataset : [CSV](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.csv) | [XLSX](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.xlsx) | [JSON](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json)
 
 We will continue to publish updated data on CO2 and Greenhouse Gas Emissions as it becomes available. Most metrics are published on an annual basis.
 
@@ -15,7 +15,7 @@ We will continue to publish updated data on CO2 and Greenhouse Gas Emissions as 
 
 ## The complete *Our World in Data* CO2 and Greenhouse Gas Emissions dataset
 
-**Our complete CO2 and Greenhouse Gas Emissions dataset is available in [CSV](https://github.com/owid/co2-data/raw/master/owid-co2-data.csv), [XLSX](https://github.com/owid/co2-data/raw/master/owid-co2-data.xlsx), and [JSON](https://github.com/owid/co2-data/raw/master/owid-co2-data.json) formats.**
+**Our complete CO2 and Greenhouse Gas Emissions dataset is available in [CSV](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.csv), [XLSX](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.xlsx), and [JSON](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json) formats.**
 
 The CSV and XLSX files follow a format of 1 row per location and year. The JSON version is split by country, with an array of yearly records.
 
@@ -25,6 +25,9 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 ## Changelog
 
+- February 24, 2022:
+  - Updated greenhouse gas emissions data from CAIT Climate Data Explorer.
+  - Included two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
 - November 5, 2021: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
 - September 16, 2021:
   - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
@@ -46,6 +49,6 @@ The data produced by third parties and made available by _Our World in Data_ is 
 
 ## Authors
 
-This data has been collected, aggregated, and documented by Hannah Ritchie, Max Roser, Edouard Mathieu and Bobbie Macdonald.
+This data has been collected, aggregated, and documented by Hannah Ritchie, Max Roser, Edouard Mathieu, Bobbie Macdonald and Pablo Rosado.
 
 The mission of *Our World in Data* is to make data and research on the world’s largest problems understandable and accessible. [Read more about our mission](https://ourworldindata.org/about).
