@@ -50,15 +50,15 @@ co2_emissions_ids = {
 }
 
 total_ghg_emissions_ids = {
-  'Total including LUCF': 347635,
-  'Total including LUCF (per capita)': 347636,
-}
-
-ch4_emissions_ids = {
   'Total including LUCF': 347573,
   'Total including LUCF (per capita)': 347574,
   'Total excluding LUCF': 347571,
   'Total excluding LUCF (per capita)': 347572,
+}
+
+ch4_emissions_ids = {
+  'Total including LUCF': 347635,
+  'Total including LUCF (per capita)': 347636,
 }
 
 n2o_emissions_ids = {
