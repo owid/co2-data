@@ -398,8 +398,8 @@ def get_primary_energy_consumption() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving primary energy consumption data...")
     variables = [
         primary_energy_consumption_ids['Primary energy consumption (TWh)'],
-        primary_energy_consumption_ids['Energy consumption per capita (kWh)'],
-        primary_energy_consumption_ids['Energy consumption per GDP (kWh per $)'],
+        primary_energy_consumption_ids['Energy per capita (kWh)'],
+        primary_energy_consumption_ids['Energy per GDP (kWh per $)'],
     ]
     dataframes = []
     codebook = []

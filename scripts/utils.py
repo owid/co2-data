@@ -1,12 +1,18 @@
-import json
-import requests
 import datetime as dt
-from typing import Dict, Union, Tuple
+import json
+import os
 from dateutil.parser import parse
+from typing import Dict, Union, Tuple
+
 import pandas as pd
+import requests
+from dotenv import load_dotenv
 
 EPOCH_DATE = "2020-01-21"
-HOST = "https://ourworldindata.org"
+# Get variables from local grapher if "HOST='http://localhost:3030'" is defined in local .env file.
+# Otherwise load variables from from live grapher.
+load_dotenv()
+HOST = os.getenv("HOST", "https://ourworldindata.org")
 
 
 def get_owid_variable(
