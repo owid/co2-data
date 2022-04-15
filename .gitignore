@@ -2,6 +2,7 @@
 __pycache__/
 venv
 .vscode
+.env
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints
