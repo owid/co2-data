@@ -55,8 +55,8 @@
   "Total including LUCF (N2O)": "nitrous_oxide",
   "Total including LUCF (per capita) (N2O)": "nitrous_oxide_per_capita",
   "Primary energy consumption (TWh)": "primary_energy_consumption",
-  "Energy consumption per capita (kWh)": "energy_per_capita",
-  "Energy consumption per GDP (kWh per $)": "energy_per_gdp",
+  "Energy per capita (kWh)": "energy_per_capita",
+  "Energy per GDP (kWh per $)": "energy_per_gdp",
   "Population (historical estimates)": "population",
   "GDP": "gdp"
 }

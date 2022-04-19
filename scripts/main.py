@@ -17,6 +17,15 @@ from tqdm.auto import tqdm
 
 from scripts import INPUT_DIR, OUTPUT_DIR
 from scripts.utils import get_owid_variable
+from scripts.input.variable_ids import (
+    ch4_emissions_ids,
+    co2_emissions_ids,
+    gdp_ids,
+    n2o_emissions_ids,
+    population_ids,
+    primary_energy_consumption_ids,
+    total_ghg_emissions_ids,
+)
 
 
 def main():
@@ -82,50 +91,56 @@ def load_and_merge_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
 def get_co2_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving CO2 emissions data...")
     variables = [
-        179841,
-        179842,
-        179845,
-        179847,
-        179848,
-        179851,
-        179852,
-        179855,
-        179856,
-        179859,
-        179860,
-        179863,
-        179864,
-        179867,
-        179868,
-        179871,
-        179872,
-        179873,
-        179874,
-        179875,
-        179876,
-        179877,
-        179878,
-        179880,
-        179882,
-        179884,
-        179886,
-        179888,
-        179890,
-        179892,
-        179893,
-        179894,
-        179895,
-        179896,
-        179897,
-        179898,
-        179899,
-        179900,
-        179901,
-        179902,
-        179903,
-        179904,
-        179905,
-        179906,
+        co2_emissions_ids["Annual CO2 emissions"],
+        co2_emissions_ids["Annual CO2 emissions (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions embedded in trade"],
+        co2_emissions_ids["Annual CO2 emissions from cement"],
+        co2_emissions_ids["Annual CO2 emissions from cement (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions from coal"],
+        co2_emissions_ids["Annual CO2 emissions from coal (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions from flaring"],
+        co2_emissions_ids["Annual CO2 emissions from flaring (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions from gas"],
+        co2_emissions_ids["Annual CO2 emissions from gas (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions from oil"],
+        co2_emissions_ids["Annual CO2 emissions from oil (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions from other industry"],
+        co2_emissions_ids["Annual CO2 emissions from other industry (per capita)"],
+        co2_emissions_ids["Annual CO2 emissions growth (%)"],
+        co2_emissions_ids["Annual CO2 emissions growth (abs)"],
+        co2_emissions_ids["Annual CO2 emissions per GDP (kg per $PPP)"],
+        co2_emissions_ids[
+            "Annual CO2 emissions per unit energy (kg per kilowatt-hour)"
+        ],
+        co2_emissions_ids["Annual consumption-based CO2 emissions"],
+        co2_emissions_ids["Annual consumption-based CO2 emissions (per capita)"],
+        co2_emissions_ids[
+            "Annual consumption-based CO2 emissions per GDP (kg per $PPP)"
+        ],
+        co2_emissions_ids["Cumulative CO2 emissions"],
+        co2_emissions_ids["Cumulative CO2 emissions from cement"],
+        co2_emissions_ids["Cumulative CO2 emissions from coal"],
+        co2_emissions_ids["Cumulative CO2 emissions from flaring"],
+        co2_emissions_ids["Cumulative CO2 emissions from gas"],
+        co2_emissions_ids["Cumulative CO2 emissions from oil"],
+        co2_emissions_ids["Cumulative CO2 emissions from other industry"],
+        co2_emissions_ids["Share of annual CO2 emissions embedded in trade"],
+        co2_emissions_ids["Share of global annual CO2 emissions"],
+        co2_emissions_ids["Share of global annual CO2 emissions from cement"],
+        co2_emissions_ids["Share of global annual CO2 emissions from coal"],
+        co2_emissions_ids["Share of global annual CO2 emissions from flaring"],
+        co2_emissions_ids["Share of global annual CO2 emissions from gas"],
+        co2_emissions_ids["Share of global annual CO2 emissions from oil"],
+        co2_emissions_ids["Share of global annual CO2 emissions from other industry"],
+        co2_emissions_ids["Share of global cumulative CO2 emissions"],
+        co2_emissions_ids["Share of global cumulative CO2 emissions from cement"],
+        co2_emissions_ids["Share of global cumulative CO2 emissions from coal"],
+        co2_emissions_ids["Share of global cumulative CO2 emissions from flaring"],
+        co2_emissions_ids["Share of global cumulative CO2 emissions from gas"],
+        co2_emissions_ids["Share of global cumulative CO2 emissions from oil"],
+        co2_emissions_ids[
+            "Share of global cumulative CO2 emissions from other industry"
+        ],
     ]
     dataframes = []
     codebook = []
@@ -187,10 +202,10 @@ def get_co2_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving total GHG emissions data...")
     variables = [
-        347573,
-        347574,
-        347571,
-        347572,
+        total_ghg_emissions_ids["Total including LUCF"],
+        total_ghg_emissions_ids["Total including LUCF (per capita)"],
+        total_ghg_emissions_ids["Total excluding LUCF"],
+        total_ghg_emissions_ids["Total excluding LUCF (per capita)"],
     ]
     dataframes = []
     codebook = []
@@ -242,8 +257,8 @@ def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving CH4 emissions data...")
     variables = [
-        347635,
-        347636,
+        ch4_emissions_ids["Total including LUCF"],
+        ch4_emissions_ids["Total including LUCF (per capita)"],
     ]
     dataframes = []
     codebook = []
@@ -297,8 +312,8 @@ def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving N2O emissions data...")
     variables = [
-        347617,
-        347618,
+        n2o_emissions_ids["Total including LUCF"],
+        n2o_emissions_ids["Total including LUCF (per capita)"],
     ]
     dataframes = []
     codebook = []
@@ -358,7 +373,9 @@ def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_population() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving population data...")
-    df, meta = get_owid_variable(72, to_frame=True)
+    df, meta = get_owid_variable(
+        population_ids["Population (historical estimates)"], to_frame=True
+    )
     df = df.rename(
         columns={"entity": "Country", "year": "Year", "value": meta["name"]}
     ).drop(columns=["variable"])
@@ -374,7 +391,7 @@ def get_population() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_gdp() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving gdp data...")
-    df, meta = get_owid_variable(146201, to_frame=True)
+    df, meta = get_owid_variable(gdp_ids["GDP"], to_frame=True)
     df = df.rename(
         columns={"entity": "Country", "year": "Year", "value": meta["name"]}
     ).drop(columns=["variable"])
@@ -390,7 +407,11 @@ def get_gdp() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_primary_energy_consumption() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving primary energy consumption data...")
-    variables = [143360, 143363, 143364]
+    variables = [
+        primary_energy_consumption_ids["Primary energy consumption (TWh)"],
+        primary_energy_consumption_ids["Energy per capita (kWh)"],
+        primary_energy_consumption_ids["Energy per GDP (kWh per $)"],
+    ]
     dataframes = []
     codebook = []
     for var_id in variables:

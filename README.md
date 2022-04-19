@@ -25,6 +25,9 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 
 ## Changelog
 
+- April 15, 2022:
+  - Updated primary energy consumption data.
+  - Updated CO2 data to include aggregations for the different country income levels.
 - February 24, 2022:
   - Updated greenhouse gas emissions data from CAIT Climate Data Explorer.
   - Included two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
