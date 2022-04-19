@@ -1,4 +1,4 @@
-boto3==1.21.3
+boto3==1.21.42
 numpy==1.22.2
 openpyxl==3.0.9
 pandas==1.4.1
@@ -6,4 +6,4 @@ pytest==7.0.1
 python-dotenv==0.20.0
 requests==2.27.1
 tqdm==4.62.3
-git+https://github.com/owid/data-utils-py.git
+git+https://github.com/owid/data-utils-py.git@v0.2.0-alpha#egg=owid.datautils
