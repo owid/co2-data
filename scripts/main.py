@@ -9,23 +9,14 @@ Usage:
 import json
 import os
 import re
-from functools import reduce
-from typing import List, Tuple, Dict, Optional
+from typing import List, Tuple, Dict, Optional, Any
 
 import pandas as pd
-from tqdm.auto import tqdm
+import requests
 
 from scripts import INPUT_DIR, OUTPUT_DIR
-from scripts.utils import get_owid_variable
-from scripts.input.variable_ids import (
-    ch4_emissions_ids,
-    co2_emissions_ids,
-    gdp_ids,
-    n2o_emissions_ids,
-    population_ids,
-    primary_energy_consumption_ids,
-    total_ghg_emissions_ids,
-)
+
+from utils import API_URL, fetch_data_and_metadata_from_api
 
 
 def main():
@@ -90,64 +81,65 @@ def load_and_merge_datasets() -> Tuple[pd.DataFrame, pd.DataFrame]:
 
 def get_co2_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving CO2 emissions data...")
+
     variables = [
-        co2_emissions_ids["Annual CO2 emissions"],
-        co2_emissions_ids["Annual CO2 emissions (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions embedded in trade"],
-        co2_emissions_ids["Annual CO2 emissions from cement"],
-        co2_emissions_ids["Annual CO2 emissions from cement (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions from coal"],
-        co2_emissions_ids["Annual CO2 emissions from coal (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions from flaring"],
-        co2_emissions_ids["Annual CO2 emissions from flaring (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions from gas"],
-        co2_emissions_ids["Annual CO2 emissions from gas (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions from oil"],
-        co2_emissions_ids["Annual CO2 emissions from oil (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions from other industry"],
-        co2_emissions_ids["Annual CO2 emissions from other industry (per capita)"],
-        co2_emissions_ids["Annual CO2 emissions growth (%)"],
-        co2_emissions_ids["Annual CO2 emissions growth (abs)"],
-        co2_emissions_ids["Annual CO2 emissions per GDP (kg per $PPP)"],
-        co2_emissions_ids[
-            "Annual CO2 emissions per unit energy (kg per kilowatt-hour)"
-        ],
-        co2_emissions_ids["Annual consumption-based CO2 emissions"],
-        co2_emissions_ids["Annual consumption-based CO2 emissions (per capita)"],
-        co2_emissions_ids[
-            "Annual consumption-based CO2 emissions per GDP (kg per $PPP)"
-        ],
-        co2_emissions_ids["Cumulative CO2 emissions"],
-        co2_emissions_ids["Cumulative CO2 emissions from cement"],
-        co2_emissions_ids["Cumulative CO2 emissions from coal"],
-        co2_emissions_ids["Cumulative CO2 emissions from flaring"],
-        co2_emissions_ids["Cumulative CO2 emissions from gas"],
-        co2_emissions_ids["Cumulative CO2 emissions from oil"],
-        co2_emissions_ids["Cumulative CO2 emissions from other industry"],
-        co2_emissions_ids["Share of annual CO2 emissions embedded in trade"],
-        co2_emissions_ids["Share of global annual CO2 emissions"],
-        co2_emissions_ids["Share of global annual CO2 emissions from cement"],
-        co2_emissions_ids["Share of global annual CO2 emissions from coal"],
-        co2_emissions_ids["Share of global annual CO2 emissions from flaring"],
-        co2_emissions_ids["Share of global annual CO2 emissions from gas"],
-        co2_emissions_ids["Share of global annual CO2 emissions from oil"],
-        co2_emissions_ids["Share of global annual CO2 emissions from other industry"],
-        co2_emissions_ids["Share of global cumulative CO2 emissions"],
-        co2_emissions_ids["Share of global cumulative CO2 emissions from cement"],
-        co2_emissions_ids["Share of global cumulative CO2 emissions from coal"],
-        co2_emissions_ids["Share of global cumulative CO2 emissions from flaring"],
-        co2_emissions_ids["Share of global cumulative CO2 emissions from gas"],
-        co2_emissions_ids["Share of global cumulative CO2 emissions from oil"],
-        co2_emissions_ids[
-            "Share of global cumulative CO2 emissions from other industry"
-        ],
+        "Annual CO2 emissions",
+        "Annual CO2 emissions (per capita)",
+        "Annual CO2 emissions embedded in trade",
+        "Annual CO2 emissions from cement",
+        "Annual CO2 emissions from cement (per capita)",
+        "Annual CO2 emissions from coal",
+        "Annual CO2 emissions from coal (per capita)",
+        "Annual CO2 emissions from flaring",
+        "Annual CO2 emissions from flaring (per capita)",
+        "Annual CO2 emissions from gas",
+        "Annual CO2 emissions from gas (per capita)",
+        "Annual CO2 emissions from oil",
+        "Annual CO2 emissions from oil (per capita)",
+        "Annual CO2 emissions from other industry",
+        "Annual CO2 emissions from other industry (per capita)",
+        "Annual CO2 emissions growth (%)",
+        "Annual CO2 emissions growth (abs)",
+        "Annual CO2 emissions per GDP (kg per $PPP)",
+        "Annual CO2 emissions per unit energy (kg per kilowatt-hour)",
+        "Annual consumption-based CO2 emissions",
+        "Annual consumption-based CO2 emissions (per capita)",
+        "Annual consumption-based CO2 emissions per GDP (kg per $PPP)",
+        "Cumulative CO2 emissions",
+        "Cumulative CO2 emissions from cement",
+        "Cumulative CO2 emissions from coal",
+        "Cumulative CO2 emissions from flaring",
+        "Cumulative CO2 emissions from gas",
+        "Cumulative CO2 emissions from oil",
+        "Cumulative CO2 emissions from other industry",
+        "Share of annual CO2 emissions embedded in trade",
+        "Share of global annual CO2 emissions",
+        "Share of global annual CO2 emissions from cement",
+        "Share of global annual CO2 emissions from coal",
+        "Share of global annual CO2 emissions from flaring",
+        "Share of global annual CO2 emissions from gas",
+        "Share of global annual CO2 emissions from oil",
+        "Share of global annual CO2 emissions from other industry",
+        "Share of global cumulative CO2 emissions",
+        "Share of global cumulative CO2 emissions from cement",
+        "Share of global cumulative CO2 emissions from coal",
+        "Share of global cumulative CO2 emissions from flaring",
+        "Share of global cumulative CO2 emissions from gas",
+        "Share of global cumulative CO2 emissions from oil",
+        "Share of global cumulative CO2 emissions from other industry",
     ]
-    dataframes = []
+
+    df, metadata = fetch_data_and_metadata_from_api(
+        "backport/owid/latest/dataset_5582_global_carbon_budget__global_carbon_project__v2021/dataset_5582_global_carbon_budget__global_carbon_project__v2021",
+        variables,
+    )
+
     codebook = []
-    for var_id in tqdm(variables):
-        df, meta = get_owid_variable(var_id, to_frame=True)
+    for var_title in variables:
+        meta = [v for v in metadata["variables"] if v["title"] == var_title][0]
+
         assert re.search(
-            r"co2", meta["name"], re.I
+            r"co2", meta["title"], re.I
         ), "'co2' does not appear in co2 emissions variable"
         # converts tonnes to million tonnes for CO2 emissions variables with
         # unit=="tonnes".
@@ -159,58 +151,52 @@ def get_co2_emissions() -> Tuple[pd.DataFrame, List[dict]]:
             "kilograms per $PPP",
             "kilograms per kilowatt-hour",
         ], (
-            f"Encountered an unexpected unit value for variable {var_id}: "
+            f"Encountered an unexpected unit value for variable {var_title}: "
             f'"{meta["unit"]}". get_co2_emissions() may not work as '
             "expected."
         )
         if meta["unit"] == "tonnes":
             assert "conversionFactor" not in meta["display"], (
-                f"variable {var_id} has a non-null conversion factor "
+                f"variable {var_title} has a non-null conversion factor "
                 f"({meta['display']['conversionFactor']}). Variable may not "
                 "actually be stored in tonnes."
             )
-            df["value"] /= 1e6  # convert tonnes to million tonnes
+            df[var_title] /= 1e6  # convert tonnes to million tonnes
             new_description = re.sub("tonnes", "million tonnes", description)
             assert (
                 new_description != description and "million tonnes" in new_description
             ), 'Expected "million tonnes" to be present in modified description.'
             description = new_description
-        df = df.rename(
-            columns={
-                "entity": "Country",
-                "year": "Year",
-                "value": meta["name"],
-            }
-        ).drop(columns=["variable"])
-        dataframes.append(df)
         codebook.append(
             {
-                "name": meta["name"],
-                "description": description,
-                "source": meta["source"]["name"],
+                "name": meta["title"],
+                "description": meta["description"],
+                "source": meta["sources"][0]["name"],
             }
         )
-    df = reduce(
-        lambda left, right: pd.merge(
-            left, right, on=["Country", "Year"], how="outer", validate="1:1"
-        ),
-        dataframes,
-    )
+
     return df, codebook
 
 
 def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving total GHG emissions data...")
+
     variables = [
-        total_ghg_emissions_ids["Total including LUCF"],
-        total_ghg_emissions_ids["Total including LUCF (per capita)"],
-        total_ghg_emissions_ids["Total excluding LUCF"],
-        total_ghg_emissions_ids["Total excluding LUCF (per capita)"],
+        "Total including LUCF",
+        "Total including LUCF (per capita)",
+        "Total excluding LUCF",
+        "Total excluding LUCF (per capita)",
     ]
-    dataframes = []
+
+    df, metadata = fetch_data_and_metadata_from_api(
+        "backport/owid/latest/dataset_5524_ghg_emissions_by_country_and_sector__cait__2021/dataset_5524_ghg_emissions_by_country_and_sector__cait__2021",
+        variables,
+    )
+
     codebook = []
-    for var_id in variables:
-        df, meta = get_owid_variable(var_id, to_frame=True)
+    for var_title in variables:
+        meta = [v for v in metadata["variables"] if v["title"] == var_title][0]
+
         # fix: if conversionFactor==1e6, then the variable is actually stored in
         # million tonnes. Updates the description accordingly.
         description = meta["description"]
@@ -226,27 +212,13 @@ def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
                 ), 'Expected "million tonnes" to be present in modified description.'
                 description = new_description
 
-        df = df.rename(
-            columns={
-                "entity": "Country",
-                "year": "Year",
-                "value": meta["name"],
-            }
-        ).drop(columns=["variable"])
-        dataframes.append(df)
         codebook.append(
             {
-                "name": meta["name"],
+                "name": meta["title"],
                 "description": description,
-                "source": meta["source"]["name"],
+                "source": meta["sources"][0]["name"],
             }
         )
-    df = reduce(
-        lambda left, right: pd.merge(
-            left, right, on=["Country", "Year"], how="outer", validate="1:1"
-        ),
-        dataframes,
-    )
 
     # fix: replaces "European Union (27)" with "EU-27" for consistency with CO2
     # emissions dataset
@@ -256,16 +228,23 @@ def get_total_ghg_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving CH4 emissions data...")
+
     variables = [
-        ch4_emissions_ids["Total including LUCF"],
-        ch4_emissions_ids["Total including LUCF (per capita)"],
+        "Total including LUCF",
+        "Total including LUCF (per capita)",
     ]
-    dataframes = []
+
+    df, metadata = fetch_data_and_metadata_from_api(
+        "backport/owid/latest/dataset_5527_methane_emissions_by_sector__cait__2021/dataset_5527_methane_emissions_by_sector__cait__2021",
+        variables,
+    )
+
     codebook = []
-    for var_id in variables:
-        df, meta = get_owid_variable(var_id, to_frame=True)
-        if not re.search(r"ch4", meta["name"], re.I):
-            meta["name"] += " (CH4)"
+    for var_title in variables:
+        meta = [v for v in metadata["variables"] if v["title"] == var_title][0]
+
+        if not re.search(r"ch4", meta["title"], re.I):
+            meta["title"] += " (CH4)"
         # fix: if conversionFactor==1e6, then the variable is actually stored in
         # million tonnes. Updates the description accordingly
         description = meta["description"]
@@ -281,27 +260,13 @@ def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
                 ), 'Expected "million tonnes" to be present in modified description.'
                 description = new_description
 
-        df = df.rename(
-            columns={
-                "entity": "Country",
-                "year": "Year",
-                "value": meta["name"],
-            }
-        ).drop(columns=["variable"])
-        dataframes.append(df)
         codebook.append(
             {
-                "name": meta["name"],
+                "name": meta["title"],
                 "description": description,
-                "source": meta["source"]["name"],
+                "source": meta["sources"][0]["name"],
             }
         )
-    df = reduce(
-        lambda left, right: pd.merge(
-            left, right, on=["Country", "Year"], how="outer", validate="1:1"
-        ),
-        dataframes,
-    )
 
     # fix: replaces "European Union (27)" with "EU-27" for consistency with CO2
     # emissions dataset
@@ -312,20 +277,26 @@ def get_ch4_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving N2O emissions data...")
     variables = [
-        n2o_emissions_ids["Total including LUCF"],
-        n2o_emissions_ids["Total including LUCF (per capita)"],
+        "Total including LUCF",
+        "Total including LUCF (per capita)",
     ]
-    dataframes = []
+
+    df, metadata = fetch_data_and_metadata_from_api(
+        "backport/owid/latest/dataset_5526_nitrous_oxide_emissions_by_sector__cait__2021/dataset_5526_nitrous_oxide_emissions_by_sector__cait__2021",
+        variables,
+    )
+
     codebook = []
-    for var_id in variables:
-        df, meta = get_owid_variable(var_id, to_frame=True)
+    for var_title in variables:
+        meta = [v for v in metadata["variables"] if v["title"] == var_title][0]
+
         # appends ' (n2o)' to variable name if it does not exist, because
         # variable name for 142848 ("Total including LUCF (per capita)") does
         # not already contain N2O (for disambiguation from other gases).
-        if not re.search(r"n2o", meta["name"], re.I):
-            meta["name"] += " (N2O)"
+        if not re.search(r"n2o", meta["title"], re.I):
+            meta["title"] += " (N2O)"
         assert re.search(
-            r"n2o", meta["name"], re.I
+            r"n2o", meta["title"], re.I
         ), "'n2o' does not appear in n2o emissions variable"
 
         # fix: if conversionFactor==1e6, then the variable is actually stored in
@@ -343,27 +314,13 @@ def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
                 ), 'Expected "million tonnes" to be present in modified description.'
                 description = new_description
 
-        df = df.rename(
-            columns={
-                "entity": "Country",
-                "year": "Year",
-                "value": meta["name"],
-            }
-        ).drop(columns=["variable"])
-        dataframes.append(df)
         codebook.append(
             {
-                "name": meta["name"],
+                "name": meta["title"],
                 "description": description,
-                "source": meta["source"]["name"],
+                "source": meta["sources"][0]["name"],
             }
         )
-    df = reduce(
-        lambda left, right: pd.merge(
-            left, right, on=["Country", "Year"], how="outer", validate="1:1"
-        ),
-        dataframes,
-    )
 
     # fix: replaces "European Union (27)" with "EU-27" for consistency with CO2
     # emissions dataset
@@ -373,17 +330,21 @@ def get_n2o_emissions() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_population() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving population data...")
-    df, meta = get_owid_variable(
-        population_ids["Population (historical estimates)"], to_frame=True
+
+    variables = ["Population (historical estimates)"]
+
+    df, metadata = fetch_data_and_metadata_from_api(
+        "backport/owid/latest/dataset_70_population__gapminder__hyde__and__un/dataset_70_population__gapminder__hyde__and__un",
+        variables,
     )
-    df = df.rename(
-        columns={"entity": "Country", "year": "Year", "value": meta["name"]}
-    ).drop(columns=["variable"])
+
+    meta = [v for v in metadata["variables"] if v["title"] == variables[0]][0]
+
     codebook = [
         {
-            "name": meta["name"],
+            "name": meta["title"],
             "description": meta["description"],
-            "source": meta["source"]["name"],
+            "source": meta["sources"][0]["name"],
         }
     ]
     return df, codebook
@@ -391,15 +352,35 @@ def get_population() -> Tuple[pd.DataFrame, List[dict]]:
 
 def get_gdp() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving gdp data...")
-    df, meta = get_owid_variable(gdp_ids["GDP"], to_frame=True)
+
+    r = requests.get(
+        f"{API_URL}/v1/dataset/metadata/garden/ggdc/2020-10-01/ggdc_maddison/maddison_gdp"
+    )
+    assert r.ok
+    metadata = r.json()
+
+    df = pd.read_feather(
+        f"{API_URL}/v1/dataset/data/garden/ggdc/2020-10-01/ggdc_maddison/maddison_gdp.feather"
+    )
     df = df.rename(
-        columns={"entity": "Country", "year": "Year", "value": meta["name"]}
-    ).drop(columns=["variable"])
+        columns={
+            "year": "Year",
+            "country": "Country",
+        }
+    )
+
+    # use long title instead of short names
+    df = df.rename(columns={v["short_name"]: v["title"] for v in metadata["variables"]})
+
+    df = df[["Country", "Year", "GDP"]]
+
+    meta = [v for v in metadata["variables"] if v["title"] == "GDP"][0]
+
     codebook = [
         {
-            "name": meta["name"],
+            "name": meta["title"],
             "description": meta["description"],
-            "source": meta["source"]["name"],
+            "source": metadata["dataset"]["sources"][0]["name"],
         }
     ]
     return df, codebook
@@ -408,38 +389,30 @@ def get_gdp() -> Tuple[pd.DataFrame, List[dict]]:
 def get_primary_energy_consumption() -> Tuple[pd.DataFrame, List[dict]]:
     print("retrieving primary energy consumption data...")
     variables = [
-        primary_energy_consumption_ids["Primary energy consumption (TWh)"],
-        primary_energy_consumption_ids["Energy per capita (kWh)"],
-        primary_energy_consumption_ids["Energy per GDP (kWh per $)"],
+        "Primary energy consumption (TWh)",
+        "Energy per capita (kWh)",
+        "Energy per GDP (kWh per $)",
     ]
-    dataframes = []
+
+    df, metadata = fetch_data_and_metadata_from_api(
+        "backport/owid/latest/dataset_5569_primary_energy_consumption_bp__and__eia__2022/dataset_5569_primary_energy_consumption_bp__and__eia__2022",
+        variables,
+    )
+
     codebook = []
-    for var_id in variables:
-        df, meta = get_owid_variable(var_id, to_frame=True)
+    for var_title in variables:
+        meta = [v for v in metadata["variables"] if v["title"] == var_title][0]
+
         assert re.search(
-            r"energy", meta["name"], re.I
+            r"energy", meta["title"], re.I
         ), "'energy' does not appear in energy consumption variable"
-        df = df.rename(
-            columns={
-                "entity": "Country",
-                "year": "Year",
-                "value": meta["name"],
-            }
-        ).drop(columns=["variable"])
-        dataframes.append(df)
         codebook.append(
             {
-                "name": meta["name"],
+                "name": meta["title"],
                 "description": meta["description"],
-                "source": meta["source"]["name"],
+                "source": meta["sources"][0]["name"],
             }
         )
-    df = reduce(
-        lambda left, right: pd.merge(
-            left, right, on=["Country", "Year"], how="outer", validate="1:1"
-        ),
-        dataframes,
-    )
     return df, codebook
 
 
