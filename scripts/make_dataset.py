@@ -20,9 +20,6 @@ OUTPUT_EXCEL_FILE = OUTPUT_DIR / "owid-co2-data.xlsx"
 OUTPUT_JSON_FILE = OUTPUT_DIR / "owid-co2-data.json"
 CODEBOOK_FILE = OUTPUT_DIR / "owid-co2-codebook.csv"
 
-# Details of the latest owid-co2 dataset from etl.
-CO2_DATASET_TABLE = "owid_co2"
-
 
 def df_to_json(complete_dataset: pd.DataFrame, output_path: str, static_columns: List[str]) -> None:
     megajson = {}
@@ -75,7 +72,6 @@ def prepare_codebook(table: catalog.Table) -> pd.DataFrame:
         metadata["description"].append(table[column].metadata.description)
         metadata["source"].append(table[column].metadata.sources[0].name)
 
-
     # Create a dataframe with the gathered metadata and sort conveniently by column name.
     codebook = pd.DataFrame(metadata).set_index("column").sort_index()
     # For clarity, ensure column descriptions are in the same order as the columns in the data.
@@ -89,18 +85,9 @@ def main() -> None:
     #
     # Load data.
     #
-    # Load OWID-co2 dataset from the catalog.
-
-    ########################################
-    # TODO: Uncomment once etl PR is merged.
-    # table = catalog.find(CO2_DATASET_TABLE, namespace="emissions", channels=["garden"]).sort_values("version", ascending=False).load()
-    ########################################
-
-    ########################################
-    # TODO: Remove temporary solution.
-    dataset = catalog.Dataset("/Users/prosado/Documents/owid/repos/etl/data/garden/emissions/2022-08-26/owid_co2/")
-    table = dataset[dataset.table_names[0]]
-    ########################################
+    # Load latest OWID-CO2 dataset from the catalog.
+    table = catalog.find("owid_co2", namespace="emissions", channels=["garden"]).\
+        sort_values("version", ascending=False).iloc[0].load()
 
     #
     # Process data.
