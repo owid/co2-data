@@ -1,5 +1,4 @@
-import os
+from pathlib import Path
 
-CURRENT_DIR = os.path.dirname(__file__)
-INPUT_DIR = os.path.join(CURRENT_DIR, "input")
-OUTPUT_DIR = os.path.join(CURRENT_DIR, "..")
+# Define path to output directory.
+OUTPUT_DIR = Path(__file__).parent.parent

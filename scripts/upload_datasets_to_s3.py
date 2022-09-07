@@ -10,31 +10,25 @@ Files should be accessible at the following urls:
 """
 
 import argparse
-import os
+from pathlib import Path
 
 from tqdm.auto import tqdm
 from owid.datautils.io.s3 import S3
 
-# Define path to current directory.
-CURRENT_DIR = os.path.dirname(__file__)
+from scripts import OUTPUT_DIR
+
 # Define S3 base URL.
 S3_URL = "https://nyc3.digitaloceanspaces.com"
 # Profile name to use for S3 client (as defined in .aws/config).
 S3_PROFILE_NAME = "default"
 # S3 bucket name and folder where dataset files will be stored.
 S3_BUCKET_NAME = "owid-public"
-S3_DATA_DIR = os.path.join("data", "co2")
+S3_DATA_DIR = Path("data/co2")
 # Local files to upload.
 FILES_TO_UPLOAD = {
-    os.path.join(CURRENT_DIR, "..", "owid-co2-data.csv"): os.path.join(
-        S3_DATA_DIR, "owid-co2-data.csv"
-    ),
-    os.path.join(CURRENT_DIR, "..", "owid-co2-data.json"): os.path.join(
-        S3_DATA_DIR, "owid-co2-data.json"
-    ),
-    os.path.join(CURRENT_DIR, "..", "owid-co2-data.xlsx"): os.path.join(
-        S3_DATA_DIR, "owid-co2-data.xlsx"
-    ),
+    OUTPUT_DIR / "owid-co2-data.csv": S3_DATA_DIR / "owid-co2-data.csv",
+    OUTPUT_DIR / "owid-co2-data.json": S3_DATA_DIR / "owid-co2-data.json",
+    OUTPUT_DIR / "owid-co2-data.xlsx": S3_DATA_DIR / "owid-co2-data.xlsx",
 }
 
 
