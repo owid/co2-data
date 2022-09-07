@@ -44,8 +44,8 @@ def main(files_to_upload, s3_bucket_name=S3_BUCKET_NAME):
             f"Uploading file {local_file} to S3 bucket {s3_bucket_name} as {s3_file}."
         )
         s3.upload_to_s3(
-            local_path=local_file,
-            s3_path=f"s3://{s3_bucket_name}/{s3_file}",
+            local_path=str(local_file),
+            s3_path=f"s3://{s3_bucket_name}/{str(s3_file)}",
             public=public,
         )
 
