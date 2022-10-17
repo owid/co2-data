@@ -13,7 +13,7 @@ import argparse
 from pathlib import Path
 
 from tqdm.auto import tqdm
-from owid.datautils.io.s3 import S3
+from owid.datautils.s3 import S3
 
 from scripts import OUTPUT_DIR
 
