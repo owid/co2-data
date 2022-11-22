@@ -28,18 +28,33 @@ The dataset is built upon a number of datasets and processing steps:
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2022-07-27/energy_consumption.py)
 - Primary energy consumption (Our World in Data based on BP's Statistical review of world energy & EIA's International energy data):
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2022-07-29/primary_energy_consumption.py)
-- Global carbon budget (Our World in Data based on Global Carbon Project):
-  - [Source data](https://www.globalcarbonproject.org/carbonbudget/21/data.htm)
-  - [Ingestion and processing code](https://github.com/owid/importers/tree/master/gcp_gcb)
+- Global carbon budget - Fossil CO2 emissions (Global Carbon Project):
+  - [Source data](https://zenodo.org/record/7215364#.Y3y3sezMIeY)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_fossil_co2_emissions.py)
+- Global carbon budget - Global carbon emissions (Global Carbon Project):
+  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/Global_Carbon_Budget_2022v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_global_emissions.py)
+- Global carbon budget - National fossil carbon emissions (Global Carbon Project):
+  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_Fossil_Carbon_Emissions_2022v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_national_emissions.py)
+- Global carbon budget - National land-use change carbon emissions (Global Carbon Project):
+  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_LandUseChange_Carbon_Emissions_2022v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_land_use_change_emissions.py)
+- Global carbon budget (Our World in Data based on the Global Carbon Project's Fossil CO2 emissions, Global carbon emissions, National fossil carbon emissions, and National land-use change emissions):
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2022-11-11/global_carbon_budget.py)
 - Greenhouse gas emissions (including methane and nitrous oxide) by sector (CAIT):
   - [Source data](https://www.climatewatchdata.org/data-explorer/historical-emissions)
   - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/cait/2022-08-10/cait_ghg_emissions.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/cait/2022-08-10/ghg_emissions_by_sector.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/cait/2022-08-10/ghg_emissions_by_sector.py)
 - CO2 dataset (Our World in Data based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2022-08-05/owid_energy.py)
-  - [Exporting code](https://github.com/owid/energy-data/blob/master/scripts/make_dataset.py)
-  - [Uploading code](https://github.com/owid/energy-data/blob/master/scripts/upload_datasets_to_s3.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2022-11-11/owid_co2.py)
+  - [Exporting code](https://github.com/owid/co2-data/blob/master/scripts/make_dataset.py)
+  - [Uploading code](https://github.com/owid/co2-data/blob/master/scripts/upload_datasets_to_s3.py)
 
 Additionally, to construct variables per capita and per GDP, we use the following datasets and processing steps:
 - Population (Our World in Data based on [a number of different sources](https://ourworldindata.org/population-sources)).
@@ -51,22 +66,27 @@ Additionally, to construct variables per capita and per GDP, we use the followin
 
 ## Changelog
 
-- September 6, 2022:
+- 2022-11-11:
+  - Updated CO2 emissions data with the newly released Global Carbon Budget (2022) by the Global Carbon Project.
+  - Added various new variables related to national land-use change emissions.
+  - Added the emissions of the 1991 Kuwaiti oil fires in Kuwait's emissions (while also keeping 'Kuwaiti Oil Fires (GCP)' as a separate entity), to properly account for these emissions in the aggregate of Asia.
+  - Applied minor changes to entity names (e.g. "Asia (excl. China & India)" -> "Asia (excl. China and India)").
+- 2022-09-06:
   - Updated data on primary energy consumption (from BP & EIA) and greenhouse gas emissions by sector (from CAIT).
   - Refactored code, since now this repository simply loads the data, generates the output files, and uploads them to the cloud; the code to generate the dataset is now in our [etl repository](https://github.com/owid/etl).
   - Minor changes in the codebook.
-- April 15, 2022:
+- 2022-04-15:
   - Updated primary energy consumption data.
   - Updated CO2 data to include aggregations for the different country income levels.
-- February 24, 2022:
+- 2022-02-24:
   - Updated greenhouse gas emissions data from CAIT Climate Data Explorer.
   - Included two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
-- November 5, 2021: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
-- September 16, 2021:
+- 2021-11-05: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
+- 2021-09-16:
   - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
   - Replaced all input CSVs with data retrieved directly from ourworldindata.org.
-- February 8, 2021: we updated this dataset with the latest annual release from the Global Carbon Project.
-- August 7, 2020: the first version of this dataset was made available.
+- 2021-02-08: Updated this dataset with the latest annual release from the Global Carbon Project.
+- 2020-08-07: The first version of this dataset was made available.
 
 ## Data alterations
 

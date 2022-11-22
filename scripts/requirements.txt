@@ -6,5 +6,5 @@ pytest==7.0.1
 python-dotenv==0.20.0
 requests==2.27.1
 tqdm==4.62.3
-git+https://github.com/owid/data-utils-py.git@v0.4.8-alpha#egg=owid.datautils
+git+https://github.com/owid/data-utils-py.git@v0.5.0-alpha#egg=owid.datautils
 git+https://github.com/owid/owid-catalog-py.git@master#egg=owid.catalog
