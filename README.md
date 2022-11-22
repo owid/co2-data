@@ -28,11 +28,24 @@ The dataset is built upon a number of datasets and processing steps:
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2022-07-27/energy_consumption.py)
 - Primary energy consumption (Our World in Data based on BP's Statistical review of world energy & EIA's International energy data):
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2022-07-29/primary_energy_consumption.py)
-- Global carbon budget (Our World in Data based on Global Carbon Project):
-  - [Source data](https://globalcarbonbudget.org/carbonbudget/)
+- Global carbon budget - Fossil CO2 emissions (Global Carbon Project):
+  - [Source data](https://zenodo.org/record/7215364#.Y3y3sezMIeY)
   - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_fossil_co2_emissions.py)
+- Global carbon budget - Global carbon emissions (Global Carbon Project):
+  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/Global_Carbon_Budget_2022v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_global_emissions.py)
+- Global carbon budget - National fossil carbon emissions (Global Carbon Project):
+  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_Fossil_Carbon_Emissions_2022v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_national_emissions.py)
+- Global carbon budget - National land-use change carbon emissions (Global Carbon Project):
+  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_LandUseChange_Carbon_Emissions_2022v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_land_use_change_emissions.py)
+- Global carbon budget (Our World in Data based on the Global Carbon Project's Fossil CO2 emissions, Global carbon emissions, National fossil carbon emissions, and National land-use change emissions):
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2022-11-11/global_carbon_budget.py)
 - Greenhouse gas emissions (including methane and nitrous oxide) by sector (CAIT):
   - [Source data](https://www.climatewatchdata.org/data-explorer/historical-emissions)
   - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/cait/2022-08-10/cait_ghg_emissions.py)
