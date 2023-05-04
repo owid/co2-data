@@ -20,45 +20,45 @@ The dataset is built upon a number of datasets and processing steps:
 - Statistical review of world energy (BP):
   - [Source data](https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html)
   - [Ingestion and processing code](https://github.com/owid/importers/tree/master/bp_statreview)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/bp/2022-07-14/statistical_review.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/bp/2022-12-18/statistical_review.py)
 - International energy data (EIA):
   - [Source data](https://www.eia.gov/opendata/bulkfiles.php)
   - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/eia_international_energy_data.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2022-07-27/energy_consumption.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2022-07-27/energy_consumption.py)
 - Primary energy consumption (Our World in Data based on BP's Statistical review of world energy & EIA's International energy data):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2022-07-29/primary_energy_consumption.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2023-02-20/primary_energy_consumption.py)
 - Global carbon budget - Fossil CO2 emissions (Global Carbon Project):
   - [Source data](https://zenodo.org/record/7215364#.Y3y3sezMIeY)
-  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_fossil_co2_emissions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-04-28/global_carbon_budget_fossil_co2_emissions.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-04-28/global_carbon_budget_fossil_co2_emissions.py)
 - Global carbon budget - Global carbon emissions (Global Carbon Project):
   - [Source data](https://globalcarbonbudget.org/wp-content/uploads/Global_Carbon_Budget_2022v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_global_emissions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-04-28/global_carbon_budget_fossil_co2_emissions.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-04-28/global_carbon_budget_global_emissions.py)
 - Global carbon budget - National fossil carbon emissions (Global Carbon Project):
   - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_Fossil_Carbon_Emissions_2022v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_national_emissions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-04-28/global_carbon_budget_fossil_co2_emissions.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-04-28/global_carbon_budget_national_emissions.py)
 - Global carbon budget - National land-use change carbon emissions (Global Carbon Project):
   - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_LandUseChange_Carbon_Emissions_2022v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/gcp/2022-11-11/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2022-11-11/global_carbon_budget_land_use_change_emissions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-04-28/global_carbon_budget_fossil_co2_emissions.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-04-28/global_carbon_budget_land_use_change_emissions.py)
 - Global carbon budget (Our World in Data based on the Global Carbon Project's Fossil CO2 emissions, Global carbon emissions, National fossil carbon emissions, and National land-use change emissions):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2022-11-11/global_carbon_budget.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2023-04-28/global_carbon_budget.py)
 - Greenhouse gas emissions (including methane and nitrous oxide) by sector (CAIT):
   - [Source data](https://www.climatewatchdata.org/data-explorer/historical-emissions)
   - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/cait/2022-08-10/cait_ghg_emissions.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/cait/2022-08-10/ghg_emissions_by_sector.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/cait/2022-08-10/ghg_emissions_by_sector.py)
 - CO2 dataset (Our World in Data based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2022-11-11/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-05-03/owid_co2.py)
   - [Exporting code](https://github.com/owid/co2-data/blob/master/scripts/make_dataset.py)
   - [Uploading code](https://github.com/owid/co2-data/blob/master/scripts/upload_datasets_to_s3.py)
 
 Additionally, to construct variables per capita and per GDP, we use the following datasets and processing steps:
 - Population (Our World in Data based on [a number of different sources](https://ourworldindata.org/population-sources)).
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/owid/latest/key_indicators/table_population.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/demography/2022-12-08/population/__init__.py)
 - GDP (University of Groningen GGDC's Maddison Project Database, Bolt and van Zanden, 2020).
   - [Source data](https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2020)
   - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/ggdc_maddison.py)
@@ -66,6 +66,8 @@ Additionally, to construct variables per capita and per GDP, we use the followin
 
 ## Changelog
 
+- 2023-05-04:
+  - Added variables `share_of_temperature_change_from_ghg`, `temperature_change_from_ch4`, `temperature_change_from_co2`, `temperature_change_from_ghg`, and `temperature_change_from_n2o` using data from Jones et al. (2023).
 - 2022-11-11:
   - Updated CO2 emissions data with the newly released Global Carbon Budget (2022) by the Global Carbon Project.
   - Added various new variables related to national land-use change emissions.
