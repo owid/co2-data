@@ -7,5 +7,5 @@ python-dotenv==0.20.0
 requests==2.27.1
 tqdm==4.62.3
 git+https://github.com/owid/data-utils-py.git@v0.5.2-alpha#egg=owid.datautils
-owid-catalog==0.3.7
+owid-catalog==0.3.8
 
