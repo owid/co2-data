@@ -76,6 +76,7 @@ Additionally, to construct variables per capita and per GDP, we use the followin
 
 - 2023-11-08:
   - Updated CO2 emissions data to use the latest emissions by sector from Climate Watch (2023).
+  - Update codebook accordingly.
 - 2023-10-16:
   - Improved codebook.
   - Fixed issue related to consumption-based emissions in Africa, and Palau emissions.
