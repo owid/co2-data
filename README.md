@@ -50,13 +50,13 @@ The dataset is built upon a number of datasets and processing steps:
   - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2023-05-02/national_contributions.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/2023-09-28/global_carbon_budget.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/2023-09-28/global_carbon_budget.py)
-- Greenhouse gas emissions (including methane and nitrous oxide) by sector (CAIT):
+- Greenhouse gas emissions (including methane and nitrous oxide) by sector (Climate Watch):
   - [Source data](https://www.climatewatchdata.org/data-explorer/historical-emissions)
-  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/cait/2022-08-10/cait_ghg_emissions.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/cait/2022-08-10/ghg_emissions_by_sector.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/cait/2022-08-10/ghg_emissions_by_sector.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/climate_watch/2023-10-31/emissions_by_sector.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/climate_watch/2023-10-31/emissions_by_sector.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/climate_watch/2023-10-31/emissions_by_sector.py)
 - CO2 dataset (Our World in Data based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-09-28/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-11-08/owid_co2.py)
   - [Exporting code](https://github.com/owid/co2-data/blob/master/scripts/make_dataset.py)
   - [Uploading code](https://github.com/owid/co2-data/blob/master/scripts/upload_datasets_to_s3.py)
 
@@ -74,6 +74,9 @@ Additionally, to construct variables per capita and per GDP, we use the followin
 
 ## Changelog
 
+- 2023-11-08:
+  - Updated CO2 emissions data to use the latest emissions by sector from Climate Watch (2023).
+  - Update codebook accordingly.
 - 2023-10-16:
   - Improved codebook.
   - Fixed issue related to consumption-based emissions in Africa, and Palau emissions.

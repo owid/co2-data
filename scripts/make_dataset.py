@@ -9,6 +9,7 @@ Running this script will generate the full energy dataset in three different for
 
 import argparse
 import json
+import re
 from typing import List
 import pandas as pd
 from owid.catalog import Source, Table, find
@@ -54,6 +55,16 @@ def prepare_data(tb: Table) -> Table:
     return tb
 
 
+def remove_details_on_demand(text: str) -> str:
+    # Remove references to details on demand from a text.
+    # Example: "This is a [description](#dod:something)." -> "This is a description."
+    regex = r"\(\#dod\:.*\)"
+    if "(#dod:" in text:
+        text = re.sub(regex, "", text).replace("[", "").replace("]", "")
+
+    return text
+
+
 def prepare_codebook(tb: Table) -> pd.DataFrame:
     table = tb.copy()
 
@@ -72,7 +83,13 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
     metadata = {"column": [], "description": [], "source": []}
     for column in table.columns:
         metadata["column"].append(column)
-        metadata["description"].append(table[column].metadata.description or table[column].metadata.description_short)
+        # Prepare indicator's description.
+        if table[column].metadata.description:
+            description = table[column].metadata.description
+        else:
+            description = f"{table[column].metadata.title} - {table[column].metadata.description_short}"
+            description = remove_details_on_demand(description)
+        metadata["description"].append(description)
         # Gather unique sources of current variable.
         unique_sources = []
         for source in table[column].metadata.sources:
