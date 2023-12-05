@@ -12,7 +12,7 @@ import json
 import re
 from typing import List
 import pandas as pd
-from owid.catalog import Source, Table, find
+from owid.catalog import LocalCatalog, Source, Table, find
 from tqdm.auto import tqdm
 from scripts import OUTPUT_DIR
 
@@ -75,8 +75,12 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
     table["year"].metadata.description = "Year of observation."
     table["year"].metadata.sources = [Source(name="Our World in Data")]
     table["year"].metadata.origins = []
-    table["iso_code"].metadata.description = "ISO 3166-1 alpha-3, three-letter country codes."
-    table["iso_code"].metadata.sources = [Source(name="International Organization for Standardization")]
+    table[
+        "iso_code"
+    ].metadata.description = "ISO 3166-1 alpha-3, three-letter country codes."
+    table["iso_code"].metadata.sources = [
+        Source(name="International Organization for Standardization")
+    ]
     table["iso_code"].metadata.origins = []
 
     # Gather column names, descriptions and sources from the variables' metadata.
@@ -97,7 +101,7 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
             # Some source names end in a period. Remove it.
             if source_name[-1] == ".":
                 source_name = source_name[:-1]
-            
+
             # Remove the "Our World in Data based on" from all sources.
             source_name = source_name.replace("Our World in Data based on ", "")
 
@@ -110,16 +114,19 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
         for origin in table[column].metadata.origins:
             # Construct the source name from the origin's attribution.
             # If not defined, build it using the default format "Producer - Data product (year)".
-            source_name = origin.attribution or f"{origin.producer} - {origin.title or origin.title_snapshot} ({origin.date_published.split('-')[0]})"
+            source_name = (
+                origin.attribution
+                or f"{origin.producer} - {origin.title or origin.title_snapshot} ({origin.date_published.split('-')[0]})"
+            )
 
             # Add url at the end of the source.
             if origin.url_main:
                 source_name += f" [{origin.url_main}]"
-            
+
             # Add the source to the list of unique sources.
             if source_name not in unique_sources:
                 unique_sources.append(source_name)
-        
+
         # Concatenate all sources.
         sources_combined = "; ".join(unique_sources)
         metadata["source"].append(sources_combined)
@@ -139,8 +146,21 @@ def main() -> None:
     #
     # Load data.
     #
-    # Load latest OWID-CO2 dataset from the catalog.
-    tb = find("owid_co2", namespace="emissions", channels=["garden"]).sort_values("version", ascending=False).iloc[0].load()
+    try:
+        # First try to load the latest OWID CO2 dataset from the local catalog, if it exists.
+        # NOTE: If the latest dataset exists but is not found, run "reindex" from the etl poetry shell.
+        tables = (
+            LocalCatalog("../etl/data/", channels=["garden"])
+            .find("owid_co2", namespace="emissions")
+            .sort_values("version", ascending=False)
+        )
+    except ValueError:
+        # Load the latest OWID-CO2 dataset from the remote catalog.
+        tables = find(
+            "owid_co2", namespace="emissions", channels=["garden"]
+        ).sort_values("version", ascending=False)
+    print(f"Loading owid_co2 version {tables.iloc[0].version}.")
+    tb = tables.iloc[0].load()
 
     #
     # Process data.
