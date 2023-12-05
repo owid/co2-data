@@ -31,32 +31,32 @@ The dataset is built upon a number of datasets and processing steps:
 - Primary energy consumption (Our World in Data based on EI's Statistical review of world energy & EIA's International energy data):
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2023-07-10/primary_energy_consumption.py)
 - Global carbon budget - Fossil CO2 emissions (Global Carbon Project):
-  - [Source data](https://zenodo.org/record/7215364#.Y3y3sezMIeY)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-09-28/global_carbon_budget.py)
+  - [Source data](https://zenodo.org/records/10177738)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
 - Global carbon budget - Global carbon emissions (Global Carbon Project):
-  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/Global_Carbon_Budget_2022v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-09-28/global_carbon_budget.py)
+  - [Source data](https://globalcarbonbudgetdata.org/downloads/latest-data/Global_Carbon_Budget_2023v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
 - Global carbon budget - National fossil carbon emissions (Global Carbon Project):
-  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_Fossil_Carbon_Emissions_2022v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-09-28/global_carbon_budget.py)
+  - [Source data](https://globalcarbonbudgetdata.org/downloads/latest-data/National_Fossil_Carbon_Emissions_2023v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
 - Global carbon budget - National land-use change carbon emissions (Global Carbon Project):
-  - [Source data](https://globalcarbonbudget.org/wp-content/uploads/National_LandUseChange_Carbon_Emissions_2022v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-09-28/global_carbon_budget.py)
+  - [Source data](https://globalcarbonbudgetdata.org/downloads/latest-data/National_LandUseChange_Carbon_Emissions_2023v1.0.xlsx)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
 - Global carbon budget (Our World in Data based on the Global Carbon Project's Fossil CO2 emissions, Global carbon emissions, National fossil carbon emissions, and National land-use change emissions):
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/2023-09-28/global_carbon_budget.py)
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/2023-09-28/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-12-05/global_carbon_budget.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2023-12-05/global_carbon_budget.py)
 - National contributions to climate change (Jones et al. (2023)):
   - [Source data](https://zenodo.org/record/7636699#.ZFCy4exBweZ)
   - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2023-05-02/national_contributions.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/2023-09-28/global_carbon_budget.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/2023-09-28/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/emissions/2023-11-23/national_contributions.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-11-23/national_contributions.py)
 - Greenhouse gas emissions (including methane and nitrous oxide) by sector (Climate Watch):
-  - [Source data](https://www.climatewatchdata.org/data-explorer/historical-emissions)
+  - [Source data](https://www.climatewatchdata.org/ghg-emissions)
   - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/climate_watch/2023-10-31/emissions_by_sector.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/climate_watch/2023-10-31/emissions_by_sector.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/climate_watch/2023-10-31/emissions_by_sector.py)
 - CO2 dataset (Our World in Data based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-11-08/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-12-05/owid_co2.py)
   - [Exporting code](https://github.com/owid/co2-data/blob/master/scripts/make_dataset.py)
   - [Uploading code](https://github.com/owid/co2-data/blob/master/scripts/upload_datasets_to_s3.py)
 
@@ -69,11 +69,14 @@ Additionally, to construct variables per capita and per GDP, we use the followin
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/wb/2023-04-30/income_groups.py)
 - GDP (University of Groningen GGDC's Maddison Project Database, Bolt and van Zanden, 2020).
   - [Source data](https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2020)
-  - [Ingestion code](https://github.com/owid/walden/blob/master/ingests/ggdc_maddison.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/ggdc/2020-10-01/ggdc_maddison.py)
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/ggdc/2020-10-01/ggdc_maddison.py)
 
 ## Changelog
 
+- 2023-12-05:
+  - Updated dataset (and codebook) to use the latest version of the Global Carbon Budget (2023).
+    - In this version, "International transport" has been replaced by "International aviation" and "International shipping". Also, some overseas territories have no data in this version. More details on the changes can be found in the pdf file hosted [here](https://zenodo.org/records/10177738).
 - 2023-11-08:
   - Updated CO2 emissions data to use the latest emissions by sector from Climate Watch (2023).
   - Update codebook accordingly.
