@@ -1,6 +1,6 @@
 """Generate OWID CO2 dataset from most up-to-date sources.
 
-Running this script will generate the full energy dataset in three different formats:
+Running this script will generate the full dataset in three different formats:
 * owid-co2-data.csv
 * owid-co2-data.xlsx
 * owid-co2-data.json
@@ -10,11 +10,13 @@ Running this script will generate the full energy dataset in three different for
 import argparse
 import json
 import re
-from typing import List
+from pathlib import Path
+
 import pandas as pd
-from owid.catalog import LocalCatalog, Source, Table, find
-from tqdm.auto import tqdm
-from scripts import OUTPUT_DIR
+from owid.catalog import LocalCatalog, Origin, Table, find
+
+# Define path to output directory.
+OUTPUT_DIR = Path(__file__).parent.parent
 
 # Define paths to output files.
 OUTPUT_CSV_FILE = OUTPUT_DIR / "owid-co2-data.csv"
@@ -78,49 +80,63 @@ def remove_details_on_demand(text: str) -> str:
 def prepare_codebook(tb: Table) -> pd.DataFrame:
     table = tb.copy()
 
-    # Manually edit some of the metadata fields.
-    table["country"].metadata.description = "Geographic location."
-    table["country"].metadata.sources = [Source(name="Our World in Data")]
-    table["country"].metadata.origins = []
-    table["year"].metadata.description = "Year of observation."
-    table["year"].metadata.sources = [Source(name="Our World in Data")]
-    table["year"].metadata.origins = []
-    table[
-        "iso_code"
-    ].metadata.description = "ISO 3166-1 alpha-3, three-letter country codes."
-    table["iso_code"].metadata.sources = [
-        Source(name="International Organization for Standardization")
-    ]
-    table["iso_code"].metadata.origins = []
+    # Manually create an origin for the regions dataset.
+    regions_origin = [Origin(producer="Our World in Data", title="Regions", date_published=str(table["year"].max()))]
 
-    # Gather column names, descriptions and sources from the variables' metadata.
-    metadata = {"column": [], "description": [], "source": []}
+    # Manually edit some of the metadata fields.
+    table["country"].metadata.title = "Country"
+    table["country"].metadata.description_short = "Geographic location."
+    table["country"].metadata.description = None
+    table["country"].metadata.unit = ""
+    table["country"].metadata.origins = regions_origin
+    table["year"].metadata.title = "Year"
+    table["year"].metadata.description_short = "Year of observation."
+    table["year"].metadata.description = None
+    table["year"].metadata.unit = ""
+    table["year"].metadata.origins = regions_origin
+
+    ####################################################################################################################
+    if table["gdp"].metadata.description is None:
+        print("WARNING: Column gdp finally has a description_short. Remove this part of the code")
+    else:
+        table["gdp"].metadata.description_short = table["gdp"].metadata.description
+        table["gdp"].metadata.description = None
+
+    if table["population"].metadata.description is None:
+        print("WARNING: Column population has no longer a description field. Remove this part of the code")
+    else:
+        table["population"].metadata.description = None
+
+    ####################################################################################################################
+
+    # Gather column names, titles, short descriptions, unit and origins from the indicators' metadata.
+    metadata = {"column": [], "description": [], "unit": [], "source": []}
     for column in table.columns:
         metadata["column"].append(column)
+
+        if hasattr(table[column].metadata, "description") and table[column].metadata.description is not None:
+            print(f"WARNING: Column {column} still has a 'description' field.")
         # Prepare indicator's description.
-        if table[column].metadata.description:
-            description = table[column].metadata.description
+        description = ""
+        if hasattr(table[column].metadata.presentation, "title_public") and table[column].metadata.presentation.title_public is not None:
+            description += table[column].metadata.presentation.title_public
         else:
-            description = f"{table[column].metadata.title} - {table[column].metadata.description_short}"
+            description += table[column].metadata.title
+        if table[column].metadata.description_short:
+            description += f" - {table[column].metadata.description_short}"
             description = remove_details_on_demand(description)
         metadata["description"].append(description)
-        # Gather unique sources of current variable.
+
+        # Prepare indicator's unit.
+        if table[column].metadata.unit is None:
+            print(f"WARNING: Column {column} does not have a unit.")
+            unit = ""
+        else:
+            unit = table[column].metadata.unit
+        metadata["unit"].append(unit)
+
+        # Gather unique origins of current variable.
         unique_sources = []
-        for source in table[column].metadata.sources:
-            source_name = source.name
-            # Some source names end in a period. Remove it.
-            if source_name[-1] == ".":
-                source_name = source_name[:-1]
-
-            # Remove the "Our World in Data based on" from all sources.
-            source_name = source_name.replace("Our World in Data based on ", "")
-
-            # Add url at the end of the source (if any url is given).
-            if source.url:
-                source_name += f" [{source.url}]"
-
-            if source_name not in unique_sources:
-                unique_sources.append(source_name)
         for origin in table[column].metadata.origins:
             # Construct the source name from the origin's attribution.
             # If not defined, build it using the default format "Producer - Data product (year)".
@@ -146,7 +162,7 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
     # For clarity, ensure column descriptions are in the same order as the columns in the data.
     first_columns = ["country", "year", "iso_code", "population", "gdp"]
     codebook = pd.concat(
-        [codebook.loc[first_columns], codebook.drop(first_columns)]
+        [codebook.loc[first_columns], codebook.drop(first_columns, errors="raise")]
     ).reset_index()
 
     return codebook
@@ -155,14 +171,14 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
 def load_latest_dataset(dataset_name: str = "owid_co2", namespace: str="emissions",
                         path_to_local_catalog: str = "../etl/data/", channel:str = "garden") -> Table:
     try:
-        # First try to load the latest OWID energy dataset from the local catalog, if it exists.
+        # First try to load the latest dataset from the local catalog, if it exists.
         tables = (
             LocalCatalog(path_to_local_catalog, channels=[channel])
             .find(dataset_name, namespace=namespace)
             .sort_values("version", ascending=False)
         )
     except ValueError:
-        # Load the latest OWID energy dataset from the remote catalog.
+        # Load the latest dataset from the remote catalog.
         tables = find(
             dataset_name, namespace=namespace, channels=[channel]
         ).sort_values("version", ascending=False)
