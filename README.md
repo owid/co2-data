@@ -74,8 +74,9 @@ Additionally, to construct variables per capita and per GDP, we use the followin
 
 ## Changelog
 
-- 2023-12-12:
-  - Updated metadata for primary energy consumption (nothing has changed in the data).
+- 2023-12-28:
+  - Enhanced codebook (improved descriptions, added units, updated sources).
+  - Updated primary energy consumption (to update metadata, nothing has changed in the data).
 - 2023-12-05:
   - Updated dataset (and codebook) to use the latest version of the Global Carbon Budget (2023).
     - In this version, "International transport" has been replaced by "International aviation" and "International shipping". Also, some overseas territories have no data in this version. More details on the changes can be found in the pdf file hosted [here](https://zenodo.org/records/10177738).
