@@ -12,7 +12,7 @@ The variables represent all of our main data related to CO2 emissions, other gre
 
 We will continue to publish updated data on CO2 and Greenhouse Gas Emissions as it becomes available. Most metrics are published on an annual basis.
 
-A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv) is made available, with a description and source for each variable in the dataset.
+A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv) is made available, with a description and source for each variable in the dataset. This codebook is also included as an additional sheet in the XLSX file.
 
 ## Our source data and code
 
@@ -20,34 +20,34 @@ The dataset is built upon a number of datasets and processing steps:
 
 - Statistical review of world energy (Energy Institute, EI):
   - [Source data](https://www.energyinst.org/statistical-review)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/energy_institute/2023-06-26/statistical_review_of_world_energy.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/energy_institute/2023-06-26/statistical_review_of_world_energy.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy_institute/2023-06-26/statistical_review_of_world_energy.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/energy_institute/2023-12-12/statistical_review_of_world_energy.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/energy_institute/2023-12-12/statistical_review_of_world_energy.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy_institute/2023-12-12/statistical_review_of_world_energy.py)
 - International energy data (U.S. Energy Information Administration, EIA):
   - [Source data](https://www.eia.gov/opendata/bulkfiles.php)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/eia/2023-07-10/international_energy_data.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2023-07-10/energy_consumption.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2023-07-10/energy_consumption.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/eia/2023-12-12/international_energy_data.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2023-12-12/energy_consumption.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2023-12-12/energy_consumption.py)
 - Primary energy consumption (Our World in Data based on EI's Statistical review of world energy & EIA's International energy data):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2023-07-10/primary_energy_consumption.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2023-12-12/primary_energy_consumption.py)
 - Global carbon budget - Fossil CO2 emissions (Global Carbon Project):
   - [Source data](https://zenodo.org/records/10177738)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-12/global_carbon_budget.py)
 - Global carbon budget - Global carbon emissions (Global Carbon Project):
   - [Source data](https://globalcarbonbudgetdata.org/downloads/latest-data/Global_Carbon_Budget_2023v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-12/global_carbon_budget.py)
 - Global carbon budget - National fossil carbon emissions (Global Carbon Project):
   - [Source data](https://globalcarbonbudgetdata.org/downloads/latest-data/National_Fossil_Carbon_Emissions_2023v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-12/global_carbon_budget.py)
 - Global carbon budget - National land-use change carbon emissions (Global Carbon Project):
   - [Source data](https://globalcarbonbudgetdata.org/downloads/latest-data/National_LandUseChange_Carbon_Emissions_2023v1.0.xlsx)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-05/global_carbon_budget.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-12/global_carbon_budget.py)
 - Global carbon budget (Our World in Data based on the Global Carbon Project's Fossil CO2 emissions, Global carbon emissions, National fossil carbon emissions, and National land-use change emissions):
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-12-05/global_carbon_budget.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2023-12-05/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2023-12-12/global_carbon_budget.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2023-12-12/global_carbon_budget.py)
 - National contributions to climate change (Jones et al. (2023)):
   - [Source data](https://zenodo.org/record/7636699#.ZFCy4exBweZ)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2023-05-02/national_contributions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2023-11-23/national_contributions.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/emissions/2023-11-23/national_contributions.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-11-23/national_contributions.py)
 - Greenhouse gas emissions (including methane and nitrous oxide) by sector (Climate Watch):
@@ -56,7 +56,7 @@ The dataset is built upon a number of datasets and processing steps:
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/climate_watch/2023-10-31/emissions_by_sector.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/climate_watch/2023-10-31/emissions_by_sector.py)
 - CO2 dataset (Our World in Data based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-12-05/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2023-12-12/owid_co2.py)
   - [Exporting code](https://github.com/owid/co2-data/blob/master/scripts/make_dataset.py)
   - [Uploading code](https://github.com/owid/co2-data/blob/master/scripts/upload_datasets_to_s3.py)
 
@@ -74,6 +74,9 @@ Additionally, to construct variables per capita and per GDP, we use the followin
 
 ## Changelog
 
+- 2023-12-28:
+  - Enhanced codebook (improved descriptions, added units, updated sources).
+  - Updated primary energy consumption (to update metadata, nothing has changed in the data).
 - 2023-12-05:
   - Updated dataset (and codebook) to use the latest version of the Global Carbon Budget (2023).
     - In this version, "International transport" has been replaced by "International aviation" and "International shipping". Also, some overseas territories have no data in this version. More details on the changes can be found in the pdf file hosted [here](https://zenodo.org/records/10177738).
