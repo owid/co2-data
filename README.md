@@ -8,11 +8,11 @@ Our complete CO2 and Greenhouse Gas Emissions dataset is a collection of key met
 
 The CSV and XLSX files follow a format of 1 row per location and year. The JSON version is split by country, with an array of yearly records.
 
-The variables represent all of our main data related to CO2 emissions, other greenhouse gas emissions, energy mix, as well as other variables of potential interest.
+The indicators represent all of our main data related to CO2 emissions, other greenhouse gas emissions, energy mix, as well as other indicators of potential interest.
 
 We will continue to publish updated data on CO2 and Greenhouse Gas Emissions as it becomes available. Most metrics are published on an annual basis.
 
-A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv) is made available, with a description and source for each variable in the dataset. This codebook is also included as an additional sheet in the XLSX file.
+A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook.csv) is made available, with a description and source for each indicator in the dataset. This codebook is also included as an additional sheet in the XLSX file.
 
 ## Our source data and code
 
@@ -60,7 +60,7 @@ The dataset is built upon a number of datasets and processing steps:
   - [Exporting code](https://github.com/owid/co2-data/blob/master/scripts/make_dataset.py)
   - [Uploading code](https://github.com/owid/co2-data/blob/master/scripts/upload_datasets_to_s3.py)
 
-Additionally, to construct variables per capita and per GDP, we use the following datasets and processing steps:
+Additionally, to construct indicators per capita and per GDP, we use the following datasets and processing steps:
 - Regions (Our World in Data).
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/regions/2023-01-01/regions.py)
 - Population (Our World in Data based on [a number of different sources](https://ourworldindata.org/population-sources)).
@@ -87,13 +87,13 @@ Additionally, to construct variables per capita and per GDP, we use the followin
   - Improved codebook.
   - Fixed issue related to consumption-based emissions in Africa, and Palau emissions.
 - 2023-07-10:
-  - Updated primary energy consumption and other variables relying on energy data, to use the latest Statistical Review of World Energy by the Energy Institute.
+  - Updated primary energy consumption and other indicators relying on energy data, to use the latest Statistical Review of World Energy by the Energy Institute.
   - Renamed countries 'East Timor' and 'Faroe Islands'.
 - 2023-05-04:
-  - Added variables `share_of_temperature_change_from_ghg`, `temperature_change_from_ch4`, `temperature_change_from_co2`, `temperature_change_from_ghg`, and `temperature_change_from_n2o` using data from Jones et al. (2023).
+  - Added indicators `share_of_temperature_change_from_ghg`, `temperature_change_from_ch4`, `temperature_change_from_co2`, `temperature_change_from_ghg`, and `temperature_change_from_n2o` using data from Jones et al. (2023).
 - 2022-11-11:
   - Updated CO2 emissions data with the newly released Global Carbon Budget (2022) by the Global Carbon Project.
-  - Added various new variables related to national land-use change emissions.
+  - Added various new indicators related to national land-use change emissions.
   - Added the emissions of the 1991 Kuwaiti oil fires in Kuwait's emissions (while also keeping 'Kuwaiti Oil Fires (GCP)' as a separate entity), to properly account for these emissions in the aggregate of Asia.
   - Applied minor changes to entity names (e.g. "Asia (excl. China & India)" -> "Asia (excl. China and India)").
 - 2022-09-06:
@@ -108,7 +108,7 @@ Additionally, to construct variables per capita and per GDP, we use the followin
   - Included two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
 - 2021-11-05: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
 - 2021-09-16:
-  - Fixed data quality issues in CO2 emissions variables (emissions less than 0, missing data for Eswatini, ...).
+  - Fixed data quality issues in CO2 emissions indicators (emissions less than 0, missing data for Eswatini, ...).
   - Replaced all input CSVs with data retrieved directly from ourworldindata.org.
 - 2021-02-08: Updated this dataset with the latest annual release from the Global Carbon Project.
 - 2020-08-07: The first version of this dataset was made available.
