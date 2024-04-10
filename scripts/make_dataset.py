@@ -174,8 +174,7 @@ def load_latest_dataset(dataset_name: str = "owid_co2", namespace: str="emission
         # First try to load the latest dataset from the local catalog, if it exists.
         tables = (
             LocalCatalog(path_to_local_catalog, channels=[channel])
-            .find(dataset_name, namespace=namespace)
-            .sort_values("version", ascending=False)
+            .find(dataset_name, namespace=namespace, version="latest")
         )
     except ValueError:
         # Load the latest dataset from the remote catalog.
@@ -194,7 +193,7 @@ def main() -> None:
     # Load data.
     #
     # Load latest dataset from etl (from a local or otherwise a remote catalog).
-    # NOTE: If the latest dataset exists but is not found, run "reindex" from the etl poetry shell.
+    # NOTE: If the latest dataset exists but is not found, run "etl d reindex" from the etl poetry shell.
     tb = load_latest_dataset()
 
     #
