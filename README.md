@@ -29,7 +29,7 @@ The dataset is built upon a number of datasets and processing steps:
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2023-12-12/energy_consumption.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2023-12-12/energy_consumption.py)
 - Primary energy consumption (Our World in Data based on EI's Statistical review of world energy & EIA's International energy data):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2023-12-12/primary_energy_consumption.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2024-05-08/primary_energy_consumption.py)
 - Global carbon budget - Fossil CO2 emissions (Global Carbon Project):
   - [Source data](https://zenodo.org/records/10177738)
   - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2023-12-12/global_carbon_budget.py)
