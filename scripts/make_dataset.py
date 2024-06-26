@@ -96,12 +96,6 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
     table["year"].metadata.origins = regions_origin
 
     ####################################################################################################################
-    if table["gdp"].metadata.description is None:
-        print("WARNING: Column gdp finally has a description_short. Remove this part of the code")
-    else:
-        table["gdp"].metadata.description_short = table["gdp"].metadata.description
-        table["gdp"].metadata.description = None
-
     if table["population"].metadata.description is None:
         print("WARNING: Column population has no longer a description field. Remove this part of the code")
     else:
@@ -168,8 +162,8 @@ def prepare_codebook(tb: Table) -> pd.DataFrame:
     return codebook
 
 
-def load_latest_dataset(dataset_name: str = "owid_co2", namespace: str="emissions",
-                        path_to_local_catalog: str = "../etl/data/", channel:str = "garden") -> Table:
+def load_latest_dataset(dataset_name: str = "owid_co2", namespace: str="co2_data",
+                        path_to_local_catalog: str = "../etl/data/", channel:str = "external") -> Table:
     try:
         # First try to load the latest dataset from the local catalog, if it exists.
         tables = (
