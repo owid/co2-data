@@ -1,3 +1,4 @@
+
 # Data on CO2 and Greenhouse Gas Emissions by *Our World in Data*
 
 Our complete CO2 and Greenhouse Gas Emissions dataset is a collection of key metrics maintained by [*Our World in Data*](https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions). It is updated regularly and includes data on CO2 emissions (annual, per capita, cumulative and consumption-based), other greenhouse gases, energy mix, and other relevant metrics.
@@ -137,7 +138,7 @@ The data produced by third parties and made available by _Our World in Data_ is 
 
 This data has been collected, aggregated, and documented by Hannah Ritchie, Max Roser, Edouard Mathieu, Bobbie Macdonald and Pablo Rosado.
 
-The mission of *Our World in Data* is to make data and research on the world’s largest problems understandable and accessible. [Read more about our mission](https://ourworldindata.org/about).
+The mission of *Our World in Data* is to make data and research on the world's largest problems understandable and accessible. [Read more about our mission](https://ourworldindata.org/about).
 
 
 ## How to cite this data?
@@ -145,3 +146,4 @@ The mission of *Our World in Data* is to make data and research on the world’s
 If you are using this dataset, please cite both [Our World in Data](https://ourworldindata.org/co2-and-greenhouse-gas-emissions#citation) and the underlying data source(s).
 
 Please follow [the guidelines in our FAQ](https://ourworldindata.org/faqs#citing-work-produced-by-third-parties-and-made-available-by-our-world-in-data) on how to cite our work.
+
