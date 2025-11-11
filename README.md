@@ -4,7 +4,7 @@ Our complete CO2 and Greenhouse Gas Emissions dataset is a collection of key met
 
 ## The complete *Our World in Data* CO2 and Greenhouse Gas Emissions dataset
 
-### 🗂️ Download our complete CO2 and Greenhouse Gas Emissions dataset : [CSV](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.csv) | [XLSX](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.xlsx) | [JSON](https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.json)
+### 🗂️ Download our complete CO2 and Greenhouse Gas Emissions dataset : [CSV](https://owid-public.owid.io/data/co2/owid-co2-data.csv) | [XLSX](https://owid-public.owid.io/data/co2/owid-co2-data.xlsx) | [JSON](https://owid-public.owid.io/data/co2/owid-co2-data.json)
 
 The CSV and XLSX files follow a format of 1 row per location and year. The JSON version is split by country, with an array of yearly records.
 
@@ -70,6 +70,8 @@ Additionally, to construct indicators per capita and per GDP, we use the followi
 
 ## Changelog
 
+- 2025-11-11:
+  - Changed download links for datasets
 - 2024-11-21:
   - Updated dataset (and codebook) to use the latest version of the Global Carbon Budget (2024), and Jones et al. (2024) (version 2024.2).
   - Now methane, nitrous oxide, and total greenhouse gas emissions data come from Jones et al. (2024), instead of Climate Watch, to provide a wider data coverage.
