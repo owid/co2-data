@@ -101,18 +101,23 @@ Additionally, to construct indicators per capita, per GDP, and per unit energy, 
 - 2022-02-24:
   - Updated greenhouse gas emissions data from CAIT Climate Data Explorer.
   - Included two new columns in dataset: total greenhouse gases excluding land-use change and forestry, and the same as per capita values.
-- 2021-11-05: Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
+- 2021-11-05:
+  - Updated CO2 emissions data with the newly released Global Carbon Budget (v2021).
 - 2021-09-16:
   - Fixed data quality issues in CO2 emissions indicators (emissions less than 0, missing data for Eswatini, ...).
   - Replaced all input CSVs with data retrieved directly from ourworldindata.org.
-- 2021-02-08: Updated this dataset with the latest annual release from the Global Carbon Project.
-- 2020-08-07: The first version of this dataset was made available.
+- 2021-02-08:
+  - Updated this dataset with the latest annual release from the Global Carbon Project.
+- 2020-08-07:
+  - The first version of this dataset was made available.
 
 ## Data processing
 
 - **We standardize names of countries and regions.** Since the names of countries and regions are different in different data sources, we standardize all names in order to minimize data loss during data merges.
 - **We recalculate carbon emissions to CO2.** The primary data sources on CO2 emissions—the Global Carbon Project, for example—typically report emissions in tonnes of carbon. We have recalculated these figures as tonnes of CO2 using a conversion factor of 3.664.
-- **We calculate per capita figures.** All of our per capita figures are calculated from our metric `Population`, which is included in the complete dataset.
+- **We calculate per capita figures.** All of our per capita figures are calculated from our metric `population`, which is included in the complete dataset.
+- **We create aggregate data for regions (e.g. Africa, Europe, etc.).** Since regions are defined differently by our sources, we create our own aggregates following [*Our World in Data* region definitions](https://ourworldindata.org/world-region-map-definitions).
+  - We also include data for regions as defined in the original datasets; for example, `Europe (EI)` corresponds to Europe as defined by the Energy Institute.
 
 ## License
 
