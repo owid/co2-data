@@ -25,11 +25,11 @@ The dataset is built upon a number of datasets and processing steps:
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2025-11-13/global_carbon_budget.py)
 - National contributions to climate change - Jones et al.:
   - [Source data](https://zenodo.org/records/7636699/latest)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2024-11-21/national_contributions.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/emissions/2024-11-21/national_contributions.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2024-11-21/national_contributions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2025-12-04/national_contributions.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/emissions/2025-12-04/national_contributions.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2025-12-04/national_contributions.py)
 - Our World in data's CO2 dataset (based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2025-11-13/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2025-12-04/owid_co2.py)
   - [Exporting code](https://github.com/owid/etl/blob/master/etl/steps/export/github/co2_data/latest/owid_co2.py)
   - [Uploading code](https://github.com/owid/etl/blob/master/etl/steps/export/s3/co2_data/latest/owid_co2.py)
 
@@ -59,6 +59,8 @@ Additionally, to construct indicators per capita, per GDP, and per unit energy, 
 
 ## Changelog
 
+- 2025-12-04:
+  - Update greenhouse gases using the latest data from Jones et al. (2025).
 - 2025-11-13:
   - Updated dataset to use the latest version of the Global Carbon Budget (2025).
 - 2024-11-21:
