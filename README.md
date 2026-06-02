@@ -60,7 +60,7 @@ Additionally, to construct indicators per capita, per GDP, and per unit energy, 
 ## Changelog
 
 - 2026-06-01:
-  - Update EIA's International Energy Data.
+  - Update dataset to use the latest EIA's International Energy Data.
   - Changed the units of the carbon intensity of energy indicators from kilograms to grams of CO₂ per kilowatt-hour.
 - 2025-12-04:
   - Update greenhouse gases using the latest data from Jones et al. (2025).
