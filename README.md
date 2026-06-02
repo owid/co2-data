@@ -51,9 +51,9 @@ Additionally, to construct indicators per capita, per GDP, and per unit energy, 
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
 - International energy data (U.S. Energy Information Administration, EIA):
   - [Source data](https://www.eia.gov/opendata/bulkfiles.php)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/eia/2026-05-05/international_energy_data.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2026-05-05/energy_consumption.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2026-05-05/energy_consumption.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/eia/2026-05-05/international_energy.zip.dvc)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2026-05-05/international_energy.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2026-05-05/international_energy.py)
 - Primary energy consumption (EI's Statistical review of world energy & EIA's International energy data):
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2026-05-05/primary_energy_consumption.py)
 
