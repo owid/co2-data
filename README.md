@@ -4,7 +4,9 @@
 > [!WARNING]
 > **This dataset is moving to a new home.**
 >
-> The files in this repository are no longer updated. They hold the Global Carbon Budget 2026 release, with energy measured using the substitution method. The latest dataset is already available for download:
+> The files in this repository are no longer updated. They hold the Global Carbon Budget 2026 release, with energy measured using the substitution method.
+>
+> The latest data is in new files, with energy measured as total energy supply instead. So their energy columns are not directly comparable with the old files, and `primary_energy_consumption` is now called `total_energy_supply`. [Read more about this change in how we measure primary energy](https://ourworldindata.org/primary-energy-measurement-change).
 >
 > 🗂️ **Download the latest CO₂ dataset: [CSV](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.csv) | [XLSX](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.xlsx)**
 >
@@ -12,8 +14,6 @@
 > - A [codebook](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.codebook.csv), with descriptions and sources for each indicator.
 > - A [sources file](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.sources.csv), with detailed information on each source.
 > - [Full documentation](https://catalog.ourworldindata.org/emissions/owid_co2/readme.md) for the dataset.
->
-> The new dataset measures energy as total energy supply, so its energy columns are not directly comparable with the files below. [Read more about this change](https://ourworldindata.org/primary-energy-measurement-change). The column `primary_energy_consumption` is now called `total_energy_supply`.
 >
 > We are working on a better home for this dataset. Stay tuned!
 <!-- ============================ END TEMPORARY TRANSITION BANNER ============================ -->
