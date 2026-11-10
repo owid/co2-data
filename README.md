@@ -20,16 +20,16 @@ The dataset is built upon a number of datasets and processing steps:
 
 - Global carbon budget - Global Carbon Project:
   - [Source data](https://globalcarbonbudgetdata.org/)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2025-11-13/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2025-11-13/global_carbon_budget.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2025-11-13/global_carbon_budget.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2026-11-10/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2026-11-10/global_carbon_budget.py)
+  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2026-11-10/global_carbon_budget.py)
 - National contributions to climate change - Jones et al.:
   - [Source data](https://zenodo.org/records/7636699/latest)
   - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2025-12-04/national_contributions.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/emissions/2025-12-04/national_contributions.py)
   - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2025-12-04/national_contributions.py)
 - Our World in data's CO2 dataset (based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2025-12-04/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2026-11-10/owid_co2.py)
   - [Exporting code](https://github.com/owid/etl/blob/master/etl/steps/export/github/co2_data/latest/owid_co2.py)
   - [Uploading code](https://github.com/owid/etl/blob/master/etl/steps/export/s3/co2_data/latest/owid_co2.py)
 
@@ -39,7 +39,7 @@ Additionally, to construct indicators per capita, per GDP, and per unit energy, 
 - Population (Our World in Data based on [a number of different sources](https://ourworldindata.org/population-sources)).
   - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/demography/2024-07-15/population.py)
 - Income groups (World Bank).
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/wb/2025-07-01/income_groups.py)
+  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/wb/2026-07-01/income_groups.py)
 - GDP (University of Groningen GGDC's Maddison Project Database, Bolt and van Zanden).
   - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/ggdc/2024-04-26/maddison_project_database.py)
   - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/ggdc/2024-04-26/maddison_project_database.py)
@@ -59,6 +59,9 @@ Additionally, to construct indicators per capita, per GDP, and per unit energy, 
 
 ## Changelog
 
+- 2026-11-10:
+  - Updated dataset to use the latest version of the Global Carbon Budget (2026).
+  - Land-use change emissions for each country are now the average of the three models used by the Global Carbon Project (BLUE, OSCAR and LUCE). Before, they came from the BLUE model only.
 - 2026-06-01:
   - Update dataset to use the latest EIA's International Energy Data.
   - Changed the units of the carbon intensity of energy indicators from kilograms to grams of CO₂ per kilowatt-hour.
