@@ -1,5 +1,23 @@
 # Data on CO2 and Greenhouse Gas Emissions by *Our World in Data*
 
+<!-- ============================== TEMPORARY TRANSITION BANNER ============================== -->
+> [!WARNING]
+> **This dataset is moving to a new home.**
+>
+> The files in this repository are no longer updated. They hold the Global Carbon Budget 2026 release, with energy measured using the substitution method. The latest dataset is already available for download:
+>
+> 🗂️ **Download the latest CO₂ dataset: [CSV](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.csv) | [XLSX](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.xlsx)**
+>
+> Also available:
+> - A [codebook](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.codebook.csv), with descriptions and sources for each indicator.
+> - A [sources file](https://catalog.ourworldindata.org/emissions/owid_co2/owid_co2.sources.csv), with detailed information on each source.
+> - [Full documentation](https://catalog.ourworldindata.org/emissions/owid_co2/readme.md) for the dataset.
+>
+> The new dataset measures energy as total energy supply, so its energy columns are not directly comparable with the files below. [Read more about this change](https://ourworldindata.org/primary-energy-measurement-change). The column `primary_energy_consumption` is now called `total_energy_supply`.
+>
+> We are working on a better home for this dataset. Stay tuned!
+<!-- ============================ END TEMPORARY TRANSITION BANNER ============================ -->
+
 Our complete CO2 and Greenhouse Gas Emissions dataset is a collection of key metrics maintained by [*Our World in Data*](https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions). It is updated regularly and includes data on CO2 emissions (annual, per capita, cumulative and consumption-based), other greenhouse gases, energy mix, and other relevant metrics.
 
 ## The complete *Our World in Data* CO2 and Greenhouse Gas Emissions dataset
@@ -20,42 +38,42 @@ The dataset is built upon a number of datasets and processing steps:
 
 - Global carbon budget - Global Carbon Project:
   - [Source data](https://globalcarbonbudgetdata.org/)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/gcp/2026-11-10/global_carbon_budget.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/gcp/2026-11-10/global_carbon_budget.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/gcp/2026-11-10/global_carbon_budget.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/snapshots/gcp/2026-11-10/global_carbon_budget.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/meadow/gcp/2026-11-10/global_carbon_budget.py)
+  - [Further processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/gcp/2026-11-10/global_carbon_budget.py)
 - National contributions to climate change - Jones et al.:
   - [Source data](https://zenodo.org/records/7636699/latest)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/emissions/2025-12-04/national_contributions.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/emissions/2025-12-04/national_contributions.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2025-12-04/national_contributions.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/snapshots/emissions/2025-12-04/national_contributions.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/meadow/emissions/2025-12-04/national_contributions.py)
+  - [Further processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/emissions/2025-12-04/national_contributions.py)
 - Our World in data's CO2 dataset (based on all sources above):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/emissions/2026-11-10/owid_co2.py)
-  - [Exporting code](https://github.com/owid/etl/blob/master/etl/steps/export/github/co2_data/latest/owid_co2.py)
-  - [Uploading code](https://github.com/owid/etl/blob/master/etl/steps/export/s3/co2_data/latest/owid_co2.py)
+  - [Processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/emissions/2026-11-10/owid_co2.py)
+  - [Exporting code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/export/github/co2_data/latest/owid_co2.py)
+  - [Uploading code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/export/s3/co2_data/latest/owid_co2.py)
 
 Additionally, to construct indicators per capita, per GDP, and per unit energy, we use the following datasets and processing steps:
 - Regions (Our World in Data).
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/regions/2023-01-01/regions.py)
+  - [Processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/regions/2023-01-01/regions.py)
 - Population (Our World in Data based on [a number of different sources](https://ourworldindata.org/population-sources)).
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/demography/2024-07-15/population.py)
+  - [Processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/demography/2024-07-15/population.py)
 - Income groups (World Bank).
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/wb/2026-07-01/income_groups.py)
+  - [Processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/wb/2026-07-01/income_groups.py)
 - GDP (University of Groningen GGDC's Maddison Project Database, Bolt and van Zanden).
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/ggdc/2024-04-26/maddison_project_database.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/ggdc/2024-04-26/maddison_project_database.py)
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/ggdc/2024-04-26/maddison_project_database.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/snapshots/ggdc/2024-04-26/maddison_project_database.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/meadow/ggdc/2024-04-26/maddison_project_database.py)
+  - [Processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/ggdc/2024-04-26/maddison_project_database.py)
 - Statistical review of world energy (Energy Institute, EI):
   - [Source data](https://www.energyinst.org/statistical-review)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/snapshots/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
+  - [Basic processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/meadow/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
+  - [Further processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/energy_institute/2025-06-27/statistical_review_of_world_energy.py)
 - International energy data (U.S. Energy Information Administration, EIA):
   - [Source data](https://www.eia.gov/opendata/bulkfiles.php)
-  - [Ingestion code](https://github.com/owid/etl/blob/master/snapshots/eia/2026-05-05/international_energy.zip.dvc)
-  - [Basic processing code](https://github.com/owid/etl/blob/master/etl/steps/data/meadow/eia/2026-05-05/international_energy.py)
-  - [Further processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/eia/2026-05-05/international_energy.py)
+  - [Ingestion code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/snapshots/eia/2026-05-05/international_energy.zip.dvc)
+  - [Basic processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/meadow/eia/2026-05-05/international_energy.py)
+  - [Further processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/eia/2026-05-05/international_energy.py)
 - Primary energy consumption (EI's Statistical review of world energy & EIA's International energy data):
-  - [Processing code](https://github.com/owid/etl/blob/master/etl/steps/data/garden/energy/2026-05-05/primary_energy_consumption.py)
+  - [Processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/energy/2026-05-05/primary_energy_consumption.py)
 
 ## Changelog
 
