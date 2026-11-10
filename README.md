@@ -37,7 +37,7 @@ A [full codebook](https://github.com/owid/co2-data/blob/master/owid-co2-codebook
 The dataset is built upon a number of datasets and processing steps:
 
 - Global carbon budget - Global Carbon Project:
-  - [Source data](https://globalcarbonbudgetdata.org/)
+  - [Source data](https://globalcarbonbudget.org/)
   - [Ingestion code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/snapshots/gcp/2026-11-10/global_carbon_budget.py)
   - [Basic processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/meadow/gcp/2026-11-10/global_carbon_budget.py)
   - [Further processing code](https://github.com/owid/etl/blob/41e1c3d8d33dfaf96c5abac80f88410691b0d611/etl/steps/data/garden/gcp/2026-11-10/global_carbon_budget.py)
